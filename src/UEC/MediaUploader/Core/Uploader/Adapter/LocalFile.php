@@ -5,7 +5,7 @@ namespace UEC\MediaUploader\Core\Uploader\Adapter;
 use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
 
-class SimpleFile extends AbstractUploadAdapter implements SimpleFileInterface
+class LocalFile extends AbstractUploadAdapter implements LocalFileInterface
 {
     private $path;
     private $error;

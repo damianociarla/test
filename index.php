@@ -22,7 +22,7 @@ use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaManager;
 use UEC\MediaUploader\Core\Resolver\ResolverMediaType;
 use UEC\MediaUploader\Core\Uploader\Adapter\RemoteFile;
-use UEC\MediaUploader\Core\Uploader\Adapter\SimpleFile;
+use UEC\MediaUploader\Core\Uploader\Adapter\LocalFile;
 use UEC\MediaUploader\Mapper\Doctrine\MediaManager as DoctrineMediaManager;
 use UEC\MediaUploader\Mapper\Doctrine\MediaTypeManager as DoctrineMediaTypeManager;
 use UEC\MediaUploader\Core\Uploader\Common\SimpleUploader;

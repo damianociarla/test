@@ -5,8 +5,8 @@ namespace UEC\MediaUploader\Core\Uploader\Adapter;
 use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
 
 /**
- * Interface used to represent a SimpleFile
+ * Interface used to represent a LocalFile
  */
-interface SimpleFileInterface extends UploadAdapterInterface
+interface LocalFileInterface extends UploadAdapterInterface
 {
 }
