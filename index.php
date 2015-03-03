@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\Setup;
+use Event\EventDispatcher;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use UEC\MediaUploader\Core\Uploader\Common\Validator\SizeValidator;
@@ -69,7 +70,7 @@ $typeServices = array(
 
 $mediaManagerServicesFactory = new MediaManagerServicesFactory($typeServices);
 
-$mediaManager = new MediaManager($doctrineMediaManager, $mediaManagerServicesFactory);
+$mediaManager = new MediaManager($doctrineMediaManager, $mediaManagerServicesFactory, new EventDispatcher());
 
 $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($mediaManagerServicesFactory)));
 
