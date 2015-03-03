@@ -57,10 +57,11 @@ $doctrineMediaManager = new DoctrineMediaManager($mediaObjectPersistence, $media
 
 $mediaImageModuleServices = new ImageMediaManagerServices(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaImage'),
-    new FilenameGenerator(),
-    new PathGenerator(),
-    new Flysystem(new Filesystem(new Local('./uploads'))),
-    new SimpleUploader(),
+    new SimpleUploader(
+        new Flysystem(new Filesystem(new Local('./uploads'))),
+        new FilenameGenerator(),
+        new PathGenerator()
+    ),
     new ImageInitializer(),
     new ImageAnalyzer()
 );

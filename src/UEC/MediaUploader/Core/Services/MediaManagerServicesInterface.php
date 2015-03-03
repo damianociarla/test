@@ -20,27 +20,6 @@ interface MediaManagerServicesInterface
     public function getMediaTypeManager();
 
     /**
-     * Get the filename generator
-     *
-     * @return FilenameGeneratorInterface
-     */
-    public function getFilenameGenerator();
-
-    /**
-     * Get the path generator
-     *
-     * @return PathGeneratorInterface
-     */
-    public function getPathGenerator();
-
-    /**
-     * Get the CDN manager
-     *
-     * @return CDNInterface
-     */
-    public function getCDN();
-
-    /**
      * Get uploader manager
      *
      * @return UploaderInterface

@@ -15,7 +15,7 @@ interface UploaderInterface
      * @param CDNInterface $cdn
      * @return UploaderInterface
      */
-    public function setCdn($cdn);
+    public function setCdn(CDNInterface $cdn);
 
     /**
      * Set filenameGenerator
@@ -23,7 +23,7 @@ interface UploaderInterface
      * @param FilenameGeneratorInterface $filenameGenerator
      * @return UploaderInterface
      */
-    public function setFilenameGenerator($filenameGenerator);
+    public function setFilenameGenerator(FilenameGeneratorInterface $filenameGenerator);
 
     /**
      * Set pathGenerator
@@ -31,7 +31,28 @@ interface UploaderInterface
      * @param PathGeneratorInterface $pathGenerator
      * @return UploaderInterface
      */
-    public function setPathGenerator($pathGenerator);
+    public function setPathGenerator(PathGeneratorInterface $pathGenerator);
+
+    /**
+     * Get cdn
+     *
+     * @return CDNInterface
+     */
+    public function getCdn();
+
+    /**
+     * Get filenameGenerator
+     *
+     * @return FilenameGeneratorInterface
+     */
+    public function getFilenameGenerator();
+
+    /**
+     * Get pathGenerator
+     *
+     * @return PathGeneratorInterface
+     */
+    public function getPathGenerator();
 
     public function upload($context, UploadAdapterInterface $adapter, AnalyzerInterface $analyzer);
 }

@@ -45,11 +45,7 @@ class MediaManager implements MediaManagerInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_ANALYZE_ADAPTER, $context, $adapter, $analyzer);
 
-        $filePath = $mediaManagerServices->getUploader()
-            ->setCdn($mediaManagerServices->getCDN())
-            ->setFilenameGenerator($mediaManagerServices->getFilenameGenerator())
-            ->setPathGenerator($mediaManagerServices->getPathGenerator())
-            ->upload($context, $adapter, $analyzer);
+        $filePath = $mediaManagerServices->getUploader()->upload($context, $adapter, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_UPLOAD_MEDIA, $context, $adapter, $analyzer);
 
@@ -57,7 +53,6 @@ class MediaManager implements MediaManagerInterface
         $media->setPath($filePath);
 
         $modelMediaTypeManager = $mediaManagerServices->getMediaTypeManager();
-
         $mediaType = $modelMediaTypeManager->create($media);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_INITIALIZE_MEDIA_TYPE, $context, $mediaType, $analyzer);

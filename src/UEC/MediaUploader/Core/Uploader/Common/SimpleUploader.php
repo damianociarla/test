@@ -15,10 +15,6 @@ class SimpleUploader extends AbstractUploader
             $this->filenameGenerator->generate($context, $adapter->getPath())
         );
 
-        if ($adapter->hasError()) {
-            throw new \Exception($adapter->getError());
-        }
-
         $adapter->upload($this->cdn, $finalPath);
 
         return $finalPath;
