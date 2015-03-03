@@ -1,12 +1,11 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Doctrine;
+namespace UEC\MediaUploader\Mapper\Doctrine;
 
 use UEC\MediaUploader\Core\Model\MediaInterface;
-use UEC\MediaUploader\Core\Model\MediaTypeInterface;
-use UEC\MediaUploader\Core\Model\MediaTypeManager as BaseMediaTypeManager;
+use UEC\MediaUploader\Core\Model\MediaManager as BaseMediaManager;
 
-class MediaTypeManager extends BaseMediaTypeManager
+class MediaManager extends BaseMediaManager
 {
     protected $doctrineObjectPersistence;
     protected $doctrineObjectRepository;
@@ -24,13 +23,9 @@ class MediaTypeManager extends BaseMediaTypeManager
         return $this->className;
     }
 
-    public function findByMedia(MediaInterface $media)
+    public function findById($id)
     {
-        return $this->doctrineObjectRepository
-            ->setClassName($this->className)
-            ->findOneBy(array(
-                'media' => $media
-            ));
+        return $this->doctrineObjectRepository->setClassName($this->className)->findById($id);
     }
 
     protected function getMediaObjectPersistence()
@@ -38,8 +33,8 @@ class MediaTypeManager extends BaseMediaTypeManager
         return $this->doctrineObjectPersistence;
     }
 
-    public function isNewMediaType(MediaTypeInterface $mediaType)
+    public function isNewMedia(MediaInterface $media)
     {
-        return !$this->doctrineObjectPersistence->isNew($mediaType);
+        return !$this->doctrineObjectPersistence->isNew($media);
     }
 }

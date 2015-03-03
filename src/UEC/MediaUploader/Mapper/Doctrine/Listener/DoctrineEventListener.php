@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Doctrine\Listener;
+namespace UEC\MediaUploader\Mapper\Doctrine\Listener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use UEC\MediaUploader\Core\Listener\MediaTypeInjection;

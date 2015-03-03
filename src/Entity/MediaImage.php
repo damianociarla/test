@@ -3,13 +3,13 @@
 namespace Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use UEC\MediaUploader\Image\Model\MediaTypeImage;
+use UEC\MediaUploader\Image\Mapper\Doctrine\ORM\Entity\MediaImage as BaseMediaImage;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="media_image")
  */
-class MediaImage extends MediaTypeImage
+class MediaImage extends BaseMediaImage
 {
     /**
      * @ORM\Id
@@ -17,19 +17,4 @@ class MediaImage extends MediaTypeImage
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id")
      */
     protected $media;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $width;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $height;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $size;
 }

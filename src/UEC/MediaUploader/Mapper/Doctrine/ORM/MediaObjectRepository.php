@@ -1,9 +1,9 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Doctrine\ORM;
+namespace UEC\MediaUploader\Mapper\Doctrine\ORM;
 
 use Doctrine\ORM\EntityManager;
-use UEC\MediaUploader\Core\Doctrine\DoctrineObjectRepository;
+use UEC\MediaUploader\Mapper\Doctrine\DoctrineObjectRepository;
 
 class MediaObjectRepository extends DoctrineObjectRepository
 {

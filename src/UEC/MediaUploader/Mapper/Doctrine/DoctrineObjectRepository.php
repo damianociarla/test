@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Doctrine;
+namespace UEC\MediaUploader\Mapper\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use UEC\MediaUploader\Core\Repository\MediaObjectRepositoryInterface;

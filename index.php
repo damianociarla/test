@@ -13,9 +13,9 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use UEC\MediaUploader\Core\Uploader\Common\Validator\SizeValidator;
 use UEC\MediaUploader\Core\CDN\Common\Flysystem;
-use UEC\MediaUploader\Core\Doctrine\Listener\DoctrineEventListener;
-use UEC\MediaUploader\Core\Doctrine\ORM\MediaObjectPersistence;
-use UEC\MediaUploader\Core\Doctrine\ORM\MediaObjectRepository;
+use UEC\MediaUploader\Mapper\Doctrine\Listener\DoctrineEventListener;
+use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectPersistence;
+use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectRepository;
 use UEC\MediaUploader\Core\Factory\MediaManagerServicesFactory;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
@@ -23,8 +23,8 @@ use UEC\MediaUploader\Core\MediaManager;
 use UEC\MediaUploader\Core\Resolver\ResolverMediaType;
 use UEC\MediaUploader\Core\Uploader\Adapter\RemoteFile;
 use UEC\MediaUploader\Core\Uploader\Adapter\SimpleFile;
-use UEC\MediaUploader\Core\Doctrine\MediaManager as DoctrineMediaManager;
-use UEC\MediaUploader\Core\Doctrine\MediaTypeManager as DoctrineMediaTypeManager;
+use UEC\MediaUploader\Mapper\Doctrine\MediaManager as DoctrineMediaManager;
+use UEC\MediaUploader\Mapper\Doctrine\MediaTypeManager as DoctrineMediaTypeManager;
 use UEC\MediaUploader\Core\Uploader\Common\SimpleUploader;
 use UEC\MediaUploader\Image\Analyzer\ImageAnalyzer;
 use UEC\MediaUploader\Image\Initializer\ImageInitializer;
@@ -80,3 +80,6 @@ $adapter->addValidator(new DimensionValidator(['minWidth' => 300]));
 $file = $mediaManager->save('avatar', $adapter);
 
 echo sprintf('Media with id %s and size %s byte', $file->getId(), $file->getMediaType()->getSize());
+
+
+DocumentManager
