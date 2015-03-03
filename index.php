@@ -80,6 +80,3 @@ $adapter->addValidator(new DimensionValidator(['minWidth' => 300]));
 $file = $mediaManager->save('avatar', $adapter);
 
 echo sprintf('Media with id %s and size %s byte', $file->getId(), $file->getMediaType()->getSize());
-
-
-DocumentManager
