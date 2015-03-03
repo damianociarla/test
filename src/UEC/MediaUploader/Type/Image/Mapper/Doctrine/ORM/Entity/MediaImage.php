@@ -1,9 +1,9 @@
 <?php
 
-namespace UEC\MediaUploader\Image\Mapper\Doctrine\ORM\Entity;
+namespace UEC\MediaUploader\Type\Image\Mapper\Doctrine\ORM\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use UEC\MediaUploader\Image\Model\MediaTypeImage;
+use UEC\MediaUploader\Type\Image\Model\MediaTypeImage;
 
 /**
  * @ORM\MappedSuperclass

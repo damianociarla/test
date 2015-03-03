@@ -2,7 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Uploader;
 
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 
 interface UploadAdapterInterface
 {
@@ -44,10 +44,10 @@ interface UploadAdapterInterface
     /**
      * Upload logic
      *
-     * @param CDNInterface $cdn
+     * @param FilesystemInterface $filesystem
      * @param string $finalPath
      */
-    public function upload(CDNInterface $cdn, $finalPath);
+    public function upload(FilesystemInterface $filesystem, $finalPath);
 
     /**
      * Check if adapter is for physical file

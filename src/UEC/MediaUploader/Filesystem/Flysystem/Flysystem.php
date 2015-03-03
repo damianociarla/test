@@ -1,15 +1,15 @@
 <?php
 
-namespace UEC\MediaUploader\Core\CDN\Common;
+namespace UEC\MediaUploader\Filesystem\Flysystem;
 
-use League\Flysystem\FilesystemInterface;
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
+use League\Flysystem\FilesystemInterface as FlysystemFilesystemInterface;
 
-class Flysystem implements CDNInterface
+class Flysystem implements FilesystemInterface
 {
     protected $filesystem;
 
-    function __construct(FilesystemInterface $filesystem)
+    function __construct(FlysystemFilesystemInterface $filesystem)
     {
         $this->filesystem = $filesystem;
     }

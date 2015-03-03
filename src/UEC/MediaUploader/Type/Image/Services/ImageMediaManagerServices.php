@@ -1,9 +1,9 @@
 <?php
 
-namespace UEC\MediaUploader\Image\Services;
+namespace UEC\MediaUploader\Type\Image\Services;
 
 use UEC\MediaUploader\Core\Services\MediaManagerServices;
-use UEC\MediaUploader\Image\Uploader\Validator\ImageValidator;
+use UEC\MediaUploader\Type\Image\Uploader\Validator\ImageValidator;
 
 class ImageMediaManagerServices extends MediaManagerServices
 {

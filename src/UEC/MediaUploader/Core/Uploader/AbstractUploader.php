@@ -2,31 +2,31 @@
 
 namespace UEC\MediaUploader\Core\Uploader;
 
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;
 
 abstract class AbstractUploader implements UploaderInterface
 {
-    protected $cdn;
+    protected $filesystem;
     protected $filenameGenerator;
     protected $pathGenerator;
 
-    function __construct(CDNInterface $cdn, FilenameGeneratorInterface $filenameGenerator, PathGeneratorInterface $pathGenerator)
+    function __construct(FilesystemInterface $filesystem, FilenameGeneratorInterface $filenameGenerator, PathGeneratorInterface $pathGenerator)
     {
-        $this->cdn = $cdn;
+        $this->filesystem = $filesystem;
         $this->filenameGenerator = $filenameGenerator;
         $this->pathGenerator = $pathGenerator;
     }
 
-    public function getCdn()
+    public function getFilesystem()
     {
-        return $this->cdn;
+        return $this->filesystem;
     }
 
-    public function setCdn(CDNInterface $cdn)
+    public function setFilesystem(FilesystemInterface $filesystem)
     {
-        $this->cdn = $cdn;
+        $this->filesystem = $filesystem;
         return $this;
     }
 

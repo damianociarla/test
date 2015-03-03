@@ -2,7 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Uploader\Adapter;
 
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
 
 class SimpleFile extends AbstractUploadAdapter implements SimpleFileInterface
@@ -50,8 +50,8 @@ class SimpleFile extends AbstractUploadAdapter implements SimpleFileInterface
         return true;
     }
 
-    public function upload(CDNInterface $cdn, $finalPath)
+    public function upload(FilesystemInterface $filesystem, $finalPath)
     {
-        $cdn->put($finalPath, file_get_contents($this->path));
+        $filesystem->put($finalPath, file_get_contents($this->path));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Image\Uploader\Validator;
+namespace UEC\MediaUploader\Type\Image\Uploader\Validator;
 
 use UEC\MediaUploader\Core\Uploader\AdapterValidatorInterface;
 use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;

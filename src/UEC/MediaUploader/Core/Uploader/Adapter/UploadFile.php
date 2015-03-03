@@ -2,7 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Uploader\Adapter;
 
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
 
 class UploadFile extends AbstractUploadAdapter implements UploadFileInterface
@@ -84,10 +84,10 @@ class UploadFile extends AbstractUploadAdapter implements UploadFileInterface
         return true;
     }
 
-    public function upload(CDNInterface $cdn, $finalPath)
+    public function upload(FilesystemInterface $filesystem, $finalPath)
     {
         $stream = fopen($this->getPath(), 'r+');
-        $cdn->writeStream($finalPath, $stream);
+        $filesystem->writeStream($finalPath, $stream);
         fclose($stream);
     }
 }

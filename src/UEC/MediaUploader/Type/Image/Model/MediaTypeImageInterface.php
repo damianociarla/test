@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Image\Model;
+namespace UEC\MediaUploader\Type\Image\Model;
 
 use UEC\MediaUploader\Core\Model\MediaTypeInterface;
 

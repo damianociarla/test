@@ -3,7 +3,7 @@
 namespace Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use UEC\MediaUploader\Image\Mapper\Doctrine\ORM\Entity\MediaImage as BaseMediaImage;
+use UEC\MediaUploader\Type\Image\Mapper\Doctrine\ORM\Entity\MediaImage as BaseMediaImage;
 
 /**
  * @ORM\Entity

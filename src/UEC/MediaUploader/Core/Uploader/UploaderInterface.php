@@ -3,19 +3,19 @@
 namespace UEC\MediaUploader\Core\Uploader;
 
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;
 
 interface UploaderInterface
 {
     /**
-     * Set cdn
+     * Set filesystem
      *
-     * @param CDNInterface $cdn
+     * @param FilesystemInterface $filesystem
      * @return UploaderInterface
      */
-    public function setCdn(CDNInterface $cdn);
+    public function setFilesystem(FilesystemInterface $filesystem);
 
     /**
      * Set filenameGenerator
@@ -34,11 +34,11 @@ interface UploaderInterface
     public function setPathGenerator(PathGeneratorInterface $pathGenerator);
 
     /**
-     * Get cdn
+     * Get filesystem
      *
-     * @return CDNInterface
+     * @return FilesystemInterface
      */
-    public function getCdn();
+    public function getFilesystem();
 
     /**
      * Get filenameGenerator

@@ -1,8 +1,8 @@
 <?php
 
-namespace UEC\MediaUploader\Core\CDN;
+namespace UEC\MediaUploader\Core\Filesystem;
 
-interface CDNInterface
+interface FilesystemInterface
 {
     public function put($path, $contents);
 

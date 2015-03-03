@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Image\Analyzer;
+namespace UEC\MediaUploader\Type\Image\Analyzer;
 
 use UEC\MediaUploader\Core\Analyzer\Analyzer;
 use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;

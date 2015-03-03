@@ -15,7 +15,7 @@ class SimpleUploader extends AbstractUploader
             $this->filenameGenerator->generate($context, $adapter->getPath())
         );
 
-        $adapter->upload($this->cdn, $finalPath);
+        $adapter->upload($this->filesystem, $finalPath);
 
         return $finalPath;
     }

@@ -3,7 +3,7 @@
 namespace UEC\MediaUploader\Core\Services;
 
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
-use UEC\MediaUploader\Core\CDN\CDNInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
