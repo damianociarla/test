@@ -33,7 +33,7 @@ class SimpleFile extends AbstractUploadAdapter implements SimpleFileInterface
     public function hasError()
     {
         if (!file_exists($this->path)) {
-            $this->error = sprintf('File "%s" not found', $path);
+            $this->error = sprintf('File "%s" not found', $this->path);
             return true;
         }
 
