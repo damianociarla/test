@@ -60,4 +60,11 @@ interface MediaManagerServicesInterface
      * @return AnalyzerInterface
      */
     public function getAnalyzer();
+
+    /**
+     * Get default validator to associate at the adapter
+     *
+     * @return array
+     */
+    public function getDefaultValidators();
 }

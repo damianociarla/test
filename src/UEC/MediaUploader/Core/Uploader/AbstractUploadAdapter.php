@@ -6,9 +6,13 @@ abstract class AbstractUploadAdapter implements UploadAdapterInterface
 {
     private $validators = array();
 
-    public function addValidator(AdapterValidatorInterface $validator)
+    public function addValidator(AdapterValidatorInterface $validator, $atBeginning = false)
     {
-        $this->validators[] = $validator;
+        if ($atBeginning) {
+            array_unshift($this->validators, $validator);
+        } else {
+            $this->validators[] = $validator;
+        }
     }
 
     public function getValidators()

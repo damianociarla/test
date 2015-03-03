@@ -4,6 +4,7 @@ namespace UEC\MediaUploader\Core\Event;
 
 class MediaEvents
 {
+    const AFTER_VALIDATION_ADAPTER      = 'uec_media_uploader.events.after_validation_adapter';
     const AFTER_ANALYZE_ADAPTER         = 'uec_media_uploader.events.after_analyze_adapter';
     const AFTER_UPLOAD_MEDIA            = 'uec_media_uploader.events.after_upload_media';
     const BEFORE_INITIALIZE_MEDIA_TYPE  = 'uec_media_uploader.events.before_initialize_media_type';

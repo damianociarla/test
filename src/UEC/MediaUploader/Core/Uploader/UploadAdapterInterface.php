@@ -60,9 +60,10 @@ interface UploadAdapterInterface
      * Add adapter validator
      *
      * @param AdapterValidatorInterface $validator
+     * @param bool $atBeginning
      * @return UploadAdapterInterface
      */
-    public function addValidator(AdapterValidatorInterface $validator);
+    public function addValidator(AdapterValidatorInterface $validator, $atBeginning = false);
 
     /**
      * Get validators

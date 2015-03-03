@@ -4,7 +4,6 @@ include_once 'vendor/autoload.php';
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
-use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
@@ -30,7 +29,7 @@ use UEC\MediaUploader\Core\Uploader\Common\SimpleUploader;
 use UEC\MediaUploader\Image\Analyzer\ImageAnalyzer;
 use UEC\MediaUploader\Image\Initializer\ImageInitializer;
 use UEC\MediaUploader\Image\Services\ImageMediaManagerServices;
-use UEC\MediaUploader\Image\Uploader\Validator\ImageValidator;
+use UEC\MediaUploader\Image\Uploader\Validator\DimensionValidator;
 
 $paths = array('./src/Entity');
 $isDevMode = false;
@@ -76,7 +75,7 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new
 
 $adapter = new RemoteFile('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg');
 $adapter->addValidator(new SizeValidator(['min' => 300]));
-$adapter->addValidator(new ImageValidator(['minWidth' => 300]));
+$adapter->addValidator(new DimensionValidator(['minWidth' => 300]));
 
 $file = $mediaManager->save('avatar', $adapter);
 

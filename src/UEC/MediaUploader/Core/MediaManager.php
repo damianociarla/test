@@ -26,11 +26,19 @@ class MediaManager implements MediaManagerInterface
 
     public function save($context, UploadAdapterInterface $adapter)
     {
+        $mediaManagerServices = $this->mediaManagerServicesFactory->get($context);
+
+        $defaultValidators = $mediaManagerServices->getDefaultValidators();
+
+        foreach ($defaultValidators as $validator) {
+            $adapter->addValidator($validator, true);
+        }
+
         if (!$adapter->isValid()) {
             return null;
         }
 
-        $mediaManagerServices = $this->mediaManagerServicesFactory->get($context);
+        $this->eventDispatcher->dispatch(MediaEvents::AFTER_VALIDATION_ADAPTER, $context, $adapter);
 
         $analyzer = $mediaManagerServices->getAnalyzer();
         $analyzer->analyze($adapter);
