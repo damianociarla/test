@@ -55,16 +55,19 @@ $mediaObjectRepository = new MediaObjectRepository($entityManager);
 
 $doctrineMediaManager = new DoctrineMediaManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
+$mediaImageModuleServices = new ImageMediaManagerServices(
+    new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaImage'),
+    new FilenameGenerator(),
+    new PathGenerator(),
+    new Flysystem(new Filesystem(new Local('./uploads'))),
+    new SimpleUploader(),
+    new ImageInitializer(),
+    new ImageAnalyzer()
+);
+
 $typeServices = array(
-    'avatar' => new ImageMediaManagerServices(
-        new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaImage'),
-        new FilenameGenerator(),
-        new PathGenerator(),
-        new Flysystem(new Filesystem(new Local('./uploads'))),
-        new SimpleUploader(),
-        new ImageInitializer(),
-        new ImageAnalyzer()
-    ),
+    'image' => $mediaImageModuleServices,
+    'avatar' => $mediaImageModuleServices,
 );
 
 $mediaManagerServicesFactory = new MediaManagerServicesFactory($typeServices);
