@@ -79,7 +79,7 @@ class UploadFile extends AbstractUploadAdapter implements UploadFileInterface
         return $message;
     }
 
-    public function isPhysical()
+    public function isLocal()
     {
         return true;
     }

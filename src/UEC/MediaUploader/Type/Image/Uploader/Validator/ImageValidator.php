@@ -14,7 +14,7 @@ class ImageValidator implements AdapterValidatorInterface
 
     public function validate(UploadAdapterInterface $adapter)
     {
-        if ($adapter->isPhysical()) {
+        if ($adapter->isLocal()) {
             if (exif_imagetype($adapter->getPath()) === false) {
                 return false;
             }

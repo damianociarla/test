@@ -45,7 +45,7 @@ class LocalFile extends AbstractUploadAdapter implements LocalFileInterface
         return $this->error;
     }
 
-    public function isPhysical()
+    public function isLocal()
     {
         return true;
     }

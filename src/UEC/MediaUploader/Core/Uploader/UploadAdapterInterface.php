@@ -54,7 +54,7 @@ interface UploadAdapterInterface
      *
      * @return bool
      */
-    public function isPhysical();
+    public function isLocal();
 
     /**
      * Add adapter validator

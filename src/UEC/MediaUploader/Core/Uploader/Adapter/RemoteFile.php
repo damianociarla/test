@@ -76,7 +76,7 @@ class RemoteFile extends AbstractUploadAdapter implements RemoteFileInterface
         return $this->error;
     }
 
-    public function isPhysical()
+    public function isLocal()
     {
         return false;
     }
