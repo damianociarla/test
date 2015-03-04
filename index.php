@@ -10,7 +10,7 @@ use Event\EventDispatcher;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
-use UEC\MediaUploader\Core\Adapter\Validator\SizeValidator;
+use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
 use UEC\MediaUploader\Core\Factory\ContextConfigurationFactory;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
@@ -77,8 +77,12 @@ $mediaManager = new MediaManager($doctrineMediaManager, $contextConfigurationFac
 $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($contextConfigurationFactory)));
 
 $adapter = new RemoteFile('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg');
-$adapter->addValidator(new SizeValidator(['min' => 300]));
-$adapter->addValidator(new DimensionValidator(['minWidth' => 300]));
+$adapter->addValidator(new SizeValidator(array(
+    SizeValidator::SIZE_MIN => 300
+)));
+$adapter->addValidator(new DimensionValidator(array(
+    DimensionValidator::DIMENSION_MIN_WIDTH => 300
+)));
 
 $file = $mediaManager->save('avatar', $adapter);
 

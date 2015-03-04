@@ -15,6 +15,8 @@ abstract class AbstractAdapter implements AdapterInterface
         } else {
             $this->validators[] = $validator;
         }
+
+        return $this;
     }
 
     public function getValidators()

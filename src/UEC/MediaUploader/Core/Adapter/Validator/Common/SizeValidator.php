@@ -1,8 +1,9 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Adapter\Validator;
+namespace UEC\MediaUploader\Core\Adapter\Validator\Common;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Adapter\Validator\AdapterValidatorInterface;
 
 class SizeValidator implements AdapterValidatorInterface
 {
