@@ -3,13 +3,13 @@
 namespace Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use UEC\MediaUploader\Type\Image\Mapper\Doctrine\ORM\Entity\MediaImage as BaseMediaImage;
+use UEC\MediaUploader\Type\Image\Model\MediaTypeImage as BaseMediaTypeImage;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="media_image")
  */
-class MediaImage extends BaseMediaImage
+class MediaTypeImage extends BaseMediaTypeImage
 {
     /**
      * @ORM\Id

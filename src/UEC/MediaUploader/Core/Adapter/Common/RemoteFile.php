@@ -1,10 +1,10 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader\Adapter;
+namespace UEC\MediaUploader\Core\Adapter\Common;
 
-use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
+use UEC\MediaUploader\Core\Adapter\AbstractAdapter;
 
-class RemoteFile extends AbstractUploadAdapter implements RemoteFileInterface
+class RemoteFile extends AbstractAdapter implements RemoteFileInterface
 {
     private $path;
     private $error;

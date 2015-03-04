@@ -4,7 +4,7 @@ namespace UEC\MediaUploader\Core\Model;
 
 use UEC\MediaUploader\Core\Persistence\MediaObjectPersistenceInterface;
 
-abstract class MediaTypeManager implements MediaTypeManagerInterface
+abstract class AbstractMediaTypeManager implements MediaTypeManagerInterface
 {
     public function save(MediaTypeInterface $mediaType)
     {

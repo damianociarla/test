@@ -1,8 +1,10 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader;
+namespace UEC\MediaUploader\Core\Adapter;
 
-interface UploadAdapterInterface
+use UEC\MediaUploader\Core\Adapter\Validator\AdapterValidatorInterface;
+
+interface AdapterInterface
 {
     /**
      * Get path
@@ -51,7 +53,7 @@ interface UploadAdapterInterface
      *
      * @param AdapterValidatorInterface $validator
      * @param bool $atBeginning
-     * @return UploadAdapterInterface
+     * @return AdapterInterface
      */
     public function addValidator(AdapterValidatorInterface $validator, $atBeginning = false);
 

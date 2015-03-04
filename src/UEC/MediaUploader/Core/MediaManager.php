@@ -2,14 +2,11 @@
 
 namespace UEC\MediaUploader\Core;
 
-use UEC\MediaUploader\Core\Event\AdapterEvent;
-use UEC\MediaUploader\Core\Event\AnalyzerEvent;
+use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Event\EventDispatcherInterface;
 use UEC\MediaUploader\Core\Event\MediaEvents;
 use UEC\MediaUploader\Core\Factory\ContextConfigurationFactoryInterface;
 use UEC\MediaUploader\Core\Model\MediaManagerInterface as ModelMediaManagerInterface;
-use UEC\MediaUploader\Core\Uploader\CommonFileInterface;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
 
 class MediaManager implements MediaManagerInterface
 {
@@ -24,7 +21,7 @@ class MediaManager implements MediaManagerInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function save($context, UploadAdapterInterface $adapter)
+    public function save($context, AdapterInterface $adapter)
     {
         $contextConfiguration = $this->contextConfigurationFactory->get($context);
 
@@ -45,7 +42,7 @@ class MediaManager implements MediaManagerInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_ANALYZE_ADAPTER, $context, $adapter, $analyzer);
 
-        $filePath = $contextConfiguration->getUploader()->save($context, $adapter, $analyzer);
+        $filePath = $contextConfiguration->getMediaService()->save($context, $adapter, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_UPLOAD_MEDIA, $context, $adapter, $analyzer);
 

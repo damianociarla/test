@@ -2,11 +2,11 @@
 
 namespace UEC\MediaUploader\Mapper\Doctrine;
 
+use UEC\MediaUploader\Core\Model\AbstractMediaTypeManager;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeInterface;
-use UEC\MediaUploader\Core\Model\MediaTypeManager as BaseMediaTypeManager;
 
-class MediaTypeManager extends BaseMediaTypeManager
+class MediaTypeManager extends AbstractMediaTypeManager
 {
     protected $doctrineObjectPersistence;
     protected $doctrineObjectRepository;

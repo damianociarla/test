@@ -2,10 +2,10 @@
 
 namespace UEC\MediaUploader\Type\Image\Configuration;
 
-use UEC\MediaUploader\Core\Configuration\TypeConfiguration;
-use UEC\MediaUploader\Type\Image\Uploader\Validator\ImageValidator;
+use UEC\MediaUploader\Core\Configuration\AbstractTypeConfiguration;
+use UEC\MediaUploader\Type\Image\Adapter\Validator\ImageValidator;
 
-class TypeImageConfiguration extends TypeConfiguration
+class TypeImageConfiguration extends AbstractTypeConfiguration
 {
     public function getDefaultValidators()
     {

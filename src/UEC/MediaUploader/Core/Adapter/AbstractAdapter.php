@@ -1,8 +1,10 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader;
+namespace UEC\MediaUploader\Core\Adapter;
 
-abstract class AbstractUploadAdapter implements UploadAdapterInterface
+use UEC\MediaUploader\Core\Adapter\Validator\AdapterValidatorInterface;
+
+abstract class AbstractAdapter implements AdapterInterface
 {
     private $validators = array();
 

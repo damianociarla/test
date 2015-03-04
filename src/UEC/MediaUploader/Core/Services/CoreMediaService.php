@@ -1,21 +1,20 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader\Common;
+namespace UEC\MediaUploader\Core\Services;
 
+use UEC\MediaUploader\Core\Adapter\AdapterContentInterface;
+use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Adapter\AdapterStreamInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
-use UEC\MediaUploader\Core\Uploader\AbstractUploader;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterContentInterface;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterStreamInterface;
 
-class SimpleUploader extends AbstractUploader
+class CoreMediaService extends AbstractMediaService
 {
-    public function save($context, UploadAdapterInterface $adapter, AnalyzerInterface $analyzer)
+    public function save($context, AdapterInterface $adapter, AnalyzerInterface $analyzer)
     {
-        if ($adapter instanceof UploadAdapterContentInterface) {
+        if ($adapter instanceof AdapterContentInterface) {
             $finalPath = $this->generateFinalPath($context, $adapter);
             $this->filesystem->put($finalPath, file_get_contents($adapter->getPath()));
-        } elseif ($adapter instanceof UploadAdapterStreamInterface) {
+        } elseif ($adapter instanceof AdapterStreamInterface) {
             $finalPath = $this->generateFinalPath($context, $adapter);
             $stream = fopen($adapter->getPath(), 'r+');
             $this->filesystem->writeStream($finalPath, $stream);
@@ -27,7 +26,7 @@ class SimpleUploader extends AbstractUploader
         return $finalPath;
     }
 
-    protected function generateFinalPath($context, UploadAdapterInterface $adapter)
+    protected function generateFinalPath($context, AdapterInterface $adapter)
     {
         return sprintf('%s/%s',
             $this->pathGenerator->generate($context, $adapter->getPath()),

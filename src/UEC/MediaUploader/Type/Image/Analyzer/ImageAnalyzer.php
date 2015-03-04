@@ -2,16 +2,16 @@
 
 namespace UEC\MediaUploader\Type\Image\Analyzer;
 
-use UEC\MediaUploader\Core\Analyzer\Analyzer;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
+use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Analyzer\AbstractAnalyzer;
 
-class ImageAnalyzer extends Analyzer
+class ImageAnalyzer extends AbstractAnalyzer
 {
     const INFO_WIDTH  = 'width';
     const INFO_HEIGHT = 'height';
     const INFO_SIZE   = 'size';
 
-    public function analyze(UploadAdapterInterface $adapter)
+    public function analyze(AdapterInterface $adapter)
     {
         list($width, $height) = getimagesize($adapter->getPath());
 

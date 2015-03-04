@@ -1,10 +1,10 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader\Adapter;
+namespace UEC\MediaUploader\Core\Adapter\Common;
 
-use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
+use UEC\MediaUploader\Core\Adapter\AbstractAdapter;
 
-class LocalFile extends AbstractUploadAdapter implements LocalFileInterface
+class LocalFile extends AbstractAdapter implements LocalFileInterface
 {
     private $path;
     private $error;

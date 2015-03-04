@@ -5,7 +5,7 @@ namespace UEC\MediaUploader\Core\Configuration;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
-use UEC\MediaUploader\Core\Uploader\UploaderInterface;
+use UEC\MediaUploader\Core\Services\MediaServiceInterface;
 
 interface TypeConfigurationInterface
 {
@@ -19,9 +19,9 @@ interface TypeConfigurationInterface
     /**
      * Get uploader manager
      *
-     * @return UploaderInterface
+     * @return MediaServiceInterface
      */
-    public function getUploader();
+    public function getMediaService();
 
     /**
      * Get the initializer

@@ -1,18 +1,18 @@
 <?php
 
-namespace UEC\MediaUploader\Type\Image\Uploader\Validator;
+namespace UEC\MediaUploader\Type\Image\Adapter\Validator;
 
-use UEC\MediaUploader\Core\Uploader\AdapterValidatorInterface;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
+use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Adapter\Validator\AdapterValidatorInterface;
 
 class ImageValidator implements AdapterValidatorInterface
 {
-    public function supports(UploadAdapterInterface $adapter)
+    public function supports(AdapterInterface $adapter)
     {
         return true;
     }
 
-    public function validate(UploadAdapterInterface $adapter)
+    public function validate(AdapterInterface $adapter)
     {
         if ($adapter->isLocal()) {
             if (exif_imagetype($adapter->getPath()) === false) {

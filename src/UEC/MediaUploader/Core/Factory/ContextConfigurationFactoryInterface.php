@@ -2,8 +2,8 @@
 
 namespace UEC\MediaUploader\Core\Factory;
 
-use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
+use UEC\MediaUploader\Core\Model\MediaInterface;
 
 interface ContextConfigurationFactoryInterface
 {

@@ -1,9 +1,8 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader\Common\Validator;
+namespace UEC\MediaUploader\Core\Adapter\Validator;
 
-use UEC\MediaUploader\Core\Uploader\AdapterValidatorInterface;
-use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
+use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 
 class SizeValidator implements AdapterValidatorInterface
 {
@@ -23,12 +22,12 @@ class SizeValidator implements AdapterValidatorInterface
         $this->max = isset($config[self::SIZE_MAX]) ? $config[self::SIZE_MAX] : null;
     }
 
-    public function supports(UploadAdapterInterface $adapter)
+    public function supports(AdapterInterface $adapter)
     {
         return true;
     }
 
-    public function validate(UploadAdapterInterface $adapter)
+    public function validate(AdapterInterface $adapter)
     {
         $size = $adapter->getSize();
 

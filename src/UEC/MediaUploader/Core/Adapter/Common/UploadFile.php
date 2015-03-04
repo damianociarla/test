@@ -1,10 +1,10 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Uploader\Adapter;
+namespace UEC\MediaUploader\Core\Adapter\Common;
 
-use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
+use UEC\MediaUploader\Core\Adapter\AbstractAdapter;
 
-class UploadFile extends AbstractUploadAdapter implements UploadFileInterface
+class UploadFile extends AbstractAdapter implements UploadFileInterface
 {
     private $file;
 

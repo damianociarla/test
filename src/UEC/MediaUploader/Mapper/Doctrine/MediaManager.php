@@ -2,10 +2,10 @@
 
 namespace UEC\MediaUploader\Mapper\Doctrine;
 
+use UEC\MediaUploader\Core\Model\AbstractMediaManager;
 use UEC\MediaUploader\Core\Model\MediaInterface;
-use UEC\MediaUploader\Core\Model\MediaManager as BaseMediaManager;
 
-class MediaManager extends BaseMediaManager
+class MediaManager extends AbstractMediaManager
 {
     protected $doctrineObjectPersistence;
     protected $doctrineObjectRepository;

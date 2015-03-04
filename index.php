@@ -1,7 +1,5 @@
 <?php
 
-include_once 'vendor/autoload.php';
-
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\ORM\EntityManager;
@@ -11,25 +9,26 @@ use Doctrine\ORM\Tools\Setup;
 use Event\EventDispatcher;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
+use UEC\MediaUploader\Core\Adapter\Validator\SizeValidator;
 use UEC\MediaUploader\Core\Factory\ContextConfigurationFactory;
-use UEC\MediaUploader\Core\Factory\TypeConfigurationFactory;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaManager;
 use UEC\MediaUploader\Core\Resolver\ResolverMediaType;
-use UEC\MediaUploader\Core\Uploader\Adapter\RemoteFile;
-use UEC\MediaUploader\Core\Uploader\Common\SimpleUploader;
-use UEC\MediaUploader\Core\Uploader\Common\Validator\SizeValidator;
+use UEC\MediaUploader\Core\Services\CoreMediaService;
 use UEC\MediaUploader\Filesystem\Flysystem\Flysystem;
 use UEC\MediaUploader\Mapper\Doctrine\Listener\DoctrineEventListener;
-use UEC\MediaUploader\Mapper\Doctrine\MediaManager as DoctrineMediaManager;
-use UEC\MediaUploader\Mapper\Doctrine\MediaTypeManager as DoctrineMediaTypeManager;
 use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectPersistence;
 use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectRepository;
+use UEC\MediaUploader\Mapper\Doctrine\MediaManager as DoctrineMediaManager;
+use UEC\MediaUploader\Mapper\Doctrine\MediaTypeManager as DoctrineMediaTypeManager;
+use UEC\MediaUploader\Type\Image\Adapter\Validator\DimensionValidator;
 use UEC\MediaUploader\Type\Image\Analyzer\ImageAnalyzer;
-use UEC\MediaUploader\Type\Image\Initializer\ImageInitializer;
 use UEC\MediaUploader\Type\Image\Configuration\TypeImageConfiguration;
-use UEC\MediaUploader\Type\Image\Uploader\Validator\DimensionValidator;
+use UEC\MediaUploader\Type\Image\Initializer\ImageInitializer;
+
+include_once 'vendor/autoload.php';
 
 $paths = array('./src/Entity');
 $isDevMode = false;
@@ -56,8 +55,8 @@ $mediaObjectRepository = new MediaObjectRepository($entityManager);
 $doctrineMediaManager = new DoctrineMediaManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
 $mediaImageModuleConfiguration = new TypeImageConfiguration(
-    new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaImage'),
-    new SimpleUploader(
+    new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeImage'),
+    new CoreMediaService(
         new Flysystem(new Filesystem(new Local('./uploads'))),
         new FilenameGenerator(),
         new PathGenerator()

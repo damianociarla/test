@@ -5,7 +5,7 @@ namespace UEC\MediaUploader\Core\Listener;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Resolver\ResolverMediaTypeInterface;
 
-abstract class MediaTypeInjection
+abstract class AbstractMediaTypeInjection
 {
     protected $resolverMediaType;
 

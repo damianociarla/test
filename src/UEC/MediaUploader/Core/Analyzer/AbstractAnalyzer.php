@@ -2,7 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Analyzer;
 
-abstract class Analyzer implements AnalyzerInterface
+abstract class AbstractAnalyzer implements AnalyzerInterface
 {
     protected $fileInfo;
 

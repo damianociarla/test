@@ -5,23 +5,23 @@ namespace UEC\MediaUploader\Core\Configuration;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
-use UEC\MediaUploader\Core\Uploader\UploaderInterface;
+use UEC\MediaUploader\Core\Services\MediaServiceInterface;
 
-abstract class TypeConfiguration implements TypeConfigurationInterface
+abstract class AbstractTypeConfiguration implements TypeConfigurationInterface
 {
     protected $mediaTypeManager;
-    protected $uploader;
+    protected $mediaService;
     protected $initializer;
     protected $analyzer;
 
     function __construct(
         MediaTypeManagerInterface $mediaTypeManager,
-        UploaderInterface $uploader,
+        MediaServiceInterface $mediaService,
         InitializerInterface $initializer,
         AnalyzerInterface $analyzer
     ) {
         $this->mediaTypeManager = $mediaTypeManager;
-        $this->uploader = $uploader;
+        $this->mediaService = $mediaService;
         $this->initializer = $initializer;
         $this->analyzer = $analyzer;
     }
@@ -31,9 +31,9 @@ abstract class TypeConfiguration implements TypeConfigurationInterface
         return $this->mediaTypeManager;
     }
 
-    public function getUploader()
+    public function getMediaService()
     {
-        return $this->uploader;
+        return $this->mediaService;
     }
 
     public function getInitializer()
