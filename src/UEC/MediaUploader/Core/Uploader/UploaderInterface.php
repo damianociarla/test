@@ -54,5 +54,13 @@ interface UploaderInterface
      */
     public function getPathGenerator();
 
-    public function upload($context, UploadAdapterInterface $adapter, AnalyzerInterface $analyzer);
+    /**
+     * Execute the saving of the adapter
+     *
+     * @param string $context
+     * @param UploadAdapterInterface $adapter
+     * @param AnalyzerInterface $analyzer
+     * @return string new file path
+     */
+    public function save($context, UploadAdapterInterface $adapter, AnalyzerInterface $analyzer);
 }

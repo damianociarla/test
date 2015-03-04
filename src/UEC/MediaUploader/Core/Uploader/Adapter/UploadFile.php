@@ -2,7 +2,6 @@
 
 namespace UEC\MediaUploader\Core\Uploader\Adapter;
 
-use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
 
 class UploadFile extends AbstractUploadAdapter implements UploadFileInterface
@@ -82,12 +81,5 @@ class UploadFile extends AbstractUploadAdapter implements UploadFileInterface
     public function isLocal()
     {
         return true;
-    }
-
-    public function upload(FilesystemInterface $filesystem, $finalPath)
-    {
-        $stream = fopen($this->getPath(), 'r+');
-        $filesystem->writeStream($finalPath, $stream);
-        fclose($stream);
     }
 }

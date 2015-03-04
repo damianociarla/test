@@ -2,7 +2,6 @@
 
 namespace UEC\MediaUploader\Core\Uploader\Adapter;
 
-use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Uploader\AbstractUploadAdapter;
 
 class RemoteFile extends AbstractUploadAdapter implements RemoteFileInterface
@@ -79,10 +78,5 @@ class RemoteFile extends AbstractUploadAdapter implements RemoteFileInterface
     public function isLocal()
     {
         return false;
-    }
-
-    public function upload(FilesystemInterface $filesystem, $finalPath)
-    {
-        $filesystem->put($finalPath, file_get_contents($this->path));
     }
 }

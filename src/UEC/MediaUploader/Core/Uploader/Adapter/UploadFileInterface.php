@@ -2,9 +2,9 @@
 
 namespace UEC\MediaUploader\Core\Uploader\Adapter;
 
-use UEC\MediaUploader\Core\Uploader\UploadAdapterInterface;
+use UEC\MediaUploader\Core\Uploader\UploadAdapterStreamInterface;
 
-interface UploadFileInterface extends UploadAdapterInterface
+interface UploadFileInterface extends UploadAdapterStreamInterface
 {
     /**
      * Get file
