@@ -1,11 +1,11 @@
 <?php
 
-namespace UEC\MediaUploader\Type\Image\Services;
+namespace UEC\MediaUploader\Type\Image\Configuration;
 
-use UEC\MediaUploader\Core\Services\ContextConfiguration;
+use UEC\MediaUploader\Core\Configuration\TypeConfiguration;
 use UEC\MediaUploader\Type\Image\Uploader\Validator\ImageValidator;
 
-class ImageContextConfiguration extends ContextConfiguration
+class TypeImageConfiguration extends TypeConfiguration
 {
     public function getDefaultValidators()
     {

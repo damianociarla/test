@@ -1,13 +1,13 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Services;
+namespace UEC\MediaUploader\Core\Configuration;
 
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
 use UEC\MediaUploader\Core\Uploader\UploaderInterface;
 
-interface ContextConfigurationInterface
+interface TypeConfigurationInterface
 {
     /**
      * Get the media type manager

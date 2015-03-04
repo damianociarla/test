@@ -7,7 +7,7 @@ use UEC\MediaUploader\Core\Model\MediaInterface;
 class ContextConfigurationFactory implements ContextConfigurationFactoryInterface
 {
     /**
-     * Associative array where the key is the name of the context and the value is an instance of ContextConfigurationInterface
+     * Associative array where the key is the name of the context and the value is an instance of TypeConfigurationInterface
      *
      * @var array
      */
