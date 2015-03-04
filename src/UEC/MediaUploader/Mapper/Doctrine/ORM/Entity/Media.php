@@ -2,8 +2,8 @@
 
 namespace UEC\MediaUploader\Mapper\Doctrine\ORM\Entity;
 
-use UEC\MediaUploader\Core\Model\Media as BaseMedia;
 use Doctrine\ORM\Mapping as ORM;
+use UEC\MediaUploader\Core\Model\Media as BaseMedia;
 
 /**
  * @ORM\MappedSuperclass

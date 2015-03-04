@@ -3,8 +3,8 @@
 namespace UEC\MediaUploader\Core\Uploader;
 
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
-use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;
 
 interface UploaderInterface

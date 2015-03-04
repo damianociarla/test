@@ -2,8 +2,8 @@
 
 namespace Entity;
 
-use UEC\MediaUploader\Mapper\Doctrine\ORM\Entity\Media as BaseMedia;
 use Doctrine\ORM\Mapping as ORM;
+use UEC\MediaUploader\Mapper\Doctrine\ORM\Entity\Media as BaseMedia;
 
 /**
  * @ORM\Entity

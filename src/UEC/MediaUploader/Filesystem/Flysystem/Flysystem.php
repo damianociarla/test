@@ -2,8 +2,8 @@
 
 namespace UEC\MediaUploader\Filesystem\Flysystem;
 
-use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use League\Flysystem\FilesystemInterface as FlysystemFilesystemInterface;
+use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 
 class Flysystem implements FilesystemInterface
 {
