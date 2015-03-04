@@ -4,10 +4,10 @@ namespace UEC\MediaUploader\Core\Factory;
 
 use UEC\MediaUploader\Core\Model\MediaInterface;
 
-class MediaManagerServicesFactory implements MediaManagerServicesFactoryInterface
+class ContextConfigurationFactory implements ContextConfigurationFactoryInterface
 {
     /**
-     * Associative array where the key is the name of the context and the value is an instance of MediaManagerServicesInterface
+     * Associative array where the key is the name of the context and the value is an instance of ContextConfigurationInterface
      *
      * @var array
      */

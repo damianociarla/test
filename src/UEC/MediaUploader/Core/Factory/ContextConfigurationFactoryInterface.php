@@ -3,18 +3,18 @@
 namespace UEC\MediaUploader\Core\Factory;
 
 use UEC\MediaUploader\Core\Model\MediaInterface;
-use UEC\MediaUploader\Core\Services\MediaManagerServicesInterface;
+use UEC\MediaUploader\Core\Services\ContextConfigurationInterface;
 
-interface MediaManagerServicesFactoryInterface
+interface ContextConfigurationFactoryInterface
 {
     /**
-     * Get an instance of MediaManagerServicesInterface
+     * Get an instance of ContextConfigurationInterface
      *
      * @throws \UnexpectedValueException
      * @throws \OutOfBoundsException
      *
      * @param MediaInterface|string $context
-     * @return MediaManagerServicesInterface
+     * @return ContextConfigurationInterface
      */
     public function get($context);
 }

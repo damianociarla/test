@@ -16,7 +16,7 @@ use UEC\MediaUploader\Filesystem\Flysystem\Flysystem;
 use UEC\MediaUploader\Mapper\Doctrine\Listener\DoctrineEventListener;
 use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectPersistence;
 use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectRepository;
-use UEC\MediaUploader\Core\Factory\MediaManagerServicesFactory;
+use UEC\MediaUploader\Core\Factory\ContextConfigurationFactory;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaManager;
@@ -28,7 +28,7 @@ use UEC\MediaUploader\Mapper\Doctrine\MediaTypeManager as DoctrineMediaTypeManag
 use UEC\MediaUploader\Core\Uploader\Common\SimpleUploader;
 use UEC\MediaUploader\Type\Image\Analyzer\ImageAnalyzer;
 use UEC\MediaUploader\Type\Image\Initializer\ImageInitializer;
-use UEC\MediaUploader\Type\Image\Services\ImageMediaManagerServices;
+use UEC\MediaUploader\Type\Image\Services\ImageContextConfiguration;
 use UEC\MediaUploader\Type\Image\Uploader\Validator\DimensionValidator;
 
 $paths = array('./src/Entity');
@@ -55,7 +55,7 @@ $mediaObjectRepository = new MediaObjectRepository($entityManager);
 
 $doctrineMediaManager = new DoctrineMediaManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
-$mediaImageModuleServices = new ImageMediaManagerServices(
+$mediaImageModuleServices = new ImageContextConfiguration(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaImage'),
     new SimpleUploader(
         new Flysystem(new Filesystem(new Local('./uploads'))),
@@ -71,7 +71,7 @@ $typeServices = array(
     'avatar' => $mediaImageModuleServices,
 );
 
-$mediaManagerServicesFactory = new MediaManagerServicesFactory($typeServices);
+$mediaManagerServicesFactory = new ContextConfigurationFactory($typeServices);
 
 $mediaManager = new MediaManager($doctrineMediaManager, $mediaManagerServicesFactory, new EventDispatcher());
 

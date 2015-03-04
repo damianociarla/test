@@ -7,7 +7,7 @@ use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
 use UEC\MediaUploader\Core\Uploader\UploaderInterface;
 
-abstract class MediaManagerServices implements MediaManagerServicesInterface
+abstract class ContextConfiguration implements ContextConfigurationInterface
 {
     protected $mediaTypeManager;
     protected $uploader;

@@ -7,7 +7,7 @@ use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
 use UEC\MediaUploader\Core\Uploader\UploaderInterface;
 
-interface MediaManagerServicesInterface
+interface ContextConfigurationInterface
 {
     /**
      * Get the media type manager
