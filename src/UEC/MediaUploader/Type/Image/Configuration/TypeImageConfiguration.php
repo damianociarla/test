@@ -20,7 +20,7 @@ class TypeImageConfiguration extends AbstractTypeConfiguration
         return true;
     }
 
-    public function getAdaptersSupported()
+    public function getSupportedAdapters()
     {
         return;
     }

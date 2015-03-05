@@ -58,5 +58,5 @@ interface TypeConfigurationInterface
      *
      * @return array
      */
-    public function getAdaptersSupported();
+    public function getSupportedAdapters();
 }

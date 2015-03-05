@@ -21,7 +21,7 @@ class TypeEmbedConfiguration extends AbstractTypeConfiguration
         return $adapter instanceof EmbedFileInterface;
     }
 
-    public function getAdaptersSupported()
+    public function getSupportedAdapters()
     {
         return array(
             'UEC\MediaUploader\Type\Embed\Adapter\EmbedFileInterface',

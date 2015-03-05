@@ -27,7 +27,7 @@ class MediaManager implements MediaManagerInterface
         $contextConfiguration = $this->contextConfigurationFactory->get($context);
 
         if (!$contextConfiguration->supports($adapter)) {
-            throw new UnexpectedAdapterException($adapter, $contextConfiguration->getAdaptersSupported());
+            throw new UnexpectedAdapterException($adapter, $contextConfiguration->getSupportedAdapters());
         }
 
         $defaultValidators = $contextConfiguration->getDefaultValidators();
