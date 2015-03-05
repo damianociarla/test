@@ -2,6 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Configuration;
 
+use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
@@ -43,4 +44,19 @@ interface TypeConfigurationInterface
      * @return array
      */
     public function getDefaultValidators();
+
+    /**
+     * Check if a configuration support an adapter
+     *
+     * @param AdapterInterface $adapter
+     * @return false
+     */
+    public function supports(AdapterInterface $adapter);
+
+    /**
+     * Get the list of the adapters supported from configuration
+     *
+     * @return array
+     */
+    public function getAdaptersSupported();
 }

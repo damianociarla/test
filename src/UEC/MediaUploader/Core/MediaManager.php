@@ -5,6 +5,7 @@ namespace UEC\MediaUploader\Core;
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Event\EventDispatcherInterface;
 use UEC\MediaUploader\Core\Event\MediaEvents;
+use UEC\MediaUploader\Core\Exception\UnexpectedAdapterException;
 use UEC\MediaUploader\Core\Factory\ContextConfigurationFactoryInterface;
 use UEC\MediaUploader\Core\Model\MediaManagerInterface as ModelMediaManagerInterface;
 
@@ -24,6 +25,10 @@ class MediaManager implements MediaManagerInterface
     public function save($context, AdapterInterface $adapter)
     {
         $contextConfiguration = $this->contextConfigurationFactory->get($context);
+
+        if (!$contextConfiguration->supports($adapter)) {
+            throw new UnexpectedAdapterException($adapter, $contextConfiguration->getAdaptersSupported());
+        }
 
         $defaultValidators = $contextConfiguration->getDefaultValidators();
 
