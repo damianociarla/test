@@ -4,6 +4,7 @@
   },
   "require": {
     "doctrine/orm": "2.4.7",
-    "league/flysystem": "1.0.1"
+    "league/flysystem": "1.0.1",
+    "embed/embed": "2.1.1"
   }
 }
