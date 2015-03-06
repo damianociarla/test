@@ -28,7 +28,7 @@ class AfterSaveMedia
         $mediaType = $media->getMediaType();
 
         if ($mediaType instanceof MediaTypePdfInterface) {
-            $configuration = $this->mediaManager->getContextConfiguration($media);
+            $configuration = $this->mediaManager->getContextLocator($media);
             $deliveryPath = $configuration->getCDN()->getDeliveryPath($media);
 
             $mediaBaseDir = pathinfo($media->getPath(), PATHINFO_DIRNAME).'/'.pathinfo($media->getPath(), PATHINFO_FILENAME);

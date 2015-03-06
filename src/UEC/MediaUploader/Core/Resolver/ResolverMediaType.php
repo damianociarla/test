@@ -2,21 +2,21 @@
 
 namespace UEC\MediaUploader\Core\Resolver;
 
-use UEC\MediaUploader\Core\Factory\ContextConfigurationInterface;
+use UEC\MediaUploader\Core\Factory\ContextLocatorInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 
 class ResolverMediaType implements ResolverMediaTypeInterface
 {
-    protected $contextConfigurationFactory;
+    protected $contextLocatorFactory;
 
-    function __construct(ContextConfigurationInterface $contextConfiguration)
+    function __construct(ContextLocatorInterface $contextLocator)
     {
-        $this->contextConfiguration = $contextConfiguration;
+        $this->contextLocator = $contextLocator;
     }
 
     public function resolve(MediaInterface $media)
     {
-        $mediaTypeManager = $this->contextConfiguration->get($media->getContext());
+        $mediaTypeManager = $this->contextLocator->get($media->getContext());
         return $mediaTypeManager->getMediaTypeManager()->findByMedia($media);
     }
 }

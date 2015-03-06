@@ -21,5 +21,5 @@ interface MediaManagerInterface
      * @param MediaInterface|string $context
      * @return TypeConfigurationInterface
      */
-    public function getContextConfiguration($context);
+    public function getContextLocator($context);
 }

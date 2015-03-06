@@ -7,32 +7,32 @@ use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\Event\EventDispatcherInterface;
 use UEC\MediaUploader\Core\Event\MediaEvents;
 use UEC\MediaUploader\Core\Exception\UnexpectedAdapterException;
-use UEC\MediaUploader\Core\Factory\ContextConfigurationInterface;
+use UEC\MediaUploader\Core\Factory\ContextLocatorInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaManagerInterface as ModelMediaManagerInterface;
 
 class MediaManager implements MediaManagerInterface
 {
     protected $modelMediaManager;
-    protected $contextConfiguration;
+    protected $contextLocator;
     protected $eventDispatcher;
 
-    function __construct(ModelMediaManagerInterface $modelMediaManager, ContextConfigurationInterface $contextConfiguration, EventDispatcherInterface $eventDispatcher)
+    function __construct(ModelMediaManagerInterface $modelMediaManager, ContextLocatorInterface $contextLocator, EventDispatcherInterface $eventDispatcher)
     {
         $this->modelMediaManager = $modelMediaManager;
-        $this->contextConfiguration = $contextConfiguration;
+        $this->contextLocator = $contextLocator;
         $this->eventDispatcher = $eventDispatcher;
     }
 
     public function save(AdapterInterface $adapter, $context)
     {
-        $contextConfiguration = $this->contextConfiguration->get($context);
+        $contextLocator = $this->contextLocator->get($context);
 
-        if (!$contextConfiguration->supports($adapter)) {
-            throw new UnexpectedAdapterException($adapter, $contextConfiguration->getSupportedAdapters());
+        if (!$contextLocator->supports($adapter)) {
+            throw new UnexpectedAdapterException($adapter, $contextLocator->getSupportedAdapters());
         }
 
-        $defaultValidators = $contextConfiguration->getDefaultValidators();
+        $defaultValidators = $contextLocator->getDefaultValidators();
 
         foreach ($defaultValidators as $validator) {
             $adapter->addValidator($validator, true);
@@ -44,25 +44,25 @@ class MediaManager implements MediaManagerInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_VALIDATION_ADAPTER, $context, $adapter);
 
-        $analyzer = $contextConfiguration->getAnalyzer();
+        $analyzer = $contextLocator->getAnalyzer();
         $analyzer->analyze($adapter);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_ANALYZE_ADAPTER, $context, $adapter, $analyzer);
 
-        $filePath = $contextConfiguration->getMediaService()->save($context, $adapter, $analyzer);
+        $filePath = $contextLocator->getMediaService()->save($context, $adapter, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_UPLOAD_MEDIA, $context, $adapter, $analyzer);
 
         $media = $this->modelMediaManager->create($context);
         $media->setPath($filePath);
 
-        $modelMediaTypeManager = $contextConfiguration->getMediaTypeManager();
+        $modelMediaTypeManager = $contextLocator->getMediaTypeManager();
         $mediaType = $modelMediaTypeManager->create($media);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_INITIALIZE_MEDIA_TYPE, $context, $mediaType, $analyzer);
 
-        $contextConfiguration->getInitializer()->initializeMedia($media, $analyzer);
-        $contextConfiguration->getInitializer()->initializeMediaType($mediaType, $analyzer);
+        $contextLocator->getInitializer()->initializeMedia($media, $analyzer);
+        $contextLocator->getInitializer()->initializeMediaType($mediaType, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_SAVE_MEDIA, $context, $media, $mediaType, $analyzer);
 
@@ -74,8 +74,8 @@ class MediaManager implements MediaManagerInterface
         return $media;
     }
 
-    public function getContextConfiguration($context)
+    public function getContextLocator($context)
     {
-        return $this->contextConfiguration->get($context);
+        return $this->contextLocator->get($context);
     }
 }

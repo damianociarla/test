@@ -17,7 +17,7 @@ use League\Flysystem\Filesystem;
 use Pdf\Parser\ImagickParser;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
 use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
-use UEC\MediaUploader\Core\Factory\ContextConfiguration;
+use UEC\MediaUploader\Core\Factory\ContextLocator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaManager;
@@ -103,17 +103,17 @@ $mediaPdfModuleConfiguration = new TypePdfConfiguration(
     new PdfAnalyzer(new PdfParser())
 );
 
-$contextConfigurationArray = array(
+$contextLocatorConfiguration = array(
     'image' => $mediaImageModuleConfiguration,
     'embed' => $mediaEmbedModuleConfiguration,
     'pdf'   => $mediaPdfModuleConfiguration,
 );
 
-$contextConfiguration = new ContextConfiguration($contextConfigurationArray);
+$contextLocator = new ContextLocator($contextLocatorConfiguration);
 
-$mediaManager = new MediaManager($doctrineMediaManager, $contextConfiguration, new EventDispatcher());
+$mediaManager = new MediaManager($doctrineMediaManager, $contextLocator, new EventDispatcher());
 
-$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($contextConfiguration)));
+$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($contextLocator)));
 
 /**
  * Esempio salvataggio immagine remota

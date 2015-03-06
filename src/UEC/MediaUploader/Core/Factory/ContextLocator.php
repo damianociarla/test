@@ -5,7 +5,7 @@ namespace UEC\MediaUploader\Core\Factory;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 
-class ContextConfiguration implements ContextConfigurationInterface
+class ContextLocator implements ContextLocatorInterface
 {
     /**
      * Associative array where the key is the name of the context and the value is an instance of TypeConfigurationInterface
