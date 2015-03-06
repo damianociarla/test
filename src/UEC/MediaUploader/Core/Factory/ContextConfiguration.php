@@ -27,7 +27,7 @@ class ContextConfiguration implements ContextConfigurationInterface
 
     public function has($context)
     {
-        return !array_key_exists($context, $this->contexts);
+        return array_key_exists($context, $this->contexts);
     }
 
     public function get($context)
