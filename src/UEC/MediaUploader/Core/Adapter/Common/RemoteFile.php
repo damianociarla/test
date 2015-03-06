@@ -6,17 +6,11 @@ use UEC\MediaUploader\Core\Adapter\AbstractAdapter;
 
 class RemoteFile extends AbstractAdapter implements RemoteFileInterface
 {
-    private $path;
     private $error;
 
-    function __construct($path)
+    public function getRemoveOriginal()
     {
-        $this->path = $path;
-    }
-
-    public function getPath()
-    {
-        return $this->path;
+        return false;
     }
 
     public function getName()

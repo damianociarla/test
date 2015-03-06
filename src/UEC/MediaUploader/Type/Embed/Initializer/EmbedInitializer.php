@@ -4,12 +4,18 @@ namespace UEC\MediaUploader\Type\Embed\Initializer;
 
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
+use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeInterface;
 use UEC\MediaUploader\Type\Embed\Analyzer\EmbedAnalyzer;
 use UEC\MediaUploader\Type\Embed\Model\MediaTypeEmbedInterface;
 
 class EmbedInitializer implements InitializerInterface
 {
+    public function initializeMedia(MediaInterface $media, AnalyzerInterface $analyzer)
+    {
+
+    }
+
     public function initializeMediaType(MediaTypeInterface $mediaType, AnalyzerInterface $analyzer)
     {
         if ($mediaType instanceof MediaTypeEmbedInterface) {

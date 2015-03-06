@@ -6,17 +6,23 @@ use UEC\MediaUploader\Core\Adapter\AbstractAdapter;
 
 class LocalFile extends AbstractAdapter implements LocalFileInterface
 {
-    private $path;
     private $error;
+    private $removeOriginal;
 
-    function __construct($path)
+    function __construct($path = null, $removeOriginal = false)
     {
-        $this->path = $path;
+        parent::__construct($path);
+        $this->setRemoveOriginal($removeOriginal);
     }
 
-    public function getPath()
+    public function getRemoveOriginal()
     {
-        return $this->path;
+        return $this->removeOriginal;
+    }
+
+    public function setRemoveOriginal($removeOriginal)
+    {
+        $this->removeOriginal = (bool)$removeOriginal;
     }
 
     public function getName()

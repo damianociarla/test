@@ -3,10 +3,12 @@
 namespace UEC\MediaUploader\Core;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\Event\EventDispatcherInterface;
 use UEC\MediaUploader\Core\Event\MediaEvents;
 use UEC\MediaUploader\Core\Exception\UnexpectedAdapterException;
 use UEC\MediaUploader\Core\Factory\ContextConfigurationFactoryInterface;
+use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaManagerInterface as ModelMediaManagerInterface;
 
 class MediaManager implements MediaManagerInterface
@@ -59,6 +61,7 @@ class MediaManager implements MediaManagerInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_INITIALIZE_MEDIA_TYPE, $context, $mediaType, $analyzer);
 
+        $contextConfiguration->getInitializer()->initializeMedia($media, $analyzer);
         $contextConfiguration->getInitializer()->initializeMediaType($mediaType, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_SAVE_MEDIA, $context, $media, $mediaType, $analyzer);
@@ -66,8 +69,13 @@ class MediaManager implements MediaManagerInterface
         $this->modelMediaManager->save($media);
         $modelMediaTypeManager->save($mediaType);
 
-        $this->eventDispatcher->dispatch(MediaEvents::AFTER_SAVE_MEDIA, $context, $media, $mediaType, $analyzer);
+        $this->eventDispatcher->dispatch(MediaEvents::AFTER_SAVE_MEDIA, $context, $media, $analyzer);
 
         return $media;
+    }
+
+    public function getContextConfiguration($context)
+    {
+        return $this->contextConfigurationFactory->get($context);
     }
 }

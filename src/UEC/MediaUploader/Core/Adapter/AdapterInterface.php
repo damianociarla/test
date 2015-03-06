@@ -14,6 +14,13 @@ interface AdapterInterface
     public function getPath();
 
     /**
+     * Set path
+     *
+     * @param mixed $path
+     */
+    public function setPath($path);
+
+    /**
      * Get name of the file
      *
      * @return string

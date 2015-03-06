@@ -8,13 +8,13 @@ class UploadFile extends AbstractAdapter implements UploadFileInterface
 {
     private $file;
 
-    function __construct($name)
+    function __construct($path)
     {
-        if (!isset($_FILES[$name])) {
-            throw new \Exception(sprintf('File "%s" not found', $name));
+        if (!isset($_FILES[$path])) {
+            throw new \Exception(sprintf('File "%s" not found', $path));
         }
 
-        $this->file = $_FILES[$name];
+        $this->file = $_FILES[$path];
     }
 
     public function getFile()

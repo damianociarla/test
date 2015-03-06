@@ -13,7 +13,16 @@ class ImageAnalyzer extends AbstractAnalyzer
 
     public function analyze(AdapterInterface $adapter)
     {
-        list($width, $height) = getimagesize($adapter->getPath());
+        $path   = $adapter->getPath();
+        $width  = null;
+        $height = null;
+
+        if (false !== $sizes = getimagesize($path)) {
+            list($width, $height) = $sizes;
+        } elseif (false !== $im = imagecreatefromstring($path)) {
+            $width = imagesx($im);
+            $height = imagesy($im);
+        }
 
         $this->fileInfo = array(
             self::INFO_WIDTH  => $width,

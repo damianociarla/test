@@ -6,7 +6,24 @@ use UEC\MediaUploader\Core\Adapter\Validator\AdapterValidatorInterface;
 
 abstract class AbstractAdapter implements AdapterInterface
 {
-    private $validators = array();
+    protected $path;
+    protected $validators;
+
+    function __construct($path = null)
+    {
+        $this->path = $path;
+        $this->validators = array();
+    }
+
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
 
     public function addValidator(AdapterValidatorInterface $validator, $atBeginning = false)
     {

@@ -26,7 +26,7 @@ abstract class MediaTypeImage extends MediaType implements MediaTypeImageInterfa
         return $this->width;
     }
 
-    public function setWidth($width)
+    public function setWidth($width = null)
     {
         $this->width = $width;
         return $this;
@@ -37,7 +37,7 @@ abstract class MediaTypeImage extends MediaType implements MediaTypeImageInterfa
         return $this->height;
     }
 
-    public function setHeight($height)
+    public function setHeight($height = null)
     {
         $this->height = $height;
         return $this;
@@ -48,7 +48,7 @@ abstract class MediaTypeImage extends MediaType implements MediaTypeImageInterfa
         return $this->size;
     }
 
-    public function setSize($size)
+    public function setSize($size = null)
     {
         $this->size = $size;
         return $this;

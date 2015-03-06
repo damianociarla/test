@@ -3,6 +3,7 @@
 namespace UEC\MediaUploader\Core;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 
 interface MediaManagerInterface
@@ -13,4 +14,12 @@ interface MediaManagerInterface
      * @return MediaInterface
      */
     public function save($context, AdapterInterface $adapter);
+
+    /**
+     * Get configuration from context. Context can be a string or an instance of MediaInterface
+     *
+     * @param MediaInterface|string $context
+     * @return TypeConfigurationInterface
+     */
+    public function getContextConfiguration($context);
 }

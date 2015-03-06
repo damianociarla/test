@@ -11,17 +11,17 @@ use UEC\MediaUploader\Type\Image\Model\MediaTypeImage as BaseMediaTypeImage;
 abstract class MediaTypeImage extends BaseMediaTypeImage
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $width;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $height;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $size;
 }

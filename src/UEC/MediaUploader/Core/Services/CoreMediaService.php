@@ -2,6 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Services;
 
+use UEC\MediaUploader\Core\Adapter\AdapterBlobInterface;
 use UEC\MediaUploader\Core\Adapter\AdapterContentInterface;
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Adapter\AdapterStreamInterface;
@@ -14,6 +15,12 @@ class CoreMediaService extends AbstractMediaService
         if ($adapter instanceof AdapterContentInterface) {
             $finalPath = $this->generateFinalPath($context, $adapter);
             $this->filesystem->put($finalPath, file_get_contents($adapter->getPath()));
+            if ($adapter->getRemoveOriginal()) {
+                unlink($adapter->getPath());
+            }
+        } elseif ($adapter instanceof AdapterBlobInterface) {
+            $finalPath = $this->generateFinalPath($context, $adapter);
+            $this->filesystem->put($finalPath, $adapter->getBlob());
         } elseif ($adapter instanceof AdapterStreamInterface) {
             $finalPath = $this->generateFinalPath($context, $adapter);
             $stream = fopen($adapter->getPath(), 'r+');

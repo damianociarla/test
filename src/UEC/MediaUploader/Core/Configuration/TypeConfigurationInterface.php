@@ -4,6 +4,7 @@ namespace UEC\MediaUploader\Core\Configuration;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
+use UEC\MediaUploader\Core\CDN\CDNInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
 use UEC\MediaUploader\Core\Services\MediaServiceInterface;
@@ -37,6 +38,13 @@ interface TypeConfigurationInterface
      * @return AnalyzerInterface
      */
     public function getAnalyzer();
+
+    /**
+     * Get CDN manager
+     *
+     * @return CDNInterface
+     */
+    public function getCDN();
 
     /**
      * Get default validator to associate at the adapter

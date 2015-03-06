@@ -19,7 +19,7 @@ interface MediaTypeImageInterface extends MediaTypeInterface
      * @param int $width
      * @return MediaTypeImageInterface
      */
-    public function setWidth($width);
+    public function setWidth($width = null);
 
     /**
      * Get height
@@ -34,7 +34,7 @@ interface MediaTypeImageInterface extends MediaTypeInterface
      * @param int $height
      * @return MediaTypeImageInterface
      */
-    public function setHeight($height);
+    public function setHeight($height = null);
 
     /**
      * Get size
@@ -49,5 +49,5 @@ interface MediaTypeImageInterface extends MediaTypeInterface
      * @param int $size
      * @return MediaTypeImageInterface
      */
-    public function setSize($size);
+    public function setSize($size = null);
 }

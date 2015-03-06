@@ -8,4 +8,11 @@ use UEC\MediaUploader\Core\Adapter\AdapterContentInterface;
  */
 interface LocalFileInterface extends AdapterContentInterface
 {
+    /**
+     * Set removeOriginal
+     *
+     * @param boolean $removeOriginal
+     * @return LocalFileInterface
+     */
+    public function setRemoveOriginal($removeOriginal);
 }
