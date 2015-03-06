@@ -27,7 +27,7 @@ class ContextConfiguration implements ContextConfigurationInterface
 
     public function has($context)
     {
-        return isset($this->contexts[$context]);
+        return !array_key_exists($context, $this->contexts);
     }
 
     public function get($context)
@@ -36,7 +36,7 @@ class ContextConfiguration implements ContextConfigurationInterface
             throw new \UnexpectedValueException('The value must be a string');
         }
 
-        if (!array_key_exists($context, $this->contexts)) {
+        if (!$this->has($context)) {
             throw new \OutOfBoundsException(sprintf('The context "%s" is not present in the configuration', $context));
         }
 
