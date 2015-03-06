@@ -16,7 +16,7 @@ class ResolverMediaType implements ResolverMediaTypeInterface
 
     public function resolve(MediaInterface $media)
     {
-        $mediaTypeManager = $this->contextConfiguration->get($media);
+        $mediaTypeManager = $this->contextConfiguration->get($media->getContext());
         return $mediaTypeManager->getMediaTypeManager()->findByMedia($media);
     }
 }

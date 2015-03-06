@@ -3,6 +3,7 @@
 namespace UEC\MediaUploader\Core\Factory;
 
 use UEC\MediaUploader\Core\Model\MediaInterface;
+use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 
 class ContextConfiguration implements ContextConfigurationInterface
 {
@@ -18,14 +19,21 @@ class ContextConfiguration implements ContextConfigurationInterface
         $this->contexts = $contexts;
     }
 
+    public function set($context, TypeConfigurationInterface $typeConfiguration)
+    {
+        $this->contexts[$context] = $typeConfiguration;
+        return $this;
+    }
+
+    public function has($context)
+    {
+        return isset($this->contexts[$context]);
+    }
+
     public function get($context)
     {
-        if (!is_scalar($context) && !$context instanceof MediaInterface) {
-            throw new \UnexpectedValueException('The value must be a string or an instance of MediaInterface');
-        }
-
-        if ($context instanceof MediaInterface) {
-            $context = $context->getContext();
+        if (!is_scalar($context) && !is_string($context)) {
+            throw new \UnexpectedValueException('The value must be a string');
         }
 
         if (!array_key_exists($context, $this->contexts)) {

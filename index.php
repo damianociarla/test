@@ -17,7 +17,7 @@ use League\Flysystem\Filesystem;
 use Pdf\Parser\ImagickParser;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
 use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
-use UEC\MediaUploader\Core\Factory\ContextConfigurationFactory;
+use UEC\MediaUploader\Core\Factory\ContextConfiguration;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaManager;
@@ -109,8 +109,7 @@ $contextConfigurationArray = array(
     'pdf'   => $mediaPdfModuleConfiguration,
 );
 
-$contextConfigurationFactory = new ContextConfigurationFactory();
-$contextConfiguration = $contextConfigurationFactory($contextConfigurationArray);
+$contextConfiguration = new ContextConfiguration($contextConfigurationArray);
 
 $mediaManager = new MediaManager($doctrineMediaManager, $contextConfiguration, new EventDispatcher());
 
