@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 use CDN\CDNBase;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -100,17 +103,18 @@ $mediaPdfModuleConfiguration = new TypePdfConfiguration(
     new PdfAnalyzer(new PdfParser())
 );
 
-$contextConfiguration = array(
+$contextConfigurationArray = array(
     'image' => $mediaImageModuleConfiguration,
     'embed' => $mediaEmbedModuleConfiguration,
     'pdf'   => $mediaPdfModuleConfiguration,
 );
 
-$contextConfigurationFactory = new ContextConfigurationFactory($contextConfiguration);
+$contextConfigurationFactory = new ContextConfigurationFactory();
+$contextConfiguration = $contextConfigurationFactory($contextConfigurationArray);
 
-$mediaManager = new MediaManager($doctrineMediaManager, $contextConfigurationFactory, new EventDispatcher());
+$mediaManager = new MediaManager($doctrineMediaManager, $contextConfiguration, new EventDispatcher());
 
-$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($contextConfigurationFactory)));
+$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($contextConfiguration)));
 
 /**
  * Esempio salvataggio immagine remota
@@ -123,18 +127,18 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new
 //    DimensionValidator::DIMENSION_MIN_WIDTH => 300
 //)));
 //
-//$file = $mediaManager->save('image', $adapterRemote);
+//$file = $mediaManager->save($adapterRemote, 'image');
 
 /**
  * Esempio salvataggio embed
  */
-//$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
-//$file = $mediaManager->save('embed', $adapterEmbed);
+$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
+$file = $mediaManager->save($adapterEmbed, 'embed');
 
 /**
  * Esempio salvataggio pdf remoto
  */
-$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
-$file = $mediaManager->save($adapterRemote, 'pdf');
-
+//$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
+//$file = $mediaManager->save($adapterRemote, 'pdf');
+//
 Debug::dump($file);
