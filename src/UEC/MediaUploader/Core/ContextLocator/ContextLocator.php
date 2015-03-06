@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Factory;
+namespace UEC\MediaUploader\Core\ContextLocator;
 
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;

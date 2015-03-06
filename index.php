@@ -17,7 +17,7 @@ use League\Flysystem\Filesystem;
 use Pdf\Parser\ImagickParser;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
 use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
-use UEC\MediaUploader\Core\Factory\ContextLocator;
+use UEC\MediaUploader\Core\ContextLocator\ContextLocator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaManager;

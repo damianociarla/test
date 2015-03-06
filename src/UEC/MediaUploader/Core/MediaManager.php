@@ -7,7 +7,7 @@ use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\Event\EventDispatcherInterface;
 use UEC\MediaUploader\Core\Event\MediaEvents;
 use UEC\MediaUploader\Core\Exception\UnexpectedAdapterException;
-use UEC\MediaUploader\Core\Factory\ContextLocatorInterface;
+use UEC\MediaUploader\Core\ContextLocator\ContextLocatorInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaManagerInterface as ModelMediaManagerInterface;
 
