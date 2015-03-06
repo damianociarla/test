@@ -100,13 +100,13 @@ $mediaPdfModuleConfiguration = new TypePdfConfiguration(
     new PdfAnalyzer(new PdfParser())
 );
 
-$typeConfiguration = array(
+$contextConfiguration = array(
     'image' => $mediaImageModuleConfiguration,
     'embed' => $mediaEmbedModuleConfiguration,
     'pdf'   => $mediaPdfModuleConfiguration,
 );
 
-$contextConfigurationFactory = new ContextConfigurationFactory($typeConfiguration);
+$contextConfigurationFactory = new ContextConfigurationFactory($contextConfiguration);
 
 $mediaManager = new MediaManager($doctrineMediaManager, $contextConfigurationFactory, new EventDispatcher());
 
@@ -135,6 +135,6 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new
  * Esempio salvataggio pdf remoto
  */
 $adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
-$file = $mediaManager->save('pdf', $adapterRemote);
+$file = $mediaManager->save($adapterRemote, 'pdf');
 
 Debug::dump($file);

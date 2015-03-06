@@ -9,11 +9,11 @@ use UEC\MediaUploader\Core\Model\MediaInterface;
 interface MediaManagerInterface
 {
     /**
-     * @param string $context
      * @param AdapterInterface $adapter
+     * @param string $context
      * @return MediaInterface
      */
-    public function save($context, AdapterInterface $adapter);
+    public function save(AdapterInterface $adapter, $context);
 
     /**
      * Get configuration from context. Context can be a string or an instance of MediaInterface

@@ -24,7 +24,7 @@ class MediaManager implements MediaManagerInterface
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function save($context, AdapterInterface $adapter)
+    public function save(AdapterInterface $adapter, $context)
     {
         $contextConfiguration = $this->contextConfigurationFactory->get($context);
 

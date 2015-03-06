@@ -39,7 +39,7 @@ class AfterSaveMedia
 
                 if ($this->extractor->extractPageFromPdf($deliveryPath, $pageNumber, $this->quality, $finalPath)) {
                     $adapter = new LocalFile($finalPath, true);
-                    $media = $this->mediaManager->save($this->contextImageName, $adapter);
+                    $media = $this->mediaManager->save($adapter, $this->contextImageName);
                 }
             }
         }
