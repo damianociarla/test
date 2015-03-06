@@ -4,7 +4,7 @@ namespace UEC\MediaUploader\Type\Pdf\Analyzer;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Analyzer\AbstractAnalyzer;
-use UEC\MediaUploader\Type\Pdf\Parser\PdfParserInterface;
+use UEC\MediaUploader\Type\Pdf\Parser\ParserInterface;
 
 class PdfAnalyzer extends AbstractAnalyzer
 {
@@ -13,7 +13,7 @@ class PdfAnalyzer extends AbstractAnalyzer
     const INFO_SIZE     = 'size';
     const INFO_TOT_PAGE = 'tot_page';
 
-    function __construct(PdfParserInterface $parser)
+    function __construct(ParserInterface $parser)
     {
         $this->parser = $parser;
     }

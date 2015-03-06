@@ -35,17 +35,17 @@ interface MediaTypePdfInterface
     public function setTotalPageNumber($totalPageNumber);
 
     /**
-     * Get images
+     * Get pages
      *
      * @return array
      */
-    public function getImages();
+    public function getPages();
 
     /**
-     * Set images
+     * Set pages
      *
-     * @param array $images
+     * @param array $pages
      * @return MediaTypePdfInterface
      */
-    public function setImages($images);
+    public function setPages($pages);
 }

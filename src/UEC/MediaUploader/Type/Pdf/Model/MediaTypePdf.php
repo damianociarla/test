@@ -19,11 +19,11 @@ abstract class MediaTypePdf extends MediaType implements MediaTypePdfInterface
     /**
      * @var array
      */
-    protected $images;
+    protected $pages;
 
     function __construct()
     {
-        $this->images = array();
+        $this->pages = array();
     }
 
     public function getSize()
@@ -48,14 +48,14 @@ abstract class MediaTypePdf extends MediaType implements MediaTypePdfInterface
         return $this;
     }
 
-    public function getImages()
+    public function getPages()
     {
-        return $this->images;
+        return $this->pages;
     }
 
-    public function setImages($images)
+    public function setPages($pages)
     {
-        $this->images = $images;
+        $this->pages = $pages;
         return $this;
     }
 }

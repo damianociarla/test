@@ -5,20 +5,20 @@ namespace UEC\MediaUploader\Type\Pdf\Listener;
 use UEC\MediaUploader\Core\Adapter\Common\LocalFile;
 use UEC\MediaUploader\Core\MediaManagerInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
+use UEC\MediaUploader\Extension\PdfImageExtractor\Extractor\ExtractorInterface;
 use UEC\MediaUploader\Type\Pdf\Model\MediaTypePdfInterface;
-use UEC\MediaUploader\Type\Pdf\Parser\PdfParserInterface;
 
 class AfterSaveMedia
 {
     protected $mediaManager;
-    protected $pdfParser;
+    protected $extractor;
     protected $quality;
     protected $contextImageName;
 
-    function __construct(MediaManagerInterface $mediaManager, PdfParserInterface $pdfParser, $quality, $contextImageName)
+    function __construct(MediaManagerInterface $mediaManager, ExtractorInterface $extractor, $quality, $contextImageName)
     {
         $this->mediaManager = $mediaManager;
-        $this->pdfParser = $pdfParser;
+        $this->extractor = $extractor;
         $this->quality = $quality;
         $this->contextImageName = $contextImageName;
     }
@@ -37,7 +37,7 @@ class AfterSaveMedia
                 $filename = sprintf('page_%s.jpg', $pageNumber);
                 $finalPath = $mediaBaseDir.'/'.$filename;
 
-                if ($this->pdfParser->extractPageFromPdf($deliveryPath, $pageNumber, $this->quality, $finalPath)) {
+                if ($this->extractor->extractPageFromPdf($deliveryPath, $pageNumber, $this->quality, $finalPath)) {
                     $adapter = new LocalFile($finalPath, true);
                     $media = $this->mediaManager->save($this->contextImageName, $adapter);
                 }
