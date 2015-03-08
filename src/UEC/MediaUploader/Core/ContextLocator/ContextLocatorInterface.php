@@ -3,7 +3,6 @@
 namespace UEC\MediaUploader\Core\ContextLocator;
 
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
-use UEC\MediaUploader\Core\Model\MediaInterface;
 
 interface ContextLocatorInterface
 {

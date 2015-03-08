@@ -2,7 +2,6 @@
 
 namespace UEC\MediaUploader\Core\ContextLocator;
 
-use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 
 class ContextLocator implements ContextLocatorInterface

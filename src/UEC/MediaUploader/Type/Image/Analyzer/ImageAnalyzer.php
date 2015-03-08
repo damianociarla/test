@@ -3,6 +3,7 @@
 namespace UEC\MediaUploader\Type\Image\Analyzer;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Adapter\Common\BlobFileInterface;
 use UEC\MediaUploader\Core\Analyzer\AbstractAnalyzer;
 
 class ImageAnalyzer extends AbstractAnalyzer
@@ -13,15 +14,15 @@ class ImageAnalyzer extends AbstractAnalyzer
 
     public function analyze(AdapterInterface $adapter)
     {
-        $path   = $adapter->getPath();
-        $width  = null;
-        $height = null;
+        $width  = 0;
+        $height = 0;
 
-        if (false !== $sizes = getimagesize($path)) {
-            list($width, $height) = $sizes;
-        } elseif (false !== $im = imagecreatefromstring($path)) {
+        if ($adapter instanceof BlobFileInterface) {
+            $im = imagecreatefromstring($adapter->getBlob());
             $width = imagesx($im);
             $height = imagesy($im);
+        } else {
+            list($width, $height) = getimagesize($adapter->getPath());
         }
 
         $this->fileInfo = array(

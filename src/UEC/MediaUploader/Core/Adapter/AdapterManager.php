@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Services;
+namespace UEC\MediaUploader\Core\Adapter;
 
 use UEC\MediaUploader\Core\Adapter\AdapterBlobInterface;
 use UEC\MediaUploader\Core\Adapter\AdapterContentInterface;
@@ -8,9 +8,9 @@ use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Adapter\AdapterStreamInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 
-class CoreMediaService extends AbstractMediaService
+class AdapterManager extends AbstractAdapterManager
 {
-    public function save($context, AdapterInterface $adapter, AnalyzerInterface $analyzer)
+    public function save($context, AdapterInterface $adapter)
     {
         if ($adapter instanceof AdapterContentInterface) {
             $finalPath = $this->generateFinalPath($context, $adapter);

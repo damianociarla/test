@@ -3,6 +3,10 @@
 namespace UEC\MediaUploader\Type\Pdf\Model;
 
 use UEC\MediaUploader\Core\Model\MediaType;
+use UEC\MediaUploader\Type\Pdf\Resolver\PageResolver;
+use UEC\MediaUploader\Type\Pdf\Resolver\PageResolverInterface;
+use UEC\MediaUploader\Type\Pdf\Resolver\PageResolverManager;
+use UEC\MediaUploader\Type\Pdf\Resolver\PageResolverManagerInterface;
 
 abstract class MediaTypePdf extends MediaType implements MediaTypePdfInterface
 {
@@ -17,13 +21,13 @@ abstract class MediaTypePdf extends MediaType implements MediaTypePdfInterface
     protected $totalPageNumber;
 
     /**
-     * @var array
+     * @var PageResolverManagerInterface
      */
-    protected $pages;
+    protected $pageResolver;
 
     function __construct()
     {
-        $this->pages = array();
+        $this->pageResolver = new PageResolverManager($this);
     }
 
     public function getSize()
@@ -48,14 +52,18 @@ abstract class MediaTypePdf extends MediaType implements MediaTypePdfInterface
         return $this;
     }
 
-    public function getPages()
+    public function getPage($number)
     {
-        return $this->pages;
+        $this->pageResolver->setPageNumber($number);
+        return $this->pageResolver;
     }
 
-    public function setPages($pages)
+    public function addPageResolver(PageResolverInterface $resolver)
     {
-        $this->pages = $pages;
-        return $this;
+        if (null === $this->pageResolver) {
+            $this->pageResolver = new PageResolverManager($this);
+        }
+
+        return $this->pageResolver->addResolver($resolver);
     }
 }

@@ -3,15 +3,13 @@
 namespace UEC\MediaUploader\Core;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
-use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
+use UEC\MediaUploader\Core\ContextLocator\ContextLocatorInterface;
 use UEC\MediaUploader\Core\Event\EventDispatcherInterface;
 use UEC\MediaUploader\Core\Event\MediaEvents;
 use UEC\MediaUploader\Core\Exception\UnexpectedAdapterException;
-use UEC\MediaUploader\Core\ContextLocator\ContextLocatorInterface;
-use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaManagerInterface as ModelMediaManagerInterface;
 
-class MediaManager implements MediaManagerInterface
+class MediaUploader implements MediaUploaderInterface
 {
     protected $modelMediaManager;
     protected $contextLocator;
@@ -49,7 +47,7 @@ class MediaManager implements MediaManagerInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_ANALYZE_ADAPTER, $context, $adapter, $analyzer);
 
-        $filePath = $contextLocator->getMediaService()->save($context, $adapter, $analyzer);
+        $filePath = $contextLocator->getAdapterManager()->save($context, $adapter);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_UPLOAD_MEDIA, $context, $adapter, $analyzer);
 

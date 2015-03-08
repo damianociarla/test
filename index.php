@@ -20,11 +20,13 @@ use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
 use UEC\MediaUploader\Core\ContextLocator\ContextLocator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
-use UEC\MediaUploader\Core\MediaManager;
+use UEC\MediaUploader\Core\MediaUploader;
 use UEC\MediaUploader\Core\Resolver\ResolverMediaType;
-use UEC\MediaUploader\Core\Services\CoreMediaService;
-use UEC\MediaUploader\Filesystem\Flysystem\Flysystem;
-use UEC\MediaUploader\Mapper\Doctrine\Listener\DoctrineEventListener;
+use UEC\MediaUploader\Core\Adapter\AdapterManager;
+use UEC\MediaUploader\Extension\PdfImageExtractor\ExtractorManager;
+use UEC\MediaUploader\Extension\PdfImageExtractor\Mapper\Doctrine\MediaTypePdfImageManager;
+use UEC\MediaUploader\Extension\PdfImageExtractor\Resolver\PageImageResolver;
+use UEC\MediaUploader\Mapper\Doctrine\Listener\DoctrineEventListener as MediaTypeDoctrineEventListener;
 use UEC\MediaUploader\Mapper\Doctrine\MediaManager as DoctrineMediaManager;
 use UEC\MediaUploader\Mapper\Doctrine\MediaTypeManager as DoctrineMediaTypeManager;
 use UEC\MediaUploader\Mapper\Doctrine\ORM\MediaObjectPersistence;
@@ -40,11 +42,13 @@ use UEC\MediaUploader\Type\Image\Initializer\ImageInitializer;
 use UEC\MediaUploader\Type\Pdf\Analyzer\PdfAnalyzer;
 use UEC\MediaUploader\Type\Pdf\Configuration\TypePdfConfiguration;
 use UEC\MediaUploader\Type\Pdf\Initializer\PdfInitializer;
+use UEC\MediaUploader\Extension\PdfImageExtractor\Mapper\Doctrine\Listener\DoctrineEventListener as PdfImageExtractorDoctrineEventListener;
+use Filesystem as Flysystem;
 
 include_once 'vendor/autoload.php';
 
 $paths = array('./src/Entity');
-$isDevMode = false;
+$isDevMode = true;
 
 // the connection configuration
 $dbParams = array(
@@ -69,7 +73,7 @@ $doctrineMediaManager = new DoctrineMediaManager($mediaObjectPersistence, $media
 
 $mediaImageModuleConfiguration = new TypeImageConfiguration(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeImage'),
-    new CoreMediaService(
+    new AdapterManager(
         new Flysystem(new Filesystem(new Local('./uploads'))),
         new FilenameGenerator(),
         new PathGenerator()
@@ -81,7 +85,7 @@ $mediaImageModuleConfiguration = new TypeImageConfiguration(
 
 $mediaEmbedModuleConfiguration = new TypeEmbedConfiguration(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeEmbed'),
-    new CoreMediaService(
+    new AdapterManager(
         new Flysystem(new Filesystem(new Local('./uploads'))),
         new FilenameGenerator(),
         new PathGenerator()
@@ -93,7 +97,7 @@ $mediaEmbedModuleConfiguration = new TypeEmbedConfiguration(
 
 $mediaPdfModuleConfiguration = new TypePdfConfiguration(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdf'),
-    new CoreMediaService(
+    new AdapterManager(
         new Flysystem(new Filesystem(new Local('./uploads'))),
         new FilenameGenerator(),
         new PathGenerator()
@@ -107,13 +111,14 @@ $contextLocatorConfiguration = array(
     'image' => $mediaImageModuleConfiguration,
     'embed' => $mediaEmbedModuleConfiguration,
     'pdf'   => $mediaPdfModuleConfiguration,
+    'pdf_image' => $mediaImageModuleConfiguration,
 );
 
 $contextLocator = new ContextLocator($contextLocatorConfiguration);
 
-$mediaManager = new MediaManager($doctrineMediaManager, $contextLocator, new EventDispatcher());
+$mediaUploader = new MediaUploader($doctrineMediaManager, $contextLocator, new EventDispatcher());
 
-$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new DoctrineEventListener(new ResolverMediaType($contextLocator)));
+$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new MediaTypeDoctrineEventListener(new ResolverMediaType($contextLocator)));
 
 /**
  * Esempio salvataggio immagine remota
@@ -126,18 +131,30 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new
 //    DimensionValidator::DIMENSION_MIN_WIDTH => 300
 //)));
 //
-//$file = $mediaManager->save($adapterRemote, 'image');
+//$file = $mediaUploader->save($adapterRemote, 'image');
 
 /**
  * Esempio salvataggio embed
  */
-$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
-$file = $mediaManager->save($adapterEmbed, 'embed');
+//$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
+//$file = $mediaUploader->save($adapterEmbed, 'embed');
 
 /**
  * Esempio salvataggio pdf remoto
  */
-//$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
-//$file = $mediaManager->save($adapterRemote, 'pdf');
-//
+
+$doctrinePdfImageManager = new MediaTypePdfImageManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdfImage');
+$pdfExtractor = new PdfExtractor();
+$pageImageResolver = new PageImageResolver($doctrinePdfImageManager);
+
+$entityManager->getEventManager()->addEventListener(array(Events::postLoad, Events::postPersist), new PdfImageExtractorDoctrineEventListener($pageImageResolver));
+
+$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
+$file = $mediaUploader->save($adapterRemote, 'pdf');
+
+$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
+$extractorManager
+    ->setQuality(100)
+    ->extractAll($file);
+
 Debug::dump($file);

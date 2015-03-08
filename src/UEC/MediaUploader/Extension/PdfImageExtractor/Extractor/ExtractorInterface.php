@@ -13,5 +13,5 @@ interface ExtractorInterface
      * @param string $output
      * @return boolean
      */
-    public function extractPageFromPdf($path, $pageNumber, $quality, $output);
+    public function extractPageFromPdf($path, $pageNumber, $quality, $output = null);
 }

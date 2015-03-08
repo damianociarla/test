@@ -6,25 +6,25 @@ use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\CDN\CDNInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
-use UEC\MediaUploader\Core\Services\MediaServiceInterface;
+use UEC\MediaUploader\Core\Adapter\AdapterManagerInterface;
 
 abstract class AbstractTypeConfiguration implements TypeConfigurationInterface
 {
     protected $mediaTypeManager;
-    protected $mediaService;
+    protected $adapterManager;
     protected $cdn;
     protected $initializer;
     protected $analyzer;
 
     function __construct(
         MediaTypeManagerInterface $mediaTypeManager,
-        MediaServiceInterface $mediaService,
+        AdapterManagerInterface $adapterManager,
         CDNInterface $cdn,
         InitializerInterface $initializer,
         AnalyzerInterface $analyzer
     ) {
         $this->mediaTypeManager = $mediaTypeManager;
-        $this->mediaService = $mediaService;
+        $this->adapterManager = $adapterManager;
         $this->cdn = $cdn;
         $this->initializer = $initializer;
         $this->analyzer = $analyzer;
@@ -35,9 +35,9 @@ abstract class AbstractTypeConfiguration implements TypeConfigurationInterface
         return $this->mediaTypeManager;
     }
 
-    public function getMediaService()
+    public function getAdapterManager()
     {
-        return $this->mediaService;
+        return $this->adapterManager;
     }
 
     public function getCDN()

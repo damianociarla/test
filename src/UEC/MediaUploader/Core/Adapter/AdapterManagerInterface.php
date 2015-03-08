@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Services;
+namespace UEC\MediaUploader\Core\Adapter;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
@@ -8,7 +8,7 @@ use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
 use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;
 
-interface MediaServiceInterface
+interface AdapterManagerInterface
 {
     /**
      * Get filesystem
@@ -21,7 +21,7 @@ interface MediaServiceInterface
      * Set filesystem
      *
      * @param FilesystemInterface $filesystem
-     * @return MediaServiceInterface
+     * @return AdapterManagerInterface
      */
     public function setFilesystem(FilesystemInterface $filesystem);
 
@@ -36,7 +36,7 @@ interface MediaServiceInterface
      * Set filenameGenerator
      *
      * @param FilenameGeneratorInterface $filenameGenerator
-     * @return MediaServiceInterface
+     * @return AdapterManagerInterface
      */
     public function setFilenameGenerator(FilenameGeneratorInterface $filenameGenerator);
 
@@ -51,7 +51,7 @@ interface MediaServiceInterface
      * Set pathGenerator
      *
      * @param PathGeneratorInterface $pathGenerator
-     * @return MediaServiceInterface
+     * @return AdapterManagerInterface
      */
     public function setPathGenerator(PathGeneratorInterface $pathGenerator);
 
@@ -60,8 +60,7 @@ interface MediaServiceInterface
      *
      * @param string $context
      * @param AdapterInterface $adapter
-     * @param AnalyzerInterface $analyzer
      * @return string new file path
      */
-    public function save($context, AdapterInterface $adapter, AnalyzerInterface $analyzer);
+    public function save($context, AdapterInterface $adapter);
 }

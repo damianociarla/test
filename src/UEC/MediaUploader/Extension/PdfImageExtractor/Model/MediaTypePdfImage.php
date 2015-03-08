@@ -3,10 +3,16 @@
 namespace UEC\MediaUploader\Extension\PdfImageExtractor\Model;
 
 use UEC\MediaUploader\Core\Model\MediaInterface;
+use UEC\MediaUploader\Type\Pdf\Model\MediaTypePdfImageInterface;
 use UEC\MediaUploader\Type\Pdf\Model\MediaTypePdfInterface;
 
-abstract class MediaTypePdfPage implements MediaTypePdfPageInterface
+abstract class MediaTypePdfImage implements MediaTypePdfImageInterface
 {
+    /**
+     * @var int
+     */
+    protected $id;
+
     /**
      * @var MediaTypePdfInterface
      */
@@ -20,7 +26,12 @@ abstract class MediaTypePdfPage implements MediaTypePdfPageInterface
     /**
      * @var MediaInterface
      */
-    protected $mediaImage;
+    protected $media;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getMediaPdf()
     {
@@ -44,14 +55,14 @@ abstract class MediaTypePdfPage implements MediaTypePdfPageInterface
         return $this;
     }
 
-    public function getMediaImage()
+    public function getMedia()
     {
-        return $this->mediaImage;
+        return $this->media;
     }
 
-    public function setMediaImage(MediaInterface $mediaImage)
+    public function setMedia(MediaInterface $media)
     {
-        $this->mediaImage = $mediaImage;
+        $this->media = $media;
         return $this;
     }
 }

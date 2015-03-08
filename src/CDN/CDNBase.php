@@ -9,6 +9,6 @@ class CDNBase implements CDNInterface
 {
     public function getDeliveryPath(MediaInterface $media)
     {
-        return $media->getPath();
+        return 'uploads/'.$media->getPath();
     }
 }

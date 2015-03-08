@@ -6,7 +6,7 @@ use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 
-interface MediaManagerInterface
+interface MediaUploaderInterface
 {
     /**
      * @param AdapterInterface $adapter

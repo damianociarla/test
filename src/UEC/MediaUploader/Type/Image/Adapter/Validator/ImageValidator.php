@@ -3,6 +3,7 @@
 namespace UEC\MediaUploader\Type\Image\Adapter\Validator;
 
 use UEC\MediaUploader\Core\Adapter\AdapterInterface;
+use UEC\MediaUploader\Core\Adapter\Common\BlobFileInterface;
 use UEC\MediaUploader\Core\Adapter\Validator\AdapterValidatorInterface;
 
 class ImageValidator implements AdapterValidatorInterface
@@ -14,6 +15,10 @@ class ImageValidator implements AdapterValidatorInterface
 
     public function validate(AdapterInterface $adapter)
     {
+        if ($adapter instanceof BlobFileInterface) {
+            return false !== imagecreatefromstring($adapter->getBlob());
+        }
+
         if ($adapter->isLocal()) {
             if (exif_imagetype($adapter->getPath()) === false) {
                 return false;

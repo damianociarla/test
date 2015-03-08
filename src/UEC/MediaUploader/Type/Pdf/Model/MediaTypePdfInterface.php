@@ -2,6 +2,8 @@
 
 namespace UEC\MediaUploader\Type\Pdf\Model;
 
+use UEC\MediaUploader\Type\Pdf\Resolver\PageResolverManagerInterface;
+
 interface MediaTypePdfInterface
 {
     /**
@@ -37,15 +39,8 @@ interface MediaTypePdfInterface
     /**
      * Get pages
      *
-     * @return array
+     * @param int $number
+     * @return PageResolverManagerInterface
      */
-    public function getPages();
-
-    /**
-     * Set pages
-     *
-     * @param array $pages
-     * @return MediaTypePdfInterface
-     */
-    public function setPages($pages);
+    public function getPage($number);
 }

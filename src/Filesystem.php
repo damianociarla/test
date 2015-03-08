@@ -1,11 +1,9 @@
 <?php
 
-namespace UEC\MediaUploader\Filesystem\Flysystem;
-
 use League\Flysystem\FilesystemInterface as FlysystemFilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 
-class Flysystem implements FilesystemInterface
+class Filesystem implements FilesystemInterface
 {
     protected $filesystem;
 

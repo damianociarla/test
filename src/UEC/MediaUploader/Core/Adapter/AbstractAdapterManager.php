@@ -1,12 +1,12 @@
 <?php
 
-namespace UEC\MediaUploader\Core\Services;
+namespace UEC\MediaUploader\Core\Adapter;
 
 use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
 use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;
 
-abstract class AbstractMediaService implements MediaServiceInterface
+abstract class AbstractAdapterManager implements AdapterManagerInterface
 {
     protected $filesystem;
     protected $filenameGenerator;

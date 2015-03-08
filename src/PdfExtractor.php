@@ -4,13 +4,17 @@ use UEC\MediaUploader\Extension\PdfImageExtractor\Extractor\ExtractorInterface;
 
 class PdfExtractor implements ExtractorInterface
 {
-    public function extractPageFromPdf($path, $pageNumber, $quality, $output)
+    public function extractPageFromPdf($path, $pageNumber, $quality, $output = null)
     {
         $img = new \Imagick($path);
         $img->setResolution($quality, $quality);
         $img->setIteratorIndex($pageNumber);
         $img->setImageFormat('jpg');
 
-        return $img->writeImage($output);
+        if (null !== $output) {
+            return $img->writeImage($output);
+        } else {
+            return $img->getImageBlob();
+        }
     }
 }

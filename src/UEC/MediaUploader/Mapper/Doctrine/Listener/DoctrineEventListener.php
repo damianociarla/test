@@ -16,4 +16,13 @@ class DoctrineEventListener extends AbstractMediaTypeInjection
             $this->injectMediaTypeOnLoad($object);
         }
     }
+
+    public function postPersist(LifecycleEventArgs $args)
+    {
+        $object = $args->getObject();
+
+        if ($object instanceof MediaInterface) {
+            $this->injectMediaTypeOnLoad($object);
+        }
+    }
 }
