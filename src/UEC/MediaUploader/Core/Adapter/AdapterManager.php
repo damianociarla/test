@@ -2,12 +2,6 @@
 
 namespace UEC\MediaUploader\Core\Adapter;
 
-use UEC\MediaUploader\Core\Adapter\AdapterBlobInterface;
-use UEC\MediaUploader\Core\Adapter\AdapterContentInterface;
-use UEC\MediaUploader\Core\Adapter\AdapterInterface;
-use UEC\MediaUploader\Core\Adapter\AdapterStreamInterface;
-use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
-
 class AdapterManager extends AbstractAdapterManager
 {
     public function save($context, AdapterInterface $adapter)

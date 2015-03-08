@@ -30,7 +30,7 @@ interface MediaManagerInterface
      * Find media by id
      *
      * @param int $id
-     * @return MediaInterface|null
+     * @return null|MediaInterface
      */
     public function findById($id);
 

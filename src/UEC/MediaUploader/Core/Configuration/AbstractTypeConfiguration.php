@@ -2,11 +2,11 @@
 
 namespace UEC\MediaUploader\Core\Configuration;
 
+use UEC\MediaUploader\Core\Adapter\AdapterManagerInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\CDN\CDNInterface;
 use UEC\MediaUploader\Core\Initializer\InitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
-use UEC\MediaUploader\Core\Adapter\AdapterManagerInterface;
 
 abstract class AbstractTypeConfiguration implements TypeConfigurationInterface
 {

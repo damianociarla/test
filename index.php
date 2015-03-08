@@ -149,12 +149,14 @@ $pageImageResolver = new PageImageResolver($doctrinePdfImageManager);
 
 $entityManager->getEventManager()->addEventListener(array(Events::postLoad, Events::postPersist), new PdfImageExtractorDoctrineEventListener($pageImageResolver));
 
-$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
-$file = $mediaUploader->save($adapterRemote, 'pdf');
+//$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
+//$file = $mediaUploader->save($adapterRemote, 'pdf');
+//
+//$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
+//$extractorManager
+//    ->setQuality(100)
+//    ->extractAll($file);
 
-$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
-$extractorManager
-    ->setQuality(100)
-    ->extractAll($file);
+$file = $doctrineMediaManager->findById(45);
 
-Debug::dump($file);
+Debug::dump($file->getMediaType()->getPage(1)->image());

@@ -14,9 +14,15 @@ class PageResolverManager implements PageResolverManagerConfigurationInterface, 
      */
     private $imageResolver;
 
-    function __construct(MediaTypePdfInterface $mediaPdf)
+    function __construct(MediaTypePdfInterface $mediaPdf = null)
     {
         $this->mediaPdf = $mediaPdf;
+    }
+
+    public function setMediaPdf(MediaTypePdfInterface $mediaPdf)
+    {
+        $this->mediaPdf = $mediaPdf;
+        return $this;
     }
 
     public function setPageNumber($pageNumber)
@@ -34,6 +40,6 @@ class PageResolverManager implements PageResolverManagerConfigurationInterface, 
 
     public function image()
     {
-        return $this->imageResolver->getPage($this->mediaPdf, $this->pageNumber);
+        return $this->imageResolver->getPage($this->mediaPdf, $this->pageNumber)->getMedia();
     }
 }

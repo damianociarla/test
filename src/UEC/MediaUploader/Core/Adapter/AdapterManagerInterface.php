@@ -2,8 +2,6 @@
 
 namespace UEC\MediaUploader\Core\Adapter;
 
-use UEC\MediaUploader\Core\Adapter\AdapterInterface;
-use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Filesystem\FilenameGeneratorInterface;
 use UEC\MediaUploader\Core\Filesystem\FilesystemInterface;
 use UEC\MediaUploader\Core\Filesystem\PathGeneratorInterface;

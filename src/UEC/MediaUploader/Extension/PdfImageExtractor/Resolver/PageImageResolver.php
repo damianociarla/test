@@ -17,6 +17,6 @@ class PageImageResolver implements PageImageResolverInterface
 
     public function getPage(MediaTypePdfInterface $mediaTypePdf, $number)
     {
-        $this->mediaTypePdfImageManager->findByMediaAndPage($mediaTypePdf, $number);
+        return $this->mediaTypePdfImageManager->findByMediaAndPage($mediaTypePdf, $number);
     }
 }
