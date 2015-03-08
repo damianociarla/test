@@ -2,6 +2,8 @@
 
 namespace UEC\MediaUploader\Core\Model;
 
+use UEC\MediaUploader\Core\Resolver\ResolverMediaTypeInterface;
+
 interface MediaInterface
 {
     /**
@@ -55,6 +57,22 @@ interface MediaInterface
      * @return MediaInterface
      */
     public function setPath($path);
+
+    /**
+     * Set resolverMediaType
+     *
+     * @param ResolverMediaTypeInterface $resolverMediaType
+     * @return Media
+     */
+    public function setResolverMediaType(ResolverMediaTypeInterface $resolverMediaType);
+
+    /**
+     * Set mediaType
+     *
+     * @param MediaTypeInterface $mediaType
+     * @return MediaInterface
+     */
+    public function setMediaType(MediaTypeInterface $mediaType = null);
 
     /**
      * Get mediaType

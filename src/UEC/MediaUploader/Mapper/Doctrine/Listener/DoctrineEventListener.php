@@ -13,7 +13,7 @@ class DoctrineEventListener extends AbstractMediaTypeInjection
         $object = $args->getObject();
 
         if ($object instanceof MediaInterface) {
-            $this->injectMediaTypeOnLoad($object);
+            $this->injectResolverMediaTypeOnLoad($object);
         }
     }
 
@@ -22,7 +22,7 @@ class DoctrineEventListener extends AbstractMediaTypeInjection
         $object = $args->getObject();
 
         if ($object instanceof MediaInterface) {
-            $this->injectMediaTypeOnLoad($object);
+            $this->injectResolverMediaTypeOnLoad($object);
         }
     }
 }

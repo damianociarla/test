@@ -14,9 +14,8 @@ abstract class AbstractMediaTypeInjection
         $this->resolverMediaType = $resolverMediaType;
     }
 
-    public function injectMediaTypeOnLoad(MediaInterface $media)
+    public function injectResolverMediaTypeOnLoad(MediaInterface $media)
     {
-        $mediaType = $this->resolverMediaType->resolve($media);
-        $media->setMediaType($mediaType);
+        $media->setResolverMediaType($this->resolverMediaType);
     }
 }

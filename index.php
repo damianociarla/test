@@ -69,8 +69,6 @@ $entityManager = EntityManager::create($dbParams, $config);
 $mediaObjectPersistence = new MediaObjectPersistence($entityManager);
 $mediaObjectRepository = new MediaObjectRepository($entityManager);
 
-$doctrineMediaManager = new DoctrineMediaManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
-
 $mediaImageModuleConfiguration = new TypeImageConfiguration(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeImage'),
     new AdapterManager(
@@ -115,10 +113,12 @@ $contextLocatorConfiguration = array(
 );
 
 $contextLocator = new ContextLocator($contextLocatorConfiguration);
+$resolverMediaType = new ResolverMediaType($contextLocator);
+$doctrineMediaManager = new DoctrineMediaManager($resolverMediaType, $mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
 $mediaUploader = new MediaUploader($doctrineMediaManager, $contextLocator, new EventDispatcher());
 
-$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new MediaTypeDoctrineEventListener(new ResolverMediaType($contextLocator)));
+$entityManager->getEventManager()->addEventListener(array(Events::postLoad), new MediaTypeDoctrineEventListener($resolverMediaType));
 
 /**
  * Esempio salvataggio immagine remota

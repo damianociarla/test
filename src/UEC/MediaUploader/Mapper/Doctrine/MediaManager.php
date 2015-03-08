@@ -4,6 +4,7 @@ namespace UEC\MediaUploader\Mapper\Doctrine;
 
 use UEC\MediaUploader\Core\Model\AbstractMediaManager;
 use UEC\MediaUploader\Core\Model\MediaInterface;
+use UEC\MediaUploader\Core\Resolver\ResolverMediaTypeInterface;
 
 class MediaManager extends AbstractMediaManager
 {
@@ -11,8 +12,10 @@ class MediaManager extends AbstractMediaManager
     protected $doctrineObjectRepository;
     protected $className;
 
-    function __construct(DoctrineObjectPersistence $doctrineObjectPersistence, DoctrineObjectRepository $doctrineObjectRepository, $className)
+    function __construct(ResolverMediaTypeInterface $resolverMediaType, DoctrineObjectPersistence $doctrineObjectPersistence, DoctrineObjectRepository $doctrineObjectRepository, $className)
     {
+        parent::__construct($resolverMediaType);
+
         $this->doctrineObjectPersistence = $doctrineObjectPersistence;
         $this->doctrineObjectRepository = $doctrineObjectRepository;
         $this->className = $className;

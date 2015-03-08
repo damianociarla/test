@@ -2,6 +2,8 @@
 
 namespace UEC\MediaUploader\Core\Model;
 
+use UEC\MediaUploader\Core\Resolver\ResolverMediaTypeInterface;
+
 abstract class Media implements MediaInterface
 {
     /**
@@ -32,7 +34,14 @@ abstract class Media implements MediaInterface
     protected $path;
 
     /**
-     * Not mapped. Injected on PostLoad
+     * Not mapped. Injected
+     *
+     * @var ResolverMediaTypeInterface
+     */
+    protected $resolverMediaType;
+
+    /**
+     * Not mapped
      *
      * @var MediaTypeInterface
      */
@@ -85,25 +94,31 @@ abstract class Media implements MediaInterface
         return $this;
     }
 
+    public function setResolverMediaType(ResolverMediaTypeInterface $resolverMediaType)
+    {
+        $this->resolverMediaType = $resolverMediaType;
+    }
+
+    public function setMediaType(MediaTypeInterface $mediaType = null)
+    {
+        $this->mediaType = $mediaType;
+        return $this;
+    }
+
     public function getMediaType()
     {
+        if (null === $this->mediaType &&
+            null !== $this->resolverMediaType &&
+            null !== $this->id
+        ) {
+            $this->mediaType = $this->resolverMediaType->resolve($this);
+        }
+
         return $this->mediaType;
     }
 
     public function isNewPath()
     {
         return $this->originalPath !== $this->path;
-    }
-
-    /**
-     * Set mediaType
-     *
-     * @param MediaTypeInterface $mediaType
-     * @return Media
-     */
-    public function setMediaType($mediaType = null)
-    {
-        $this->mediaType = $mediaType;
-        return $this;
     }
 }
