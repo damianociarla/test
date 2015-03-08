@@ -120,6 +120,12 @@ $mediaUploader = new MediaUploader($doctrineMediaManager, $contextLocator, new E
 
 $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new MediaTypeDoctrineEventListener($resolverMediaType));
 
+$doctrinePdfImageManager = new MediaTypePdfImageManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdfImage');
+$pdfExtractor = new PdfExtractor();
+$pageImageResolver = new PageImageResolver($doctrinePdfImageManager);
+
+$entityManager->getEventManager()->addEventListener(array(Events::postLoad, Events::postPersist), new PdfImageExtractorDoctrineEventListener($pageImageResolver));
+
 /**
  * Esempio salvataggio immagine remota
  */
@@ -142,12 +148,6 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad), new
 /**
  * Esempio salvataggio pdf remoto
  */
-
-$doctrinePdfImageManager = new MediaTypePdfImageManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdfImage');
-$pdfExtractor = new PdfExtractor();
-$pageImageResolver = new PageImageResolver($doctrinePdfImageManager);
-
-$entityManager->getEventManager()->addEventListener(array(Events::postLoad, Events::postPersist), new PdfImageExtractorDoctrineEventListener($pageImageResolver));
 
 //$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
 //$file = $mediaUploader->save($adapterRemote, 'pdf');
