@@ -81,18 +81,6 @@ $mediaImageModuleConfiguration = new TypeImageConfiguration(
     new ImageAnalyzer()
 );
 
-$mediaEmbedModuleConfiguration = new TypeEmbedConfiguration(
-    new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeEmbed'),
-    new AdapterManager(
-        new Flysystem(new Filesystem(new Local('./uploads'))),
-        new FilenameGenerator(),
-        new PathGenerator()
-    ),
-    new CDNBase(),
-    new EmbedInitializer(),
-    new EmbedAnalyzer(new EmbedParser())
-);
-
 $mediaPdfModuleConfiguration = new TypePdfConfiguration(
     new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdf'),
     new AdapterManager(
@@ -108,9 +96,23 @@ $mediaPdfModuleConfiguration = new TypePdfConfiguration(
 $contextLocatorConfiguration = array(
     'services' => array(
         'image' => $mediaImageModuleConfiguration,
-        'embed' => $mediaEmbedModuleConfiguration,
         'pdf'   => $mediaPdfModuleConfiguration,
         'pdf_image' => $mediaImageModuleConfiguration,
+    ),
+    'factories' => array(
+        'embed' => function($sm) use ($mediaObjectPersistence, $mediaObjectRepository) {
+            return new TypeEmbedConfiguration(
+                new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeEmbed'),
+                new AdapterManager(
+                    new Flysystem(new Filesystem(new Local('./uploads'))),
+                    new FilenameGenerator(),
+                    new PathGenerator()
+                ),
+                new CDNBase(),
+                new EmbedInitializer(),
+                new EmbedAnalyzer(new EmbedParser())
+            );
+        },
     )
 );
 
