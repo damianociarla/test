@@ -129,15 +129,15 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad, Even
 /**
  * Esempio salvataggio immagine remota
  */
-//$adapterRemote = new RemoteFile('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg');
-//$adapterRemote->addValidator(new SizeValidator(array(
-//    SizeValidator::SIZE_MIN => 300
-//)));
-//$adapterRemote->addValidator(new DimensionValidator(array(
-//    DimensionValidator::DIMENSION_MIN_WIDTH => 300
-//)));
-//
-//$file = $mediaUploader->save($adapterRemote, 'image');
+$adapterRemote = new RemoteFile('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg');
+$adapterRemote->addValidator(new SizeValidator(array(
+    SizeValidator::SIZE_MIN => 300
+)));
+$adapterRemote->addValidator(new DimensionValidator(array(
+    DimensionValidator::DIMENSION_MIN_WIDTH => 300
+)));
+
+$file = $mediaUploader->save($adapterRemote, 'image');
 
 /**
  * Esempio salvataggio embed
@@ -157,6 +157,6 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad, Even
 //    ->setQuality(100)
 //    ->extractAll($file);
 
-$file = $doctrineMediaManager->findById(45);
+$file = $doctrineMediaManager->findById(1);
 
-Debug::dump($file->getMediaType()->getPage(1)->image());
+Debug::dump($file->getMediaType());

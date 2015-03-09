@@ -3,17 +3,17 @@
 namespace UEC\MediaUploader\Mapper\Doctrine\Listener;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
-use UEC\MediaUploader\Core\Listener\AbstractResolverMediaTypeInjection;
+use UEC\MediaUploader\Core\Listener\AbstractMediaTypeResolverInjection;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 
-class DoctrineEventListener extends AbstractResolverMediaTypeInjection
+class DoctrineEventListener extends AbstractMediaTypeResolverInjection
 {
     public function postLoad(LifecycleEventArgs $args)
     {
         $object = $args->getObject();
 
         if ($object instanceof MediaInterface) {
-            $this->injectResolverMediaTypeOnLoad($object);
+            $this->injectMediaTypeResolverOnLoad($object);
         }
     }
 
@@ -22,7 +22,7 @@ class DoctrineEventListener extends AbstractResolverMediaTypeInjection
         $object = $args->getObject();
 
         if ($object instanceof MediaInterface) {
-            $this->injectResolverMediaTypeOnLoad($object);
+            $this->injectMediaTypeResolverOnLoad($object);
         }
     }
 }

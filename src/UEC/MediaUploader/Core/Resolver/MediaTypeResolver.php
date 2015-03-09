@@ -5,7 +5,7 @@ namespace UEC\MediaUploader\Core\Resolver;
 use UEC\MediaUploader\Core\ContextLocator\ContextLocatorInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 
-class ResolverMediaType implements ResolverMediaTypeInterface
+class MediaTypeResolver implements MediaTypeResolverInterface
 {
     protected $contextLocatorFactory;
 

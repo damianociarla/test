@@ -4,15 +4,15 @@ namespace UEC\MediaUploader\Core\Model;
 
 use UEC\MediaUploader\Core\Persistence\MediaObjectPersistenceInterface;
 use UEC\MediaUploader\Core\Persistence\MediaObjectRepository;
-use UEC\MediaUploader\Core\Resolver\ResolverMediaTypeInterface;
+use UEC\MediaUploader\Core\Resolver\MediaTypeResolverInterface;
 
 abstract class AbstractMediaManager implements MediaManagerInterface
 {
-    protected $resolverMediaType;
+    protected $mediaTypeResolver;
 
-    function __construct(ResolverMediaTypeInterface $resolverMediaType)
+    function __construct(MediaTypeResolverInterface $mediaTypeResolver)
     {
-        $this->resolverMediaType = $resolverMediaType;
+        $this->mediaTypeResolver = $mediaTypeResolver;
     }
 
     public function save(MediaInterface $media)
@@ -30,7 +30,7 @@ abstract class AbstractMediaManager implements MediaManagerInterface
         $className = $this->getClassName();
 
         $class = new $className($context);
-        $class->setResolverMediaType($this->resolverMediaType);
+        $class->setMediaTypeResolver($this->mediaTypeResolver);
 
         return $class;
     }

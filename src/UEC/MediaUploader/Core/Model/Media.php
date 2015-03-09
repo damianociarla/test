@@ -2,7 +2,7 @@
 
 namespace UEC\MediaUploader\Core\Model;
 
-use UEC\MediaUploader\Core\Resolver\ResolverMediaTypeInterface;
+use UEC\MediaUploader\Core\Resolver\MediaTypeResolverInterface;
 
 abstract class Media implements MediaInterface
 {
@@ -36,9 +36,9 @@ abstract class Media implements MediaInterface
     /**
      * Not mapped. Injected
      *
-     * @var ResolverMediaTypeInterface
+     * @var MediaTypeResolverInterface
      */
-    protected $resolverMediaType;
+    protected $mediaTypeResolver;
 
     /**
      * Not mapped
@@ -94,9 +94,9 @@ abstract class Media implements MediaInterface
         return $this;
     }
 
-    public function setResolverMediaType(ResolverMediaTypeInterface $resolverMediaType)
+    public function setMediaTypeResolver(MediaTypeResolverInterface $mediaTypeResolver)
     {
-        $this->resolverMediaType = $resolverMediaType;
+        $this->mediaTypeResolver = $mediaTypeResolver;
     }
 
     public function setMediaType(MediaTypeInterface $mediaType = null)
@@ -108,10 +108,10 @@ abstract class Media implements MediaInterface
     public function getMediaType()
     {
         if (null === $this->mediaType &&
-            null !== $this->resolverMediaType &&
+            null !== $this->mediaTypeResolver &&
             null !== $this->id
         ) {
-            $this->mediaType = $this->resolverMediaType->resolve($this);
+            $this->mediaType = $this->mediaTypeResolver->resolve($this);
         }
 
         return $this->mediaType;
