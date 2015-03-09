@@ -106,13 +106,15 @@ $mediaPdfModuleConfiguration = new TypePdfConfiguration(
 );
 
 $contextLocatorConfiguration = array(
-    'image' => $mediaImageModuleConfiguration,
-    'embed' => $mediaEmbedModuleConfiguration,
-    'pdf'   => $mediaPdfModuleConfiguration,
-    'pdf_image' => $mediaImageModuleConfiguration,
+    'services' => array(
+        'image' => $mediaImageModuleConfiguration,
+        'embed' => $mediaEmbedModuleConfiguration,
+        'pdf'   => $mediaPdfModuleConfiguration,
+        'pdf_image' => $mediaImageModuleConfiguration,
+    )
 );
 
-$contextLocator = new ContextLocator($contextLocatorConfiguration);
+$contextLocator = new ContextLocator(new \Zend\ServiceManager\Config($contextLocatorConfiguration));
 $resolverMediaType = new MediaTypeResolver($contextLocator);
 $doctrineMediaManager = new DoctrineMediaManager($resolverMediaType, $mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
@@ -142,20 +144,20 @@ $file = $mediaUploader->save($adapterRemote, 'image');
 /**
  * Esempio salvataggio embed
  */
-//$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
-//$file = $mediaUploader->save($adapterEmbed, 'embed');
+$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
+$file = $mediaUploader->save($adapterEmbed, 'embed');
 
 /**
  * Esempio salvataggio pdf remoto
  */
 
-$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
-$file = $mediaUploader->save($adapterRemote, 'pdf');
-
-$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
-$extractorManager
-    ->setQuality(100)
-    ->extractAll($file);
+//$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
+//$file = $mediaUploader->save($adapterRemote, 'pdf');
+//
+//$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
+//$extractorManager
+//    ->setQuality(100)
+//    ->extractAll($file);
 
 //$file = $doctrineMediaManager->findById(1);
 
