@@ -3,6 +3,7 @@
     "psr-0": { "": "src/" }
   },
   "require": {
+    "zendframework/zend-servicemanager": "2.3.4",
     "doctrine/orm": "2.4.7",
     "league/flysystem": "1.0.1",
     "embed/embed": "2.1.1"
