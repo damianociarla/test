@@ -17,7 +17,7 @@ use League\Flysystem\Filesystem;
 use Pdf\Parser\ImagickParser;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
 use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
-use ContextLocator\ContextLocator;
+use Zf2ContextLocator\Zf2ContextLocator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaUploader;
@@ -116,7 +116,7 @@ $contextLocatorConfiguration = array(
     )
 );
 
-$contextLocator = new ContextLocator($contextLocatorConfiguration);
+$contextLocator = new Zf2ContextLocator($contextLocatorConfiguration);
 $resolverMediaType = new MediaTypeResolver($contextLocator);
 $doctrineMediaManager = new DoctrineMediaManager($resolverMediaType, $mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace ContextLocator;
+namespace Zf2ContextLocator;
 
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\ContextLocator\ContextLocatorInterface;
 use Zend\ServiceManager;
 
-class ContextLocator extends ServiceManager\ServiceManager implements ContextLocatorInterface
+class Zf2ContextLocator extends ServiceManager\ServiceManager implements ContextLocatorInterface
 {
     /**
      * Associative array where the key is the name of the context and the value is an instance of TypeConfigurationInterface
