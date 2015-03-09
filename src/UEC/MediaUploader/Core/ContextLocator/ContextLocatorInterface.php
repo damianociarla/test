@@ -18,15 +18,6 @@ interface ContextLocatorInterface
     public function get($context);
 
     /**
-     * Set a context resolver
-     *
-     * @param $context
-     * @param TypeConfigurationInterface $typeConfiguration
-     * @return $this
-     */
-    public function set($context, TypeConfigurationInterface $typeConfiguration);
-
-    /**
      * Determine if a context exists
      *
      * @param string $context
