@@ -6,7 +6,7 @@ use UEC\MediaUploader\Core\Adapter\AdapterInterface;
 use UEC\MediaUploader\Core\Adapter\AdapterManagerInterface;
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\CDN\CDNInterface;
-use UEC\MediaUploader\Core\Initializer\InitializerInterface;
+use UEC\MediaUploader\Core\Initializer\MediaInitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeManagerInterface;
 
 interface TypeConfigurationInterface
@@ -26,11 +26,11 @@ interface TypeConfigurationInterface
     public function getAdapterManager();
 
     /**
-     * Get the initializer
+     * Get the mediaInitializer
      *
-     * @return InitializerInterface
+     * @return MediaInitializerInterface
      */
-    public function getInitializer();
+    public function getMediaInitializer();
 
     /**
      * Get the analyzer

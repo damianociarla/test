@@ -59,8 +59,8 @@ class MediaUploader implements MediaUploaderInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_INITIALIZE_MEDIA_TYPE, $context, $mediaType, $analyzer);
 
-        $contextLocator->getInitializer()->initializeMedia($media, $analyzer);
-        $contextLocator->getInitializer()->initializeMediaType($mediaType, $analyzer);
+        $contextLocator->getMediaInitializer()->initializeMedia($media, $analyzer);
+        $contextLocator->getMediaInitializer()->initializeMediaType($mediaType, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_SAVE_MEDIA, $context, $media, $mediaType, $analyzer);
 

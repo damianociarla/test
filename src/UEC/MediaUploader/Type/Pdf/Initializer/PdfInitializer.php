@@ -3,13 +3,13 @@
 namespace UEC\MediaUploader\Type\Pdf\Initializer;
 
 use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
-use UEC\MediaUploader\Core\Initializer\InitializerInterface;
+use UEC\MediaUploader\Core\Initializer\MediaInitializerInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeInterface;
 use UEC\MediaUploader\Type\Pdf\Analyzer\PdfAnalyzer;
 use UEC\MediaUploader\Type\Pdf\Model\MediaTypePdfInterface;
 
-class PdfInitializer implements InitializerInterface
+class PdfInitializer implements MediaInitializerInterface
 {
     public function initializeMedia(MediaInterface $media, AnalyzerInterface $analyzer)
     {

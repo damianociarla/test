@@ -6,7 +6,7 @@ use UEC\MediaUploader\Core\Analyzer\AnalyzerInterface;
 use UEC\MediaUploader\Core\Model\MediaInterface;
 use UEC\MediaUploader\Core\Model\MediaTypeInterface;
 
-interface InitializerInterface
+interface MediaInitializerInterface
 {
     /**
      * Execute initial operations to fill the fields of $mediaType

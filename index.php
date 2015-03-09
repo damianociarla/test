@@ -21,7 +21,7 @@ use UEC\MediaUploader\Core\ContextLocator\ContextLocator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\FilenameGenerator;
 use UEC\MediaUploader\Core\Filesystem\Common\Generator\PathGenerator;
 use UEC\MediaUploader\Core\MediaUploader;
-use UEC\MediaUploader\Core\Resolver\ResolverMediaType;
+use UEC\MediaUploader\Core\Resolver\MediaTypeResolver;
 use UEC\MediaUploader\Core\Adapter\AdapterManager;
 use UEC\MediaUploader\Extension\PdfImageExtractor\ExtractorManager;
 use UEC\MediaUploader\Extension\PdfImageExtractor\Mapper\Doctrine\MediaTypePdfImageManager;
@@ -113,7 +113,7 @@ $contextLocatorConfiguration = array(
 );
 
 $contextLocator = new ContextLocator($contextLocatorConfiguration);
-$resolverMediaType = new ResolverMediaType($contextLocator);
+$resolverMediaType = new MediaTypeResolver($contextLocator);
 $doctrineMediaManager = new DoctrineMediaManager($resolverMediaType, $mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
 $mediaUploader = new MediaUploader($doctrineMediaManager, $contextLocator, new EventDispatcher());
@@ -149,14 +149,14 @@ $file = $mediaUploader->save($adapterRemote, 'image');
  * Esempio salvataggio pdf remoto
  */
 
-//$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
-//$file = $mediaUploader->save($adapterRemote, 'pdf');
-//
-//$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
-//$extractorManager
-//    ->setQuality(100)
-//    ->extractAll($file);
+$adapterRemote = new RemoteFile('http://desportoescolar.dge.mec.pt/sites/default/files/newsletters/newsletter1.pdf');
+$file = $mediaUploader->save($adapterRemote, 'pdf');
 
-$file = $doctrineMediaManager->findById(1);
+$extractorManager = new ExtractorManager($mediaUploader, $doctrinePdfImageManager, $pdfExtractor, 'pdf_image');
+$extractorManager
+    ->setQuality(100)
+    ->extractAll($file);
+
+//$file = $doctrineMediaManager->findById(1);
 
 Debug::dump($file->getMediaType());
