@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\Media\Adapter\Validator;
+namespace UEC\MediaValidator;
 
 use UEC\Media\Adapter\AdapterInterface;
 

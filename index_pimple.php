@@ -17,6 +17,7 @@ use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Pdf\Parser\ImagickParser;
 use Sf2ContextLocator\Sf2ContextLocator;
+use UEC\Media\Media;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
 use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
 use Zf2ContextLocator\Zf2ContextLocator;
@@ -144,6 +145,13 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad, Even
 /**
  * Esempio salvataggio immagine remota
  */
+
+$media = new Media('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg', new \UEC\Media\Adapter\Common\RemoteFile());
+
+
+
+
+
 $adapterRemote = new RemoteFile('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg');
 $adapterRemote->addValidator(new SizeValidator(array(
     SizeValidator::SIZE_MIN => 300
