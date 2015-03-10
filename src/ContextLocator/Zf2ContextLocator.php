@@ -1,6 +1,6 @@
 <?php
 
-namespace Zf2ContextLocator;
+namespace ContextLocator;
 
 use UEC\MediaUploader\Core\Configuration\TypeConfigurationInterface;
 use UEC\MediaUploader\Core\ContextLocator\ContextLocatorInterface;

@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 use CDN\CDNBase;
+use ContextLocator\PimpleContextLocator;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Util\Debug;
@@ -15,6 +16,7 @@ use Event\EventDispatcher;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Pdf\Parser\ImagickParser;
+use Sf2ContextLocator\Sf2ContextLocator;
 use UEC\MediaUploader\Core\Adapter\Common\RemoteFile;
 use UEC\MediaUploader\Core\Adapter\Validator\Common\SizeValidator;
 use Zf2ContextLocator\Zf2ContextLocator;
@@ -69,54 +71,63 @@ $entityManager = EntityManager::create($dbParams, $config);
 $mediaObjectPersistence = new MediaObjectPersistence($entityManager);
 $mediaObjectRepository = new MediaObjectRepository($entityManager);
 
-$mediaImageModuleConfiguration = new TypeImageConfiguration(
-    new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeImage'),
-    new AdapterManager(
-        new Flysystem(new Filesystem(new Local('./uploads'))),
-        new FilenameGenerator(),
-        new PathGenerator()
-    ),
-    new CDNBase(),
-    new ImageInitializer(),
-    new ImageAnalyzer()
-);
-
-$mediaPdfModuleConfiguration = new TypePdfConfiguration(
-    new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdf'),
-    new AdapterManager(
-        new Flysystem(new Filesystem(new Local('./uploads'))),
-        new FilenameGenerator(),
-        new PathGenerator()
-    ),
-    new CDNBase(),
-    new PdfInitializer(),
-    new PdfAnalyzer(new PdfParser())
-);
-
 $contextLocatorConfiguration = array(
-    'services' => array(
-        'image' => $mediaImageModuleConfiguration,
-        'pdf'   => $mediaPdfModuleConfiguration,
-        'pdf_image' => $mediaImageModuleConfiguration,
-    ),
-    'factories' => array(
-        'embed' => function($sm) use ($mediaObjectPersistence, $mediaObjectRepository) {
-            return new TypeEmbedConfiguration(
-                new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeEmbed'),
-                new AdapterManager(
-                    new Flysystem(new Filesystem(new Local('./uploads'))),
-                    new FilenameGenerator(),
-                    new PathGenerator()
-                ),
-                new CDNBase(),
-                new EmbedInitializer(),
-                new EmbedAnalyzer(new EmbedParser())
-            );
-        },
-    )
+    'image' => function ($container) use ($mediaObjectPersistence, $mediaObjectRepository) {
+        return new TypeImageConfiguration(
+            new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeImage'),
+            new AdapterManager(
+                new Flysystem(new Filesystem(new Local('./uploads'))),
+                new FilenameGenerator(),
+                new PathGenerator()
+            ),
+            new CDNBase(),
+            new ImageInitializer(),
+            new ImageAnalyzer()
+        );
+    },
+    'pdf' => function ($container) use ($mediaObjectPersistence, $mediaObjectRepository) {
+        return new TypePdfConfiguration(
+            new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypePdf'),
+            new AdapterManager(
+                new Flysystem(new Filesystem(new Local('./uploads'))),
+                new FilenameGenerator(),
+                new PathGenerator()
+            ),
+            new CDNBase(),
+            new PdfInitializer(),
+            new PdfAnalyzer(new PdfParser())
+        );
+    },
+    'pdf_image' => function ($container) use ($mediaObjectPersistence, $mediaObjectRepository) {
+        return new TypeImageConfiguration(
+            new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeImage'),
+            new AdapterManager(
+                new Flysystem(new Filesystem(new Local('./uploads'))),
+                new FilenameGenerator(),
+                new PathGenerator()
+            ),
+            new CDNBase(),
+            new ImageInitializer(),
+            new ImageAnalyzer()
+        );
+    },
+    'embed' => function($container) use ($mediaObjectPersistence, $mediaObjectRepository) {
+        return new TypeEmbedConfiguration(
+            new DoctrineMediaTypeManager($mediaObjectPersistence, $mediaObjectRepository, 'Entity\MediaTypeEmbed'),
+            new AdapterManager(
+                new Flysystem(new Filesystem(new Local('./uploads'))),
+                new FilenameGenerator(),
+                new PathGenerator()
+            ),
+            new CDNBase(),
+            new EmbedInitializer(),
+            new EmbedAnalyzer(new EmbedParser())
+        );
+    }
 );
 
-$contextLocator = new Zf2ContextLocator($contextLocatorConfiguration);
+$contextLocator = new PimpleContextLocator($contextLocatorConfiguration);
+
 $resolverMediaType = new MediaTypeResolver($contextLocator);
 $doctrineMediaManager = new DoctrineMediaManager($resolverMediaType, $mediaObjectPersistence, $mediaObjectRepository, 'Entity\Media');
 
@@ -146,8 +157,8 @@ $file = $mediaUploader->save($adapterRemote, 'image');
 /**
  * Esempio salvataggio embed
  */
-$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
-$file = $mediaUploader->save($adapterEmbed, 'embed');
+//$adapterEmbed = new EmbedFile('https://vimeo.com/96970478');
+//$file = $mediaUploader->save($adapterEmbed, 'embed');
 
 /**
  * Esempio salvataggio pdf remoto

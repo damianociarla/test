@@ -7,7 +7,7 @@ use UEC\MediaUploader\Core\Model\MediaInterface;
 
 class MediaTypeResolver implements MediaTypeResolverInterface
 {
-    protected $contextLocatorFactory;
+    protected $contextLocator;
 
     function __construct(ContextLocatorInterface $contextLocator)
     {
