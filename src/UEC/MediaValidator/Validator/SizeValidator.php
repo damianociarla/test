@@ -2,10 +2,10 @@
 
 namespace UEC\MediaValidator\Validator;
 
-use UEC\Media\Adapter\AdapterInterface;
-use UEC\MediaValidator\AdapterValidatorInterface;
+use UEC\Media\MediaInterface;
+use UEC\MediaValidator\MediaValidatorInterface;
 
-class SizeValidator implements AdapterValidatorInterface
+class SizeValidator implements MediaValidatorInterface
 {
     const SIZE_MIN = 'min';
     const SIZE_MAX = 'max';
@@ -23,12 +23,12 @@ class SizeValidator implements AdapterValidatorInterface
         $this->max = isset($config[self::SIZE_MAX]) ? $config[self::SIZE_MAX] : null;
     }
 
-    public function supports(AdapterInterface $adapter)
+    public function supports(MediaInterface $media)
     {
         return true;
     }
 
-    public function validate(AdapterInterface $adapter)
+    public function validate(MediaInterface $media)
     {
         $size = $adapter->getSize();
 

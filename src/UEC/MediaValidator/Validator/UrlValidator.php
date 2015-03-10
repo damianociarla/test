@@ -2,18 +2,18 @@
 
 namespace UEC\MediaValidator\Validator;
 
-use UEC\Media\Adapter\AdapterInterface;
-use UEC\MediaValidator\AdapterValidatorInterface;
+use UEC\Media\MediaInterface;
+use UEC\MediaValidator\MediaValidatorInterface;
 
-class UrlValidator implements AdapterValidatorInterface
+class UrlValidator implements MediaValidatorInterface
 {
-    public function supports(AdapterInterface $adapter)
+    public function supports(MediaInterface $media)
     {
         return true;
     }
 
-    public function validate(AdapterInterface $adapter)
+    public function validate(MediaInterface $media)
     {
-        return filter_var($adapter->getPath(), FILTER_VALIDATE_URL);
+        return filter_var($media->getPath(), FILTER_VALIDATE_URL);
     }
 }

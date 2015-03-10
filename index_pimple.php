@@ -146,9 +146,15 @@ $entityManager->getEventManager()->addEventListener(array(Events::postLoad, Even
  * Esempio salvataggio immagine remota
  */
 
-$media = new Media('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg', new \UEC\Media\Adapter\Common\RemoteFile());
+$media = new Media('http://40.media.tumblr.com/73dfa6e433eb28560543e0bd71ee8a50/tumblr_nkdh18I85R1qzy9ouo1_1280.jpg', new \UEC\Media\Adapter\Common\RemoteFile);
 
-
+$mediaValidator = new UEC\MediaValidator\Validator();
+$mediaValidator->validate($media, array(
+    new \UEC\MediaValidator\Validator\UrlValidator,
+    new \UEC\MediaValidator\Validator\SizeValidator(array(
+        SizeValidator::SIZE_MIN => 300
+    )),
+));
 
 
 
