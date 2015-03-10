@@ -12,6 +12,11 @@ abstract class AbstractReader
         $this->uri = $uri;
     }
 
+    public function setUri($uri)
+    {
+        $this->uri = $uri;
+    }
+
     public function getUri()
     {
         return $this->uri;
