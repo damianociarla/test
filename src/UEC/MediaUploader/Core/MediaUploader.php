@@ -24,13 +24,13 @@ class MediaUploader implements MediaUploaderInterface
 
     public function save(AdapterInterface $adapter, $context)
     {
-        $contextLocator = $this->contextLocator->get($context);
+        $context = $this->contextLocator->get($context);
 
-        if (!$contextLocator->supports($adapter)) {
-            throw new UnexpectedAdapterException($adapter, $contextLocator->getSupportedAdapters());
+        if (!$context->supports($adapter)) {
+            throw new UnexpectedAdapterException($adapter, $context->getSupportedAdapters());
         }
 
-        $defaultValidators = $contextLocator->getDefaultValidators();
+        $defaultValidators = $context->getDefaultValidators();
 
         foreach ($defaultValidators as $validator) {
             $adapter->addValidator($validator, true);
@@ -42,25 +42,25 @@ class MediaUploader implements MediaUploaderInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_VALIDATION_ADAPTER, $context, $adapter);
 
-        $analyzer = $contextLocator->getAnalyzer();
+        $analyzer = $context->getAnalyzer();
         $analyzer->analyze($adapter);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_ANALYZE_ADAPTER, $context, $adapter, $analyzer);
 
-        $filePath = $contextLocator->getAdapterManager()->save($adapter, $context);
+        $filePath = $context->getAdapterManager()->save($adapter, $context);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_UPLOAD_MEDIA, $context, $adapter, $analyzer);
 
         $media = $this->modelMediaManager->create($context);
         $media->setPath($filePath);
 
-        $modelMediaTypeManager = $contextLocator->getMediaTypeManager();
+        $modelMediaTypeManager = $context->getMediaTypeManager();
         $mediaType = $modelMediaTypeManager->create($media);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_INITIALIZE_MEDIA_TYPE, $context, $mediaType, $analyzer);
 
-        $contextLocator->getMediaInitializer()->initializeMedia($media, $analyzer);
-        $contextLocator->getMediaInitializer()->initializeMediaType($mediaType, $analyzer);
+        $context->getMediaInitializer()->initializeMedia($media, $analyzer);
+        $context->getMediaInitializer()->initializeMediaType($mediaType, $analyzer);
 
         $this->eventDispatcher->dispatch(MediaEvents::BEFORE_SAVE_MEDIA, $context, $media, $mediaType, $analyzer);
 
