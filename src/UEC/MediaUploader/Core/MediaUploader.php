@@ -47,7 +47,7 @@ class MediaUploader implements MediaUploaderInterface
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_ANALYZE_ADAPTER, $context, $adapter, $analyzer);
 
-        $filePath = $contextLocator->getAdapterManager()->save($context, $adapter);
+        $filePath = $contextLocator->getAdapterManager()->save($adapter, $context);
 
         $this->eventDispatcher->dispatch(MediaEvents::AFTER_UPLOAD_MEDIA, $context, $adapter, $analyzer);
 

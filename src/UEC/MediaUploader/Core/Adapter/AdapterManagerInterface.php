@@ -56,9 +56,9 @@ interface AdapterManagerInterface
     /**
      * Execute the saving of the adapter
      *
-     * @param string $context
      * @param AdapterInterface $adapter
+     * @param string $context
      * @return string new file path
      */
-    public function save($context, AdapterInterface $adapter);
+    public function save(AdapterInterface $adapter, $context);
 }

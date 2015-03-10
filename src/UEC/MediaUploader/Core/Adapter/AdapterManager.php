@@ -4,7 +4,7 @@ namespace UEC\MediaUploader\Core\Adapter;
 
 class AdapterManager extends AbstractAdapterManager
 {
-    public function save($context, AdapterInterface $adapter)
+    public function save(AdapterInterface $adapter, $context)
     {
         if ($adapter instanceof AdapterContentInterface) {
             $finalPath = $this->generateFinalPath($context, $adapter);
