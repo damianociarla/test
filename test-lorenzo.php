@@ -7,7 +7,10 @@ use \UEC\Media\Reader;
 
 include "vendor/autoload.php";
 
-$reader = new Reader\RemoteReader("https://vimeo.com/120197450");
-$reader->addPlugin(new Reader\Plugin\RemoteReaderSizePlugin());
+$readerPluginManager = new Reader\ReaderPluginManager();
+$readerPluginManager->setService('size', new Reader\Plugin\RemoteReaderSizePlugin());
 
-var_dump($reader->canDo('getSize'));
+$reader = new Reader\RemoteReader("https://vimeo.com/120197450");
+$reader->setPluginManager($readerPluginManager);
+var_dump($reader->has('size'));
+var_dump($reader->size());

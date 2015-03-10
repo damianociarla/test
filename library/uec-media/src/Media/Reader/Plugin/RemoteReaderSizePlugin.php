@@ -2,22 +2,17 @@
 
 namespace UEC\Media\Reader\Plugin;
 
-class RemoteReaderSizePlugin
+use UEC\Media\Reader\ReaderInterface;
+
+class RemoteReaderSizePlugin extends AbstractReaderPlugin implements ReaderPluginInterface
 {
-    protected $reader;
+    protected $size;
 
-    public function setReader($reader)
+    public function __invoke()
     {
-        $this->reader = $reader;
-    }
+        if (null == $this->size)
+            $this->size = 22;
 
-    public function getSize()
-    {
-        return 22;
-    }
-
-    public function getCapability()
-    {
-        return 'getSize';
+        return $this->size;
     }
 }

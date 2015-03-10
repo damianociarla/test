@@ -2,11 +2,16 @@
 
 namespace UEC\Media\Reader;
 
+use UEC\Media\Reader\Plugin\ReaderPluginInterface;
+
 abstract class AbstractReader
 {
     protected $uri;
     protected $error;
     protected $plugins;
+
+    /** @var ReaderPluginManager */
+    protected $pluginManager;
 
     public function __construct($uri)
     {
@@ -29,15 +34,37 @@ abstract class AbstractReader
         return $this->error;
     }
 
-    public function addPlugin($plugin)
+    public function setPluginManager(ReaderPluginManager $pluginManager)
     {
-        $plugin->setReader($this);
-        $capability = $plugin->getCapability();
-        $this->plugins[$capability] = $plugin;
+        $this->pluginManager = $pluginManager;
     }
 
-    public function canDo($capability)
+    /**
+     * @return ReaderPluginManager
+     */
+    public function getPluginManager()
     {
-        return array_key_exists($capability, $this->plugins);
+        return $this->pluginManager;
+    }
+
+    public function has($name)
+    {
+        return $this->pluginManager->has($name);
+    }
+
+    public function __call($name, $params = null)
+    {
+        if ($this->has($name)) {
+            /** @var ReaderPluginInterface $plugin */
+            $plugin = $this->pluginManager->get($name, $params);
+
+            if (is_callable($plugin)) {
+                return call_user_func_array($plugin, $params);
+            }
+
+            return $plugin;
+        }
+
+        return null;
     }
 }
