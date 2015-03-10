@@ -6,22 +6,30 @@ class AdapterManager extends AbstractAdapterManager
 {
     public function save(AdapterInterface $adapter, $context)
     {
-        if ($adapter instanceof AdapterContentInterface) {
-            $finalPath = $this->generateFinalPath($context, $adapter);
-            $this->filesystem->put($finalPath, file_get_contents($adapter->getPath()));
-            if ($adapter->getRemoveOriginal()) {
-                unlink($adapter->getPath());
-            }
-        } elseif ($adapter instanceof AdapterBlobInterface) {
-            $finalPath = $this->generateFinalPath($context, $adapter);
-            $this->filesystem->put($finalPath, $adapter->getBlob());
-        } elseif ($adapter instanceof AdapterStreamInterface) {
-            $finalPath = $this->generateFinalPath($context, $adapter);
-            $stream = fopen($adapter->getPath(), 'r+');
-            $this->filesystem->writeStream($finalPath, $stream);
-            fclose($stream);
-        } else {
-            $finalPath = $adapter->getPath();
+        switch (true) {
+            case ($adapter instanceof AdapterContentInterface):
+                $finalPath = $this->generateFinalPath($context, $adapter);
+                $this->filesystem->put($finalPath, file_get_contents($adapter->getPath()));
+                if ($adapter->getRemoveOriginal()) {
+                    unlink($adapter->getPath());
+                }
+                break;
+
+            case ($adapter instanceof AdapterBlobInterface):
+                $finalPath = $this->generateFinalPath($context, $adapter);
+                $this->filesystem->put($finalPath, $adapter->getBlob());
+                break;
+
+            case ($adapter instanceof AdapterStreamInterface):
+                $finalPath = $this->generateFinalPath($context, $adapter);
+                $stream = fopen($adapter->getPath(), 'r+');
+                $this->filesystem->writeStream($finalPath, $stream);
+                fclose($stream);
+                break;
+
+            default:
+                $finalPath = $adapter->getPath();
+                break;
         }
 
         return $finalPath;
