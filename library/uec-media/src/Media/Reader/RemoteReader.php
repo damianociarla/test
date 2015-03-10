@@ -4,9 +4,6 @@ namespace UEC\Media\Reader;
 
 class RemoteReader extends AbstractReader implements ReaderInterface
 {
-    private $uri;
-    private $error;
-
     public function isValid()
     {
         $headers = @get_headers($this->uri);

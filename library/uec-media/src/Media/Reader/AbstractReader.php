@@ -4,8 +4,8 @@ namespace UEC\Media\Reader;
 
 abstract class AbstractReader
 {
-    private $uri;
-    private $error;
+    protected $uri;
+    protected $error;
 
     public function __construct($uri)
     {
