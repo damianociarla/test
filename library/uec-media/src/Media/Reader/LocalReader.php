@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\Media\Adapter\Common;
+namespace UEC\Media\Reader;
 
 class RemoteReader extends AbstractReader implements ReaderInterface
 {
