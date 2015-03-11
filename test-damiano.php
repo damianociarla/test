@@ -17,14 +17,14 @@ $reader = new RemoteReader(new RemoteUri('http://40.media.tumblr.com/73dfa6e433e
 
 $media = MediaFactory::createFromReader($reader);
 
-$remote = new RemoteSizeAdapter($media);
+$mediaWithSize = new RemoteSizeAdapter($media);
 
-$dimension = new DimensionAdapter($remote);
+$mediaWithDimension = new DimensionAdapter($mediaWithSize);
 
-echo $dimension->getUri();
+echo $mediaWithDimension->getUri();
 echo "\n";
-echo $dimension->getSize();
+echo $mediaWithDimension->getSize();
 echo "\n";
-echo $dimension->getWidth();
+echo $mediaWithDimension->getWidth();
 echo "\n";
-echo $dimension->getHeight();
+echo $mediaWithDimension->getHeight();
