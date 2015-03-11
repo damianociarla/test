@@ -2,17 +2,26 @@
 
 namespace UEC\Media\Reader;
 
-class RemoteReader extends AbstractReader implements ReaderInterface
+use UEC\Media\RemoteUriInterface;
+
+class RemoteReader extends AbstractReader implements RemoteReaderInterface
 {
-    public function isValid()
+    private $contentType;
+
+    public function supports()
     {
-        $headers = @get_headers($this->uri);
+        return $this->uri instanceof RemoteUriInterface;
+    }
 
-        if ($headers[0] == 'HTTP/1.1 404 Not Found') {
-            $this->error = 'File not found';
-            return true;
-        }
+    public function read()
+    {
+        $headers = get_headers($this->uri->getValue(), 1);
 
-        return false;
+        $this->contentType = $headers['Content-Type'];
+    }
+
+    public function getContentType()
+    {
+        return $this->contentType;
     }
 }

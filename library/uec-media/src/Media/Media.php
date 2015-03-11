@@ -2,26 +2,32 @@
 
 namespace UEC\Media;
 
-use UEC\Media\Adapter\AdapterInterface;
+use UEC\Media\Reader\ReaderInterface;
 
 class Media implements MediaInterface
 {
-    protected $path;
-    protected $adapterReader;
+    private $reader;
+    private $isValid;
 
-    public function __construct($path, AdapterInterface $adapterReader)
+    function __construct(ReaderInterface $reader)
     {
-        $this->path = $path;
-        $this->adapterReader = $adapterReader;
+        $this->reader = $reader;
+        $this->isValid = $reader->getUri()->isValid();
     }
 
-    public function getPath()
+    public function getReader()
     {
-        return $this->path;
+        return $this->reader;
     }
 
-    public function getAdapterReader()
+    public function isValid()
     {
-        return $this->adapterReader;
+        return $this->isValid;
+    }
+
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+        return $this;
     }
 }

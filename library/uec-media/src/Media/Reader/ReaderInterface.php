@@ -2,9 +2,26 @@
 
 namespace UEC\Media\Reader;
 
+use UEC\Media\UriInterface;
+
 interface ReaderInterface
 {
-    public function isValid();
+    /**
+     * Check if reader support the uri
+     *
+     * @return bool
+     */
+    public function supports();
+
+    /**
+     * Get uri
+     *
+     * @return UriInterface
+     */
     public function getUri();
-    public function getError();
+
+    /**
+     * Scan uri
+     */
+    public function read();
 }

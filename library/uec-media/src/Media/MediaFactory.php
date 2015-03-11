@@ -2,10 +2,17 @@
 
 namespace UEC\Media;
 
-class MediaFactory
-{
-    public static function createFromReader($reader)
-    {
+use UEC\Media\Reader\ReaderInterface;
 
+class MediaFactory implements MediaFactoryInterface
+{
+    function __construct()
+    {
+        // Se servono dipendenze si mettono qui
+    }
+
+    public static function createFromReader(ReaderInterface $reader)
+    {
+        return new Media($reader);
     }
 }

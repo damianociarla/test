@@ -2,26 +2,22 @@
 
 namespace UEC\Media\Reader;
 
-use UEC\Media\Reader\Plugin\ReaderPluginInterface;
+use UEC\Media\UriInterface;
 
-abstract class AbstractReader
+abstract class AbstractReader implements ReaderInterface
 {
     protected $uri;
-    protected $error;
-    protected $plugins;
 
-    /** @var ReaderPluginManager */
-    protected $pluginManager;
-
-    public function __construct($uri)
+    function __construct(UriInterface $uri)
     {
         $this->uri = $uri;
-        $this->plugins = array();
-    }
 
-    public function setUri($uri)
-    {
-        $this->uri = $uri;
+        if ($uri->isValid()) {
+            if (!$this->supports()) {
+                throw new \UnexpectedValueException('The reader can not read the uri');
+            }
+            $this->read();
+        }
     }
 
     public function getUri()
@@ -29,42 +25,8 @@ abstract class AbstractReader
         return $this->uri;
     }
 
-    public function getError()
+    public function supports()
     {
-        return $this->error;
-    }
-
-    public function setPluginManager(ReaderPluginManager $pluginManager)
-    {
-        $this->pluginManager = $pluginManager;
-    }
-
-    /**
-     * @return ReaderPluginManager
-     */
-    public function getPluginManager()
-    {
-        return $this->pluginManager;
-    }
-
-    public function has($name)
-    {
-        return $this->pluginManager->has($name);
-    }
-
-    public function __call($name, $params = null)
-    {
-        if ($this->has($name)) {
-            /** @var ReaderPluginInterface $plugin */
-            $plugin = $this->pluginManager->get($name, $params);
-
-            if (is_callable($plugin)) {
-                return call_user_func_array($plugin, $params);
-            }
-
-            return $plugin;
-        }
-
-        return null;
+        return true;
     }
 }

@@ -2,53 +2,40 @@
 
 namespace UEC\Media\Adapter;
 
-use UEC\Media\Adapter\Validator\AdapterValidatorInterface;
+use UEC\Media\MediaInterface;
 
 abstract class AbstractAdapter implements AdapterInterface
 {
-    protected $path;
-    protected $validators;
+    protected $object;
+    protected $media;
 
-    function __construct($path = null)
+    function __construct($object)
     {
-        $this->path = $path;
-        $this->validators = array();
-    }
+        if (!$object instanceof MediaInterface && !$object instanceof AdapterInterface) {
+            throw new \UnexpectedValueException('The adapter can be receive instance of MediaInterface or AdapterInterface');
+        }
 
-    public function getPath()
-    {
-        return $this->path;
-    }
+        $this->object = $object;
 
-    public function setPath($path)
-    {
-        $this->path = $path;
-    }
-
-    public function addValidator(AdapterValidatorInterface $validator, $atBeginning = false)
-    {
-        if ($atBeginning) {
-            array_unshift($this->validators, $validator);
+        if ($object instanceof AdapterInterface) {
+            $this->media = $object->getMedia();
         } else {
-            $this->validators[] = $validator;
+            $this->media = $object;
         }
-
-        return $this;
     }
 
-    public function getValidators()
+    public function getMedia()
     {
-        return $this->validators;
+        return $this->media;
     }
 
-    public function isValid()
+    public function getReader()
     {
-        foreach ($this->validators as $validator) {
-            if ($validator->supports($this) && !$validator->validate($this)) {
-                return false;
-            }
-        }
+        return $this->media->getReader();
+    }
 
-        return true;
+    function __call($name, $arguments)
+    {
+        return call_user_func_array(array($this->object, $name), $arguments);
     }
 }

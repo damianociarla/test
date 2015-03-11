@@ -2,19 +2,29 @@
 
 namespace UEC\Media;
 
+use UEC\Media\Reader\ReaderInterface;
+
 interface MediaInterface
 {
     /**
-     * Get path
+     * Get reader
      *
-     * @return mixed
+     * @return ReaderInterface
      */
-    public function getPath();
+    public function getReader();
 
     /**
-     * Get adapterReader
+     * Get isValid
      *
-     * @return AdapterInterface
+     * @return bool
      */
-    public function getAdapterReader();
+    public function isValid();
+
+    /**
+     * Set isValid
+     *
+     * @param bool $isValid
+     * @return MediaInterface
+     */
+    public function setIsValid($isValid);
 }
