@@ -4,6 +4,7 @@ namespace UEC\Media\Adapter;
 
 use UEC\Media\MediaInterface;
 use UEC\Media\Reader\ReaderInterface;
+use UEC\Media\UriInterface;
 
 interface AdapterInterface
 {
@@ -20,4 +21,11 @@ interface AdapterInterface
      * @return ReaderInterface
      */
     public function getReader();
+
+    /**
+     * Get reader
+     *
+     * @return UriInterface
+     */
+    public function getUri();
 }

@@ -21,5 +21,10 @@ $remote = new RemoteSizeAdapter($media);
 
 $dimension = new DimensionAdapter($remote);
 
-Debug::dump($dimension->getWidth());
-Debug::dump($dimension->getHeight());
+echo $dimension->getUri();
+echo "\n";
+echo $dimension->getSize();
+echo "\n";
+echo $dimension->getWidth();
+echo "\n";
+echo $dimension->getHeight();

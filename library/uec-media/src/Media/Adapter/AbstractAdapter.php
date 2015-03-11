@@ -34,6 +34,11 @@ abstract class AbstractAdapter implements AdapterInterface
         return $this->media->getReader();
     }
 
+    public function getUri()
+    {
+        return $this->media->getReader()->getUri();
+    }
+
     function __call($name, $arguments)
     {
         return call_user_func_array(array($this->object, $name), $arguments);
