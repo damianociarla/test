@@ -9,9 +9,10 @@ interface ReaderInterface
     /**
      * Check if reader support the uri
      *
+     * @param UriInterface $uri
      * @return bool
      */
-    public function supports();
+    public function supports(UriInterface $uri);
 
     /**
      * Get uri

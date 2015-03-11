@@ -13,7 +13,7 @@ abstract class AbstractReader implements ReaderInterface
         $this->uri = $uri;
 
         if ($uri->isValid()) {
-            if (!$this->supports()) {
+            if (!$this->supports($uri)) {
                 throw new \UnexpectedValueException('The reader can not read the uri');
             }
             $this->read();
@@ -25,7 +25,7 @@ abstract class AbstractReader implements ReaderInterface
         return $this->uri;
     }
 
-    public function supports()
+    public function supports(UriInterface $uri)
     {
         return true;
     }

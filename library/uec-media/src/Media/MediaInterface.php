@@ -14,6 +14,13 @@ interface MediaInterface
     public function getReader();
 
     /**
+     * Get uri
+     *
+     * @return UriInterface
+     */
+    public function getUri();
+
+    /**
      * Get isValid
      *
      * @return bool

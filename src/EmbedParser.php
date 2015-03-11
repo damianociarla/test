@@ -1,8 +1,7 @@
 <?php
 
 use Embed\Embed;
-use UEC\MediaUploader\Type\Embed\Analyzer\EmbedAnalyzer;
-use UEC\MediaUploader\Type\Embed\Parser\ParserInterface;
+use UEC\Media\EmbedParser\ParserInterface;
 
 class EmbedParser implements ParserInterface
 {
@@ -11,20 +10,20 @@ class EmbedParser implements ParserInterface
         $info = Embed::create($url);
 
         return array(
-            EmbedAnalyzer::INFO_TYPE              => $info->getType(),
-            EmbedAnalyzer::INFO_TITLE             => $info->getTitle(),
-            EmbedAnalyzer::INFO_DESCRIPTION       => $info->getDescription(),
-            EmbedAnalyzer::INFO_URL               => $info->getUrl(),
-            EmbedAnalyzer::INFO_THUMBNAIL_URL     => $info->getImage(),
-            EmbedAnalyzer::INFO_THUMBNAIL_WIDTH   => $info->getImageWidth(),
-            EmbedAnalyzer::INFO_THUMBNAIL_HEIGHT  => $info->getImageHeight(),
-            EmbedAnalyzer::INFO_HTML              => $info->getCode(),
-            EmbedAnalyzer::INFO_WIDTH             => $info->getWidth(),
-            EmbedAnalyzer::INFO_HEIGHT            => $info->getHeight(),
-            EmbedAnalyzer::INFO_AUTHOR_NAME       => $info->getAuthorName(),
-            EmbedAnalyzer::INFO_AUTHOR_URL        => $info->getAuthorUrl(),
-            EmbedAnalyzer::INFO_PROVIDER_NAME     => $info->getProviderName(),
-            EmbedAnalyzer::INFO_PROVIDER_URL      => $info->getProviderUrl(),
+            ParserInterface::INFO_TYPE              => $info->getType(),
+            ParserInterface::INFO_TITLE             => $info->getTitle(),
+            ParserInterface::INFO_DESCRIPTION       => $info->getDescription(),
+            ParserInterface::INFO_URL               => $info->getUrl(),
+            ParserInterface::INFO_THUMBNAIL_URL     => $info->getImage(),
+            ParserInterface::INFO_THUMBNAIL_WIDTH   => $info->getImageWidth(),
+            ParserInterface::INFO_THUMBNAIL_HEIGHT  => $info->getImageHeight(),
+            ParserInterface::INFO_HTML              => $info->getCode(),
+            ParserInterface::INFO_WIDTH             => $info->getWidth(),
+            ParserInterface::INFO_HEIGHT            => $info->getHeight(),
+            ParserInterface::INFO_AUTHOR_NAME       => $info->getAuthorName(),
+            ParserInterface::INFO_AUTHOR_URL        => $info->getAuthorUrl(),
+            ParserInterface::INFO_PROVIDER_NAME     => $info->getProviderName(),
+            ParserInterface::INFO_PROVIDER_URL      => $info->getProviderUrl(),
         );
     }
 }

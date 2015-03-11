@@ -3,14 +3,15 @@
 namespace UEC\Media\Reader;
 
 use UEC\Media\RemoteUriInterface;
+use UEC\Media\UriInterface;
 
 class RemoteReader extends AbstractReader implements RemoteReaderInterface
 {
     private $contentType;
 
-    public function supports()
+    public function supports(UriInterface $uri)
     {
-        return $this->uri instanceof RemoteUriInterface;
+        return $uri instanceof RemoteUriInterface;
     }
 
     public function read()

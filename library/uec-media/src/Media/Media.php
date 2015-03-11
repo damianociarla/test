@@ -20,6 +20,11 @@ class Media implements MediaInterface
         return $this->reader;
     }
 
+    public function getUri()
+    {
+        return $this->reader->getUri();
+    }
+
     public function isValid()
     {
         return $this->isValid;
