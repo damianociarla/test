@@ -2,8 +2,10 @@
 
 namespace UEC\Media\Adapter;
 
+use UEC\Media\Builder\MediaBuilderInterface;
 use UEC\Media\EmbedParser\ParserInterface;
 use UEC\Media\MediaInterface;
+use UEC\Media\Reader\ReaderInterface;
 use UEC\Media\Reader\RemoteReaderInterface;
 
 class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
@@ -11,9 +13,9 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
     private $parser;
     private $result;
 
-    function __construct(MediaInterface $media, ParserInterface $parser = null)
+    function __construct(ReaderInterface $reader, ParserInterface $parser = null)
     {
-        if (!$media->getReader() instanceof RemoteReaderInterface) {
+        if (!$reader instanceof RemoteReaderInterface) {
             throw new \UnexpectedValueException('The adapter can accept only instance of RemoteReaderInterface');
         }
 
@@ -21,7 +23,7 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
             $this->setParser($parser);
         }
 
-        parent::__construct($media);
+        parent::__construct($reader);
     }
 
     public function setParser(ParserInterface $parser)
@@ -43,7 +45,7 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
         }
 
         if (null === $this->result) {
-            $this->result = $this->parser->parse($this->media->getUri()->getValue());
+            $this->result = $this->parser->parse($this->reader->getUri());
         }
 
         return $this->result[$type];
@@ -117,5 +119,26 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
     public function getProviderUrl()
     {
         return $this->getInfo(ParserInterface::INFO_PROVIDER_URL);
+    }
+
+    public function buildMedia(MediaBuilderInterface $builder)
+    {
+        $builder
+            ->setClassName('UEC\Media\Model\MediaEmbed')
+            ->add('type', 'getType')
+            ->add('title', 'getTitle')
+            ->add('description', 'getDescription')
+            ->add('url', 'getUrl')
+            ->add('thumbnailUrl', 'getThumbnailUrl')
+            ->add('thumbnailWidth', 'getThumbnailWidth')
+            ->add('thumbnailHeight', 'getThumbnailHeight')
+            ->add('html', 'getHtml')
+            ->add('width', 'getWidth')
+            ->add('height', 'getHeight')
+            ->add('authorName', 'getAuthorName')
+            ->add('authorUrl', 'getAuthorUrl')
+            ->add('providerName', 'getProviderName')
+            ->add('providerUrl', 'getProviderUrl')
+        ;
     }
 }

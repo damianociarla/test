@@ -6,6 +6,6 @@ class LocalSizeAdapter extends AbstractAdapter implements LocalSizeAdapterInterf
 {
     public function getSize()
     {
-        return filesize($this->media->getUri());
+        return filesize($this->reader->getUri());
     }
 }

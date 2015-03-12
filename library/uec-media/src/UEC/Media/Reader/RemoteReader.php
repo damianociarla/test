@@ -9,15 +9,9 @@ class RemoteReader extends AbstractReader implements RemoteReaderInterface
 {
     private $contentType;
 
-    public function supports(UriInterface $uri)
-    {
-        return $uri instanceof RemoteUriInterface;
-    }
-
     public function read()
     {
-        $headers = get_headers($this->uri->getValue(), 1);
-
+        $headers = get_headers($this->uri, 1);
         $this->contentType = $headers['Content-Type'];
     }
 

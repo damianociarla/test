@@ -12,7 +12,7 @@ class DimensionAdapter extends AbstractAdapter implements DimensionAdapterInterf
     public function getDimension($type)
     {
         if (null === $this->dimension) {
-            list($width, $height) = getimagesize($this->media->getUri());
+            list($width, $height) = getimagesize($this->reader->getUri());
 
             $this->dimension = array(
                 self::WIDTH => $width,
