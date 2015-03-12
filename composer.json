@@ -10,7 +10,7 @@
   "autoload": {
     "psr-0": { "": "src/" },
     "psr-4": {
-      "UEC\\Media\\" : "library/uec-media/src/Media",
+      "UEC\\Media\\" : "library/uec-media/src/UEC/Media",
       "UEC\\MediaUploader\\" : "library/uec-media-uploader/src/MediaUploader",
       "UEC\\MediaValidator\\" : "library/uec-media-validator/src/MediaValidator",
       "ContextLocator\\" : "library/custom-context-locator/src/ContextLocator",

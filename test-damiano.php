@@ -1,6 +1,7 @@
 <?php
 
 use Doctrine\Common\Util\Debug;
+use UEC\Media\Builder\MediaBuilderManager;
 use UEC\Media\Adapter\DimensionAdapter;
 use UEC\Media\Adapter\EmbedAdapter;
 use UEC\Media\Adapter\LocalSizeAdapter;
@@ -14,13 +15,9 @@ ini_set('display_errors', 1);
 
 include "vendor/autoload.php";
 
-$vimeo = new RemoteReader(new RemoteUri('https://vimeo.com/96970478'));
+$remoteReader = new RemoteReader('https://vimeo.com/96970478');
+$embedAdapter = new EmbedAdapter($remoteReader, new EmbedParser());
 
-$media = MediaFactory::createFromReader($vimeo);
+$media = MediaBuilderManager::createFromAdapter($embedAdapter);
 
-$embedAdapter = new EmbedAdapter($media, new EmbedParser());
-
-echo $embedAdapter->getTitle();
-echo "\n";
-echo $embedAdapter->getHtml();
-echo "\n";
+var_dump($media);
