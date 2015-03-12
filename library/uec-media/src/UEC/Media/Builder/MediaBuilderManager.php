@@ -4,13 +4,13 @@ namespace UEC\Media\Builder;
 
 use UEC\Media\Adapter\AdapterInterface;
 use UEC\Media\Model\MediaInterface;
+use UEC\Media\Builder\MediaBuilderInterface;
 
 class MediaBuilderManager
 {
-    public static function createFromAdapter(AdapterInterface $adapter)
+    public static function createFromAdapter(MediaBuilderInterface $mediaBuilder, AdapterInterface $adapter)
     {
-        $mediaBuilder = new MediaBuilder();
-        $adapter->buildMedia($mediaBuilder);
+        //$adapter->buildMedia($mediaBuilder);
 
         $className = $mediaBuilder->getClassName();
         $media = new $className();

@@ -121,24 +121,28 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
         return $this->getInfo(ParserInterface::INFO_PROVIDER_URL);
     }
 
-    public function buildMedia(MediaBuilderInterface $builder)
+    public function getMediaBuilderClassName()
     {
-        $builder
-            ->setClassName('UEC\Media\Model\MediaEmbed')
-            ->add('type', 'getType')
-            ->add('title', 'getTitle')
-            ->add('description', 'getDescription')
-            ->add('url', 'getUrl')
-            ->add('thumbnailUrl', 'getThumbnailUrl')
-            ->add('thumbnailWidth', 'getThumbnailWidth')
-            ->add('thumbnailHeight', 'getThumbnailHeight')
-            ->add('html', 'getHtml')
-            ->add('width', 'getWidth')
-            ->add('height', 'getHeight')
-            ->add('authorName', 'getAuthorName')
-            ->add('authorUrl', 'getAuthorUrl')
-            ->add('providerName', 'getProviderName')
-            ->add('providerUrl', 'getProviderUrl')
-        ;
+        return 'UEC\Media\Model\MediaEmbed';
+    }
+
+    public function getMediaBuilderConfiguration()
+    {
+        return array(
+            'type' => 'getType',
+            'title' => 'getTitle',
+            'description' => 'getDescription',
+            'url' => 'getUrl',
+            'thumbnailUrl' => 'getThumbnailUrl',
+            'thumbnailWidth' => 'getThumbnailWidth',
+            'thumbnailHeight' =>  'getThumbnailHeight',
+            'html' =>  'getHtml',
+            'width' =>  'getWidth',
+            'height' =>  'getHeight',
+            'authorName' =>  'getAuthorName',
+            'authorUrl' =>  'getAuthorUrl',
+            'providerName' =>  'getProviderName',
+            'providerUrl' =>  'getProviderUrl',
+        );
     }
 }

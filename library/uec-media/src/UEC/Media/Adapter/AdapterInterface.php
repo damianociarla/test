@@ -15,10 +15,6 @@ interface AdapterInterface
      */
     public function getReader();
 
-    /**
-     * Configure media builder
-     *
-     * @param MediaBuilderInterface $builder
-     */
-    public function buildMedia(MediaBuilderInterface $builder);
+    public function getMediaBuilderClassName();
+    public function getMediaBuilderConfiguration();
 }
