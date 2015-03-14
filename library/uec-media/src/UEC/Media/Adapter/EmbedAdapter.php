@@ -2,7 +2,6 @@
 
 namespace UEC\Media\Adapter;
 
-use UEC\Media\Builder\MediaBuilderInterface;
 use UEC\Media\EmbedParser\ParserInterface;
 use UEC\Media\MediaInterface;
 use UEC\Media\Reader\ReaderInterface;
@@ -119,30 +118,5 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
     public function getProviderUrl()
     {
         return $this->getInfo(ParserInterface::INFO_PROVIDER_URL);
-    }
-
-    public function getMediaBuilderClassName()
-    {
-        return 'UEC\Media\Model\MediaEmbed';
-    }
-
-    public function getMediaBuilderConfiguration()
-    {
-        return array(
-            'type' => 'getType',
-            'title' => 'getTitle',
-            'description' => 'getDescription',
-            'url' => 'getUrl',
-            'thumbnailUrl' => 'getThumbnailUrl',
-            'thumbnailWidth' => 'getThumbnailWidth',
-            'thumbnailHeight' =>  'getThumbnailHeight',
-            'html' =>  'getHtml',
-            'width' =>  'getWidth',
-            'height' =>  'getHeight',
-            'authorName' =>  'getAuthorName',
-            'authorUrl' =>  'getAuthorUrl',
-            'providerName' =>  'getProviderName',
-            'providerUrl' =>  'getProviderUrl',
-        );
     }
 }

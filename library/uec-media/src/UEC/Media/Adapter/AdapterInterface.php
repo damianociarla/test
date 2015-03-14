@@ -14,7 +14,4 @@ interface AdapterInterface
      * @return ReaderInterface
      */
     public function getReader();
-
-    public function getMediaBuilderClassName();
-    public function getMediaBuilderConfiguration();
 }

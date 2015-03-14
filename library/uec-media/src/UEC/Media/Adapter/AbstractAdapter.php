@@ -19,14 +19,4 @@ abstract class AbstractAdapter implements AdapterInterface
     {
         return $this->reader;
     }
-
-    public function getMediaBuilderClassName()
-    {
-        return 'UEC\Media\Model\Media';
-    }
-
-    public function getMediaBuilderConfiguration()
-    {
-        return array();
-    }
 }

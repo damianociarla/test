@@ -5,21 +5,6 @@ namespace UEC\Media\Builder;
 interface MediaBuilderInterface
 {
     /**
-     * Get className
-     *
-     * @return mixed
-     */
-    public function getClassName();
-
-    /**
-     * Set className
-     *
-     * @param mixed $className
-     * @return MediaBuilderInterface
-     */
-    public function setClassName($className);
-
-    /**
      * Get properties
      *
      * @return mixed
@@ -30,9 +15,8 @@ interface MediaBuilderInterface
      * Set properties
      *
      * @param string $field
-     * @param string $method
-     * @param array $params
+     * @param mixed $value
      * @return MediaBuilderInterface
      */
-    public function add($field, $method, array $params = array());
+    public function add($field, $value);
 }

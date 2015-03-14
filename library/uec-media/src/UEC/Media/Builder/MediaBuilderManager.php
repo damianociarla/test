@@ -8,11 +8,13 @@ use UEC\Media\Builder\MediaBuilderInterface;
 
 class MediaBuilderManager
 {
-    public static function createFromAdapter(MediaBuilderInterface $mediaBuilder, AdapterInterface $adapter)
+    public static function createFromAdapter(AdapterInterface $adapter, MediaBuilderAdapterInterface $mediaBuilderAdapter)
     {
-        //$adapter->buildMedia($mediaBuilder);
+        if (!$mediaBuilderAdapter->supports($adapter)) {
+            throw new \UnexpectedValueException('Builder does not support the adapter');
+        }
 
-        $className = $mediaBuilder->getClassName();
+        $className = $mediaBuilderAdapter->getClassName();
         $media = new $className();
 
         if (!$media instanceof MediaInterface) {
@@ -21,14 +23,17 @@ class MediaBuilderManager
 
         $media->setUri($adapter->getReader()->getUri());
 
-        foreach ($mediaBuilder->getProperties() as $mediaField => $properties) {
+        $mediaBuilder = new MediaBuilder();
+        $mediaBuilderAdapter->build($mediaBuilder, $adapter);
+
+        foreach ($mediaBuilder->getProperties() as $mediaField => $value) {
             $mediaSetterMethod = 'set'.ucfirst($mediaField);
 
             if (!is_callable(array($media, $mediaSetterMethod), true, $callableName)) {
                 throw new \BadMethodCallException(sprintf('Method "%s" is not callable', $callableName));
             }
 
-            call_user_func_array(array($media, $mediaSetterMethod), array(call_user_func_array(array($adapter, $properties['method']), $properties['params'])));
+            call_user_func_array(array($media, $mediaSetterMethod), array($value));
         }
 
         return $media;
