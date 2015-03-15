@@ -1,7 +1,8 @@
 <?php
 
+namespace UEC\Media\Provider\Embed\Parser;
+
 use Embed\Embed;
-use UEC\Media\Provider\Embed\Parser\ParserInterface;
 
 class EmbedParser implements ParserInterface
 {

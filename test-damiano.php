@@ -1,6 +1,7 @@
 <?php
 
 use UEC\Media\Provider\Embed\Builder\EmbedMediaBuilderAdapter;
+use UEC\Media\Provider\Embed\Parser\EmbedParser;
 use UEC\Media\Builder\MediaBuilderManager;
 use UEC\Media\Provider\Embed\Reader\EmbedReaderAdapter;
 use UEC\Media\MediaFactory;
