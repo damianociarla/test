@@ -3,7 +3,7 @@
 namespace UEC\Media\Provider\Embed\Builder;
 
 use UEC\Media\Reader\Adapter\AdapterInterface;
-use UEC\Media\Reader\Adapter\EmbedAdapterInterface;
+use UEC\Media\Provider\Embed\Reader\EmbedReaderAdapterInterface;
 use UEC\Media\Builder\MediaBuilderAdapterInterface;
 use UEC\Media\Builder\MediaBuilderInterface;
 
@@ -11,7 +11,7 @@ class EmbedMediaBuilderAdapter implements MediaBuilderAdapterInterface
 {
     public function supports(AdapterInterface $adapter)
     {
-        return $adapter instanceof EmbedAdapterInterface;
+        return $adapter instanceof EmbedReaderAdapterInterface;
     }
 
     public function build(MediaBuilderInterface $mediaBuilder, AdapterInterface $adapter)
@@ -36,6 +36,6 @@ class EmbedMediaBuilderAdapter implements MediaBuilderAdapterInterface
 
     public function getClassName()
     {
-        return 'UEC\Media\Model\MediaEmbed';
+        return 'UEC\Media\Provider\Embed\Model\MediaEmbed';
     }
 }

@@ -2,12 +2,13 @@
 
 namespace UEC\Media\Provider\Embed\Reader;
 
-use UEC\Media\EmbedParser\ParserInterface;
+use UEC\Media\Provider\Embed\Parser\ParserInterface;
+use UEC\Media\Reader\Adapter\AbstractAdapter;
 use UEC\Media\MediaInterface;
 use UEC\Media\Reader\ReaderInterface;
 use UEC\Media\Reader\RemoteReaderInterface;
 
-class EmbedReaderAdapter extends AbstractAdapter implements EmbedAdapterInterface
+class EmbedReaderAdapter extends AbstractAdapter implements EmbedReaderAdapterInterface
 {
     private $parser;
     private $result;

@@ -1,16 +1,16 @@
 <?php
 
-namespace UEC\Media\Reader\Adapter;
+namespace UEC\Media\Provider\Embed\Reader;
 
-use UEC\Media\EmbedParser\ParserInterface;
+use UEC\Media\Provider\Embed\Parser\ParserInterface;
 
-interface EmbedAdapterInterface
+interface EmbedReaderAdapterInterface
 {
     /**
      * Set parser
      *
      * @param ParserInterface $parser
-     * @return EmbedAdapterInterface
+     * @return EmbedReaderAdapterInterface
      */
     public function setParser(ParserInterface $parser);
 

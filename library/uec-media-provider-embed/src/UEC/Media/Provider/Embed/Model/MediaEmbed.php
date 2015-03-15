@@ -1,6 +1,8 @@
 <?php
 
-namespace UEC\Media\Model;
+namespace UEC\Media\Provider\Embed\Model;
+
+use UEC\Media\Model\Media;
 
 class MediaEmbed extends Media implements MediaEmbedInterface
 {

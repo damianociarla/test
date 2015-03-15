@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\Media\Model;
+namespace UEC\Media\Provider\Embed\Model;
 
 interface MediaEmbedInterface
 {

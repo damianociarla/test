@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\Media\EmbedParser;
+namespace UEC\Media\Provider\Embed\Parser;
 
 interface ParserInterface
 {
