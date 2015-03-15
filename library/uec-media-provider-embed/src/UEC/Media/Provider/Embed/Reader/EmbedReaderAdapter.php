@@ -1,13 +1,13 @@
 <?php
 
-namespace UEC\Media\Reader\Adapter;
+namespace UEC\Media\Provider\Embed\Reader;
 
 use UEC\Media\EmbedParser\ParserInterface;
 use UEC\Media\MediaInterface;
 use UEC\Media\Reader\ReaderInterface;
 use UEC\Media\Reader\RemoteReaderInterface;
 
-class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
+class EmbedReaderAdapter extends AbstractAdapter implements EmbedAdapterInterface
 {
     private $parser;
     private $result;

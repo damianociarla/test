@@ -1,8 +1,8 @@
 <?php
 
-use UEC\Media\Builder\Adapter\EmbedMediaBuilder;
+use UEC\Media\Provider\Embed\Builder\EmbedMediaBuilderAdapter;
 use UEC\Media\Builder\MediaBuilderManager;
-use UEC\Media\Reader\Adapter\EmbedAdapter;
+use UEC\Media\Provider\Embed\Reader\EmbedReaderAdapter;
 use UEC\Media\MediaFactory;
 use UEC\Media\Reader\RemoteReader;
 
@@ -12,8 +12,8 @@ ini_set('display_errors', 1);
 include "vendor/autoload.php";
 
 $remoteReader = new RemoteReader('https://vimeo.com/96970478');
-$embedAdapter = new EmbedAdapter($remoteReader, new EmbedParser);
+$embedAdapter = new EmbedReaderAdapter($remoteReader, new EmbedParser);
 
-$media = MediaBuilderManager::createFromAdapter($embedAdapter, new EmbedMediaBuilder);
+$media = MediaBuilderManager::createFromAdapter($embedAdapter, new EmbedMediaBuilderAdapter);
 
 var_dump($media);

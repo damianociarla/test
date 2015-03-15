@@ -1,13 +1,13 @@
 <?php
 
-namespace UEC\Media\Builder\Adapter;
+namespace UEC\Media\Provider\Embed\Builder;
 
 use UEC\Media\Reader\Adapter\AdapterInterface;
 use UEC\Media\Reader\Adapter\EmbedAdapterInterface;
 use UEC\Media\Builder\MediaBuilderAdapterInterface;
 use UEC\Media\Builder\MediaBuilderInterface;
 
-class EmbedMediaBuilder implements MediaBuilderAdapterInterface
+class EmbedMediaBuilderAdapter implements MediaBuilderAdapterInterface
 {
     public function supports(AdapterInterface $adapter)
     {
