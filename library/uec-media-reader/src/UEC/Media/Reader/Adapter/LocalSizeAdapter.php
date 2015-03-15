@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\Media\Adapter;
+namespace UEC\Media\Reader\Adapter;
 
 class LocalSizeAdapter extends AbstractAdapter implements LocalSizeAdapterInterface
 {

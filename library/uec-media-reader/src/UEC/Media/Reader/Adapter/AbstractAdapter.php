@@ -1,6 +1,6 @@
 <?php
 
-namespace UEC\Media\Adapter;
+namespace UEC\Media\Reader\Adapter;
 
 use UEC\Media\Builder\MediaBuilderInterface;
 use UEC\Media\MediaInterface;

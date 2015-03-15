@@ -2,7 +2,7 @@
 
 use UEC\Media\Builder\Adapter\EmbedMediaBuilder;
 use UEC\Media\Builder\MediaBuilderManager;
-use UEC\Media\Adapter\EmbedAdapter;
+use UEC\Media\Reader\Adapter\EmbedAdapter;
 use UEC\Media\MediaFactory;
 use UEC\Media\Reader\RemoteReader;
 

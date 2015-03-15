@@ -2,8 +2,8 @@
 
 namespace UEC\Media\Builder\Adapter;
 
-use UEC\Media\Adapter\AdapterInterface;
-use UEC\Media\Adapter\EmbedAdapterInterface;
+use UEC\Media\Reader\Adapter\AdapterInterface;
+use UEC\Media\Reader\Adapter\EmbedAdapterInterface;
 use UEC\Media\Builder\MediaBuilderAdapterInterface;
 use UEC\Media\Builder\MediaBuilderInterface;
 
