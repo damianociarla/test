@@ -2,21 +2,30 @@
 
 namespace UEC\Media\Builder;
 
+use UEC\Media\Adapter\AdapterInterface;
+
 interface MediaBuilderInterface
 {
     /**
-     * Get properties
+     * Check if builder supports the adapter
+     *
+     * @param AdapterInterface $adapter
+     * @return boolean
+     */
+    public function supports(AdapterInterface $adapter);
+
+    /**
+     * Get className
      *
      * @return mixed
      */
-    public function getProperties();
+    public function getClassName();
 
     /**
-     * Set properties
+     * Build media
      *
-     * @param string $field
-     * @param mixed $value
-     * @return MediaBuilderInterface
+     * @param ParamBagInterface $paramBag
+     * @param AdapterInterface $adapter
      */
-    public function add($field, $value);
+    public function build(ParamBagInterface $paramBag, AdapterInterface $adapter);
 }

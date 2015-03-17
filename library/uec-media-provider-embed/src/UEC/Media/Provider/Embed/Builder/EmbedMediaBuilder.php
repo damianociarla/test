@@ -2,21 +2,21 @@
 
 namespace UEC\Media\Provider\Embed\Builder;
 
-use UEC\Media\Reader\Adapter\AdapterInterface;
-use UEC\Media\Provider\Embed\Reader\EmbedReaderAdapterInterface;
-use UEC\Media\Builder\MediaBuilderAdapterInterface;
+use UEC\Media\Adapter\AdapterInterface;
 use UEC\Media\Builder\MediaBuilderInterface;
+use UEC\Media\Builder\ParamBagInterface;
+use UEC\Media\Provider\Embed\Adapter\EmbedAdapterInterface;
 
-class EmbedMediaBuilderAdapter implements MediaBuilderAdapterInterface
+class EmbedMediaBuilder implements MediaBuilderInterface
 {
     public function supports(AdapterInterface $adapter)
     {
-        return $adapter instanceof EmbedReaderAdapterInterface;
+        return $adapter instanceof EmbedAdapterInterface;
     }
 
-    public function build(MediaBuilderInterface $mediaBuilder, AdapterInterface $adapter)
+    public function build(ParamBagInterface $paramBag, AdapterInterface $adapter)
     {
-        $mediaBuilder
+        $paramBag
             ->add('type', $adapter->getType())
             ->add('title', $adapter->getTitle())
             ->add('description', $adapter->getDescription())

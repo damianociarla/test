@@ -5,17 +5,17 @@ namespace UEC\Media\Model;
 interface MediaInterface
 {
     /**
-     * Get uri
+     * Get source
      *
      * @return string
      */
-    public function getUri();
+    public function getSource();
 
     /**
-     * Set uri
+     * Set source
      *
-     * @param string $uri
+     * @param string $source
      * @return MediaInterface
      */
-    public function setUri($uri);
+    public function setSource($source);
 }

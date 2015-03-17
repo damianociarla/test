@@ -2,13 +2,12 @@
 
 namespace UEC\Media\Builder;
 
-use UEC\Media\Reader\Adapter\AdapterInterface;
+use UEC\Media\Adapter\AdapterInterface;
 use UEC\Media\Model\MediaInterface;
-use UEC\Media\Builder\MediaBuilderInterface;
 
 class MediaBuilderManager
 {
-    public static function createFromAdapter(AdapterInterface $adapter, MediaBuilderAdapterInterface $mediaBuilderAdapter)
+    public static function createFromAdapter(AdapterInterface $adapter, MediaBuilderInterface $mediaBuilderAdapter)
     {
         if (!$mediaBuilderAdapter->supports($adapter)) {
             throw new \UnexpectedValueException('Builder does not support the adapter');
@@ -21,12 +20,12 @@ class MediaBuilderManager
             throw new \UnexpectedValueException('Class must be an instance of MediaInterface');
         }
 
-        $media->setUri($adapter->getReader()->getUri());
+        $media->setSource($adapter->getSource()->getSource());
 
-        $mediaBuilder = new MediaBuilder();
-        $mediaBuilderAdapter->build($mediaBuilder, $adapter);
+        $paramBag = new ParamBag();
+        $mediaBuilderAdapter->build($paramBag, $adapter);
 
-        foreach ($mediaBuilder->getProperties() as $mediaField => $value) {
+        foreach ($paramBag->getProperties() as $mediaField => $value) {
             $mediaSetterMethod = 'set'.ucfirst($mediaField);
 
             if (!is_callable(array($media, $mediaSetterMethod), true, $callableName)) {

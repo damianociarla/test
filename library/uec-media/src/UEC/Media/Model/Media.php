@@ -5,20 +5,18 @@ namespace UEC\Media\Model;
 class Media implements MediaInterface
 {
     /**
-     * Referrer uri
-     *
      * @var string
      */
-    protected $uri;
+    protected $source;
 
-    public function getUri()
+    public function getSource()
     {
-        return $this->uri;
+        return $this->source;
     }
 
-    public function setUri($uri)
+    public function setSource($source)
     {
-        $this->uri = $uri;
+        $this->source = $source;
         return $this;
     }
 }

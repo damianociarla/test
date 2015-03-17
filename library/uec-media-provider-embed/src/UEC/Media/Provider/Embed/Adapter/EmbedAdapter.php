@@ -1,43 +1,27 @@
 <?php
 
-namespace UEC\Media\Provider\Embed\Reader;
+namespace UEC\Media\Provider\Embed\Adapter;
 
+use UEC\Media\Adapter\AbstractAdapter;
 use UEC\Media\Provider\Embed\Parser\ParserInterface;
-use UEC\Media\Reader\Adapter\AbstractAdapter;
-use UEC\Media\MediaInterface;
-use UEC\Media\Reader\ReaderInterface;
-use UEC\Media\Reader\RemoteReaderInterface;
+use UEC\Media\Provider\Embed\Source\RemoteSourceInterface;
+use UEC\Media\Source\SourceInterface;
 
-class EmbedReaderAdapter extends AbstractAdapter implements EmbedReaderAdapterInterface
+class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
 {
     private $parser;
     private $result;
-
-    function __construct(ReaderInterface $reader, ParserInterface $parser = null)
-    {
-        if (!$reader instanceof RemoteReaderInterface) {
-            throw new \UnexpectedValueException('The adapter can accept only instance of RemoteReaderInterface');
-        }
-
-        if (null !== $parser) {
-            $this->setParser($parser);
-        }
-
-        parent::__construct($reader);
-    }
 
     public function setParser(ParserInterface $parser)
     {
         $this->parser = $parser;
     }
 
-    /**
-     * Get info
-     *
-     * @param $type
-     * @return mixed
-     * @throws \Exception
-     */
+    protected function supports(SourceInterface $source)
+    {
+        return $source instanceof RemoteSourceInterface;
+    }
+
     private function getInfo($type)
     {
         if (null === $this->parser) {
@@ -45,7 +29,7 @@ class EmbedReaderAdapter extends AbstractAdapter implements EmbedReaderAdapterIn
         }
 
         if (null === $this->result) {
-            $this->result = $this->parser->parse($this->reader->getUri());
+            $this->result = $this->parser->parse($this->source->getSource());
         }
 
         return $this->result[$type];

@@ -2,7 +2,7 @@
 
 namespace UEC\Media\Builder;
 
-class MediaBuilder implements MediaBuilderInterface
+class ParamBag implements ParamBagInterface
 {
     private $properties;
 
