@@ -1,16 +1,24 @@
 <?php
 
+use UEC\Media\Provider\Embed\Adapter\EmbedAdapter;
+use UEC\Media\Provider\Embed\Builder\EmbedMediaBuilder;
+use UEC\Media\Provider\Embed\Builder\EmbedMediaBuilderAdapter;
+use UEC\Media\Provider\Embed\Parser\EmbedParser;
+use UEC\Media\Builder\MediaBuilderManager;
+use UEC\Media\MediaFactory;
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-use \UEC\Media\Reader;
-
 include "vendor/autoload.php";
 
-$readerPluginManager = new Reader\ReaderPluginManager();
-$readerPluginManager->setService('size', new Reader\Plugin\RemoteReaderSizePlugin());
+$embedAdapter = new EmbedAdapter('https://vimeo.com/96970478');
+$embedAdapter->setParser(new EmbedParser);
+var_dump($embedAdapter->extract());
 
-$reader = new Reader\RemoteReader("https://vimeo.com/120197450");
-$reader->setPluginManager($readerPluginManager);
-var_dump($reader->has('size'));
-var_dump($reader->size());
+
+
+
+
+//echo get_class($media->getProvider());
+//var_dump($media);

@@ -17,4 +17,5 @@ $embedAdapter->setParser(new EmbedParser);
 
 $media = MediaBuilderManager::createFromAdapter($embedAdapter, new EmbedMediaBuilder);
 
-var_dump($media);
+//echo get_class($media->getProvider());
+//var_dump($media);
