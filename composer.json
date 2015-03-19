@@ -1,12 +1,27 @@
 {
-  "autoload": {
-    "psr-0": { "": "src/" }
-  },
+  "name" : "test",
   "require": {
     "zendframework/zend-servicemanager": "2.3.4",
     "pimple/pimple": "3.0.0",
     "doctrine/orm": "2.4.7",
     "league/flysystem": "1.0.1",
     "embed/embed": "2.1.1"
+  },
+  "autoload": {
+    "psr-0": { "": "src/" },
+    "psr-4": {
+      "UEC\\Media\\" : "library/uec-media/src/UEC/Media",
+      "UEC\\Media\\Adapter\\" : "library/uec-media-adapter/src/UEC/Media/Adapter",
+      "UEC\\Media\\Builder\\" : "library/uec-media-builder/src/UEC/Media/Builder",
+      "UEC\\Media\\Provider\\Embed\\" : "library/uec-media-provider-embed/src/UEC/Media/Provider/Embed",
+      "UEC\\Media\\Reader\\" : "library/uec-media-reader/src/UEC/Media/Reader",
+      "UEC\\Media\\Source\\" : "library/uec-media-source/src/UEC/Media/Source",
+      "UEC\\MediaUploader\\" : "library/uec-media-uploader/src/MediaUploader",
+      "UEC\\MediaValidator\\" : "library/uec-media-validator/src/MediaValidator",
+      "ContextLocator\\" : "library/custom-context-locator/src/ContextLocator",
+      "CDN\\" : "library/custom-cdn/src/CDN",
+      "Entity\\" : "library/custom-entity/src/Entity",
+      "Event\\" : "library/custom-event/src/Event"
+    }
   }
 }
