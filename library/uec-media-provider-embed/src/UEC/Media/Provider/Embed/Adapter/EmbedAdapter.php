@@ -97,4 +97,24 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
     {
         return $this->getInfo(ParserInterface::INFO_PROVIDER_URL);
     }
+
+    public function extract()
+    {
+        return array(
+            ParserInterface::INFO_TYPE             => $this->getType(),
+            ParserInterface::INFO_TITLE            => $this->getTitle(),
+            ParserInterface::INFO_DESCRIPTION      => $this->getDescription(),
+            ParserInterface::INFO_URL              => $this->getUrl(),
+            ParserInterface::INFO_THUMBNAIL_URL    => $this->getThumbnailUrl(),
+            ParserInterface::INFO_THUMBNAIL_WIDTH  => $this->getThumbnailWidth(),
+            ParserInterface::INFO_THUMBNAIL_HEIGHT => $this->getThumbnailHeight(),
+            ParserInterface::INFO_HTML             => $this->getHtml(),
+            ParserInterface::INFO_WIDTH            => $this->getWidth(),
+            ParserInterface::INFO_HEIGHT           => $this->getHeight(),
+            ParserInterface::INFO_AUTHOR_NAME      => $this->getAuthorName(),
+            ParserInterface::INFO_AUTHOR_URL       => $this->getAuthorUrl(),
+            ParserInterface::INFO_PROVIDER_NAME    => $this->getProviderName(),
+            ParserInterface::INFO_PROVIDER_URL     => $this->getProviderUrl(),
+        );
+    }
 }
