@@ -4,8 +4,6 @@ namespace UEC\Media\Provider\Embed\Adapter;
 
 use UEC\Media\Adapter\AbstractAdapter;
 use UEC\Media\Provider\Embed\Parser\ParserInterface;
-use UEC\Media\Provider\Embed\Source\RemoteSourceInterface;
-use UEC\Media\Source\SourceInterface;
 
 class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
 {
@@ -17,11 +15,6 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
         $this->parser = $parser;
     }
 
-    protected function supports(SourceInterface $source)
-    {
-        return $source instanceof RemoteSourceInterface;
-    }
-
     private function getInfo($type)
     {
         if (null === $this->parser) {
@@ -29,7 +22,7 @@ class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
         }
 
         if (null === $this->result) {
-            $this->result = $this->parser->parse($this->source->getSource());
+            $this->result = $this->parser->parse($this->source);
         }
 
         return $this->result[$type];
