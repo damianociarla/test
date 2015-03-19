@@ -2,12 +2,19 @@
 
 namespace UEC\Media\Model;
 
+use UEC\Media\Adapter\AdapterInterface;
+
 class Media implements MediaInterface
 {
     /**
      * @var string
      */
     protected $source;
+
+    /**
+     * @var AdapterInterface
+     */
+    protected $provider;
 
     public function getSource()
     {
@@ -18,5 +25,16 @@ class Media implements MediaInterface
     {
         $this->source = $source;
         return $this;
+    }
+
+    public function setProvider(AdapterInterface $provider)
+    {
+        $this->provider = $provider;
+        return $this;
+    }
+
+    public function getProvider()
+    {
+        return $this->provider;
     }
 }

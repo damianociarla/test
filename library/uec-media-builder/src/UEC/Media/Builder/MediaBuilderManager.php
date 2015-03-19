@@ -20,6 +20,7 @@ class MediaBuilderManager
             throw new \UnexpectedValueException('Class must be an instance of MediaInterface');
         }
 
+        $media->setProvider($adapter);
         $media->setSource($adapter->getSource());
 
         $paramBag = new ParamBag();

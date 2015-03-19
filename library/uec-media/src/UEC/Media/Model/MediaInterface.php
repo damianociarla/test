@@ -2,6 +2,8 @@
 
 namespace UEC\Media\Model;
 
+use UEC\Media\Adapter\AdapterInterface;
+
 interface MediaInterface
 {
     /**
@@ -18,4 +20,15 @@ interface MediaInterface
      * @return MediaInterface
      */
     public function setSource($source);
+
+    /**
+     * @param AdapterInterface $provider
+     * @return MediaInterface
+     */
+    public function setProvider(AdapterInterface $provider);
+
+    /**
+     * @return AdapterInterface
+     */
+    public function getProvider();
 }
