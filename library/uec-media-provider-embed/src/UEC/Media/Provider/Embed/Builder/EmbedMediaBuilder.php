@@ -6,7 +6,7 @@ use UEC\Media\Adapter\AdapterInterface;
 use UEC\Media\Builder\MediaBuilderInterface;
 use UEC\Media\Builder\ParamBagInterface;
 use UEC\Media\Provider\Embed\Adapter\EmbedAdapterInterface;
-use UEC\Media\Provider\Embed\Parser\ParserInterface
+use UEC\Media\Provider\Embed\Parser\ParserInterface;
 
 class EmbedMediaBuilder implements MediaBuilderInterface
 {
