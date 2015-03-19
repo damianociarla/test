@@ -15,7 +15,6 @@
       "UEC\\Media\\Builder\\" : "library/uec-media-builder/src/UEC/Media/Builder",
       "UEC\\Media\\Provider\\Embed\\" : "library/uec-media-provider-embed/src/UEC/Media/Provider/Embed",
       "UEC\\Media\\Reader\\" : "library/uec-media-reader/src/UEC/Media/Reader",
-      "UEC\\Media\\Source\\" : "library/uec-media-source/src/UEC/Media/Source",
       "UEC\\MediaUploader\\" : "library/uec-media-uploader/src/MediaUploader",
       "UEC\\MediaValidator\\" : "library/uec-media-validator/src/MediaValidator",
       "ContextLocator\\" : "library/custom-context-locator/src/ContextLocator",
