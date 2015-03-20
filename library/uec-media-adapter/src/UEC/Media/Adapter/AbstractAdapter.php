@@ -6,9 +6,10 @@ abstract class AbstractAdapter implements AdapterInterface
 {
     protected $source;
 
-    function __construct($source)
+    public function setSource($source)
     {
         $this->source = $source;
+        return $this;
     }
 
     public function getSource()

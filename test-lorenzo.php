@@ -12,11 +12,16 @@ ini_set('display_errors', 1);
 
 include "vendor/autoload.php";
 
-$embedAdapter = new EmbedAdapter('https://vimeo.com/96970478');
+$embedAdapter = new EmbedAdapter();
 $embedAdapter->setParser(new EmbedParser);
-var_dump($embedAdapter->extract());
 
+$reader = new \UEC\Media\Reader\Reader('https://vimeo.com/96970478', $embedAdapter);
 
+//var_dump($reader->extract());
+
+$media = MediaBuilderManager::createFromReader($reader, new EmbedMediaBuilder);
+
+var_dump($media);
 
 
 

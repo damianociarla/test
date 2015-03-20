@@ -4,9 +4,15 @@ namespace UEC\Media\Builder;
 
 use UEC\Media\Adapter\AdapterInterface;
 use UEC\Media\Model\MediaInterface;
+use UEC\Media\Reader\ReaderInterface;
 
 class MediaBuilderManager
 {
+    public static function createFromReader(ReaderInterface $reader, MediaBuilderInterface $mediaBuilderAdapter)
+    {
+        return self::createFromAdapter($reader->getAdapter(), $mediaBuilderAdapter);
+    }
+
     public static function createFromAdapter(AdapterInterface $adapter, MediaBuilderInterface $mediaBuilderAdapter)
     {
         if (!$mediaBuilderAdapter->supports($adapter)) {

@@ -2,19 +2,11 @@
 
 namespace UEC\Media\Reader;
 
-use UEC\Media\UriInterface;
+use UEC\Media\Adapter\AdapterInterface;
 
 interface ReaderInterface
 {
-    /**
-     * Get uri
-     *
-     * @return UriInterface
-     */
-    public function getUri();
-
-    /**
-     * Scan uri
-     */
-    public function read();
+    public function __construct($source, AdapterInterface $adapter);
+    public function getAdapter();
+    public function extract();
 }
