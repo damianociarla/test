@@ -6,11 +6,9 @@ use UEC\Media\MediaInterface;
 
 interface AdapterInterface
 {
-    public function setSource($source);
-    public function getSource();
-
     /**
+     * @param mixed $source
      * @return array
      */
-    public function extract();
+    public function extract($source);
 }

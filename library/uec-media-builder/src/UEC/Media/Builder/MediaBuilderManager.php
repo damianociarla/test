@@ -10,11 +10,8 @@ class MediaBuilderManager
 {
     public static function createFromReader(ReaderInterface $reader, MediaBuilderInterface $mediaBuilderAdapter)
     {
-        return self::createFromAdapter($reader->getAdapter(), $mediaBuilderAdapter);
-    }
+        $adapter = $reader->getAdapter();
 
-    public static function createFromAdapter(AdapterInterface $adapter, MediaBuilderInterface $mediaBuilderAdapter)
-    {
         if (!$mediaBuilderAdapter->supports($adapter)) {
             throw new \UnexpectedValueException('Builder does not support the adapter');
         }
@@ -27,10 +24,10 @@ class MediaBuilderManager
         }
 
         $media->setProvider($adapter);
-        $media->setSource($adapter->getSource());
+        $media->setSource($reader->getSource());
 
         $paramBag = new ParamBag();
-        $mediaBuilderAdapter->build($paramBag, $adapter);
+        $mediaBuilderAdapter->build($paramBag, $reader);
 
         foreach ($paramBag->getProperties() as $mediaField => $value) {
             $mediaSetterMethod = 'set'.ucfirst($mediaField);

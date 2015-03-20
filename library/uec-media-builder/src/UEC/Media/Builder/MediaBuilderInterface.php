@@ -3,6 +3,7 @@
 namespace UEC\Media\Builder;
 
 use UEC\Media\Adapter\AdapterInterface;
+use UEC\Media\Reader\ReaderInterface;
 
 interface MediaBuilderInterface
 {
@@ -25,7 +26,7 @@ interface MediaBuilderInterface
      * Build media
      *
      * @param ParamBagInterface $paramBag
-     * @param AdapterInterface $adapter
+     * @param ReaderInterface $reader
      */
-    public function build(ParamBagInterface $paramBag, AdapterInterface $adapter);
+    public function build(ParamBagInterface $paramBag, ReaderInterface $reader);
 }

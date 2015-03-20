@@ -7,6 +7,7 @@ use UEC\Media\Builder\MediaBuilderInterface;
 use UEC\Media\Builder\ParamBagInterface;
 use UEC\Media\Provider\Embed\Adapter\EmbedAdapterInterface;
 use UEC\Media\Provider\Embed\Parser\ParserInterface;
+use UEC\Media\Reader\ReaderInterface;
 
 class EmbedMediaBuilder implements MediaBuilderInterface
 {
@@ -15,23 +16,25 @@ class EmbedMediaBuilder implements MediaBuilderInterface
         return $adapter instanceof EmbedAdapterInterface;
     }
 
-    public function build(ParamBagInterface $paramBag, AdapterInterface $adapter)
+    public function build(ParamBagInterface $paramBag, ReaderInterface $reader)
     {
+        $result = $reader->extract();
+
         $paramBag
-            ->add(ParserInterface::INFO_TYPE, $adapter->getType())
-            ->add(ParserInterface::INFO_TITLE, $adapter->getTitle())
-            ->add(ParserInterface::INFO_DESCRIPTION, $adapter->getDescription())
-            ->add(ParserInterface::INFO_URL, $adapter->getUrl())
-            ->add(ParserInterface::INFO_THUMBNAIL_URL, $adapter->getThumbnailUrl())
-            ->add(ParserInterface::INFO_THUMBNAIL_WIDTH, $adapter->getThumbnailWidth())
-            ->add(ParserInterface::INFO_THUMBNAIL_HEIGHT, $adapter->getThumbnailHeight())
-            ->add(ParserInterface::INFO_HTML, $adapter->getHtml())
-            ->add(ParserInterface::INFO_WIDTH, $adapter->getWidth())
-            ->add(ParserInterface::INFO_HEIGHT, $adapter->getHeight())
-            ->add(ParserInterface::INFO_AUTHOR_NAME, $adapter->getAuthorName())
-            ->add(ParserInterface::INFO_AUTHOR_URL, $adapter->getAuthorUrl())
-            ->add(ParserInterface::INFO_PROVIDER_NAME, $adapter->getProviderName())
-            ->add(ParserInterface::INFO_PROVIDER_URL, $adapter->getProviderUrl())
+            ->add('type', $result[ParserInterface::INFO_TYPE])
+            ->add('title', $result[ParserInterface::INFO_TITLE])
+            ->add('description', $result[ParserInterface::INFO_DESCRIPTION])
+            ->add('url', $result[ParserInterface::INFO_URL])
+            ->add('thumbnailUrl', $result[ParserInterface::INFO_THUMBNAIL_URL])
+            ->add('thumbnailWidth', $result[ParserInterface::INFO_THUMBNAIL_WIDTH])
+            ->add('thumbnailHeight', $result[ParserInterface::INFO_THUMBNAIL_HEIGHT])
+            ->add('html', $result[ParserInterface::INFO_HTML])
+            ->add('width', $result[ParserInterface::INFO_WIDTH])
+            ->add('height', $result[ParserInterface::INFO_HEIGHT])
+            ->add('authorName', $result[ParserInterface::INFO_AUTHOR_NAME])
+            ->add('authorUrl', $result[ParserInterface::INFO_AUTHOR_URL])
+            ->add('providerName', $result[ParserInterface::INFO_PROVIDER_NAME])
+            ->add('providerUrl', $result[ParserInterface::INFO_PROVIDER_URL])
         ;
     }
 

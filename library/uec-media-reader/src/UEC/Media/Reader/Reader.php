@@ -13,7 +13,11 @@ class Reader implements ReaderInterface
     {
         $this->source = $source;
         $this->adapter = $adapter;
-        $this->adapter->setSource($source);
+    }
+
+    public function getSource()
+    {
+        return $this->source;
     }
 
     public function getAdapter()
@@ -23,6 +27,6 @@ class Reader implements ReaderInterface
 
     public function extract()
     {
-        return $this->adapter->extract();
+        return $this->adapter->extract($this->source);
     }
 }
