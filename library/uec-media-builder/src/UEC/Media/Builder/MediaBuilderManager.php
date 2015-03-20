@@ -2,7 +2,6 @@
 
 namespace UEC\Media\Builder;
 
-use UEC\Media\Reader\Adapter\AdapterInterface;
 use UEC\Media\Model\MediaInterface;
 use UEC\Media\Reader\ReaderInterface;
 

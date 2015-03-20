@@ -6,8 +6,21 @@ use UEC\Media\Manager\DestinationInterface;
 
 class ConsoleDestination implements DestinationInterface
 {
-    public function save($result)
+    private $consoleShowerInterface;
+
+    function __construct(ConsoleShowerInterface $consoleShowerInterface)
     {
-        var_dump($result);
+        $this->consoleShowerInterface = $consoleShowerInterface;
+    }
+
+    public function save($filterResponse)
+    {
+        if (is_array($filterResponse)) {
+            $this->consoleShowerInterface->writeArray($filterResponse);
+        }
+
+        if (is_string($filterResponse)) {
+            $this->consoleShowerInterface->writeString($filterResponse);
+        }
     }
 }

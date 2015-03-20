@@ -5,7 +5,8 @@
     "pimple/pimple": "3.0.0",
     "doctrine/orm": "2.4.7",
     "league/flysystem": "1.0.1",
-    "embed/embed": "2.1.1"
+    "embed/embed": "2.1.1",
+    "league/climate": "~3.0"
   },
   "autoload": {
     "psr-0": { "": "src/" },

@@ -2,8 +2,8 @@
 
 namespace UEC\Media\Provider\Embed\Adapter;
 
-use UEC\Media\Reader\Adapter\AbstractAdapter;
 use UEC\Media\Provider\Embed\Parser\ParserInterface;
+use UEC\Media\Reader\Adapter\AbstractAdapter;
 
 class EmbedAdapter extends AbstractAdapter implements EmbedAdapterInterface
 {

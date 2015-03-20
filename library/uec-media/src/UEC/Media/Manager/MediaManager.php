@@ -63,8 +63,8 @@ class MediaManager implements MediaManagerInterface
                 continue;
             }
 
-            $result = $filter->filter($this->media);
-            $destination['destination']->save($result);
+            $filterResponse = $filter->filter($this->media);
+            $destination['destination']->save($filterResponse);
         }
     }
 }

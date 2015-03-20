@@ -3,7 +3,6 @@
 namespace UEC\Media\Destination\Doctrine;
 
 use UEC\Media\Manager\DestinationInterface;
-use UEC\Media\Model\MediaInterface;
 
 class DoctrineDestination implements DestinationInterface
 {
@@ -14,8 +13,8 @@ class DoctrineDestination implements DestinationInterface
         $this->objectManager = $objectManager;
     }
 
-    public function save($result)
+    public function save($filterResponse)
     {
-        $this->objectManager->persist($result);
+        $this->objectManager->persist($filterResponse);
     }
 }

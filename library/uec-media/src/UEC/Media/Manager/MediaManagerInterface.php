@@ -4,7 +4,6 @@ namespace UEC\Media\Manager;
 
 use UEC\Media\Model\MediaInterface;
 use UEC\Media\Reader\ReaderInterface;
-use UEC\Media\Manager\DestinationFilterInterface;
 
 interface MediaManagerInterface
 {
@@ -39,6 +38,8 @@ interface MediaManagerInterface
     public function setReader(ReaderInterface $reader);
 
     /**
+     * Add a destination
+     *
      * @param DestinationInterface $destination
      * @param DestinationFilterInterface $destinationFilter
      * @return mixed
@@ -46,6 +47,7 @@ interface MediaManagerInterface
     public function addDestination(DestinationInterface $destination, DestinationFilterInterface $destinationFilter);
 
     /**
+     * Performs saving destinations
      */
     public function exec();
 }

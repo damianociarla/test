@@ -3,7 +3,6 @@
 namespace UEC\Media\Provider\Embed\Destination;
 
 use Doctrine\ORM\Mapping as ORM;
-use UEC\Media\Provider\Embed\Model\MediaEmbed;
 
 /**
  * @ORM\Entity

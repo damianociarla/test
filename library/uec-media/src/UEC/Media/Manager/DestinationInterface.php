@@ -2,10 +2,12 @@
 
 namespace UEC\Media\Manager;
 
-use UEC\Media\Model\MediaInterface;
-use UEC\Media\Reader\ReaderInterface;
-
 interface DestinationInterface
 {
-    public function save($result);
+    /**
+     * Perform the save destination
+     *
+     * @param $filterResponse
+     */
+    public function save($filterResponse);
 }

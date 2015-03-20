@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5f4f2ea36dfc29762d21e879a8353ab2",
+    "hash": "d475662cdc7aff4631d43915b7b56c26",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -601,6 +601,55 @@
                 "twitter cards"
             ],
             "time": "2015-02-24 17:56:57"
+        },
+        {
+            "name": "league/climate",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/climate.git",
+                "reference": "eb7f4e4fcaf403f72483f2f31f948af15c8c4f5a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thephpleague/climate/zipball/eb7f4e4fcaf403f72483f2f31f948af15c8c4f5a",
+                "reference": "eb7f4e4fcaf403f72483f2f31f948af15c8c4f5a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "League\\CLImate\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joe Tannenbaum",
+                    "email": "hey@joe.codes",
+                    "homepage": "http://joe.codes/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP's best friend for the terminal. CLImate allows you to easily output colored text, special formats, and more.",
+            "keywords": [
+                "cli",
+                "colors",
+                "command",
+                "php",
+                "terminal"
+            ],
+            "time": "2015-03-02 01:29:40"
         },
         {
             "name": "league/flysystem",
