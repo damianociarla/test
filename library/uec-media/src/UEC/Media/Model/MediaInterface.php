@@ -2,7 +2,7 @@
 
 namespace UEC\Media\Model;
 
-use UEC\Media\Adapter\AdapterInterface;
+use UEC\Media\Reader\Adapter\AdapterInterface;
 
 interface MediaInterface
 {

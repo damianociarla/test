@@ -2,7 +2,7 @@
 
 namespace UEC\Media\Reader;
 
-use UEC\Media\Adapter\AdapterInterface;
+use UEC\Media\Reader\Adapter\AdapterInterface;
 
 interface ReaderInterface
 {

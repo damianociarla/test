@@ -2,7 +2,7 @@
 
 namespace UEC\Media\Provider\Embed\Builder;
 
-use UEC\Media\Adapter\AdapterInterface;
+use UEC\Media\Reader\Adapter\AdapterInterface;
 use UEC\Media\Builder\MediaBuilderInterface;
 use UEC\Media\Builder\ParamBagInterface;
 use UEC\Media\Provider\Embed\Adapter\EmbedAdapterInterface;
